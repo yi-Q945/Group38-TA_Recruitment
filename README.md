@@ -7,6 +7,6 @@ repository of java based software designing focusing on TA recruitment
 |     Yi Qi      |     yi-Q945     |   2021212846   |
 |  Tianyu Zhao   |                 |                |
 |    Jie Ren     |    JieJieSAM    |   2023213308   |
-|  Haopeng Jin   |   Sunbeam23333  |                |
+|  Haopeng Jin   |   Sunbeam23333  |   231221744    |
 |   Zhuang Hou   |     qiye-cv     |                |
 |  Zexuan Dong   |   GuMiShDo666   |                |
