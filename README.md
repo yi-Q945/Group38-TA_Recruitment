@@ -22,5 +22,5 @@ Repository of Java-based software design focusing on TA recruitment.
 |  Tianyu Zhao   |                 |                   |                   |
 |    Jie Ren     |    JieJieSAM    |   2023213308      |                   |
 |  Haopeng Jin   |   Sunbeam23333  |   2023213296      |   231221744       |
-|   Zhuang Hou   |     qiye-cv     |                   |                   |
+|   Zhuang Hou   |     qiye-cv     |   2023213302      |   231220448       |
 |  Zexuan Dong   |   GuMiShDo666   |                   |                   |
