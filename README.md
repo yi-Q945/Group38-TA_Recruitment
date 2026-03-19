@@ -18,9 +18,9 @@ Repository of Java-based software design focusing on TA recruitment.
 
 |      Name      | Github Username | CN Student Number | UK Student Number |
 |----------------|-----------------|-------------------|-------------------|
-|     Yi Qi      |     yi-Q945     |   2021212846      |     210979239     |
+|     Yi Qi      |     yi-Q945     |   2021212846      |   210979239       |
 |  Tianyu Zhao   |                 |                   |                   |
-|    Jie Ren     |    JieJieSAM    |   2023213308      |                   |
+|    Jie Ren     |    JieJieSAM    |   2023213308      |   231223003       |
 |  Haopeng Jin   |   Sunbeam23333  |   2023213296      |   231221744       |
 |   Zhuang Hou   |     qiye-cv     |   2023213302      |   231220448       |
-|  Zexuan Dong   |   GuMiShDo666   |                   |                   |
+|  Zexuan Dong   |   GuMiShDo666   |   2023213310      |                   |
