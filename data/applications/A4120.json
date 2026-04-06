@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4120",
+  "jobId": "J2106",
+  "applicantId": "U1134",
+  "applyTime": "2026-03-07T15:00:00Z",
+  "status": "REJECTED",
+  "recommendationScore": 0.5,
+  "explanation": [
+    "Matched required skills: limited direct overlap",
+    "Preferred skill matches: Communication",
+    "Skills to strengthen: Python, Machine Learning",
+    "Projected workload after acceptance: 10/12 hours"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4502",
+  "jobId": "J2126",
+  "applicantId": "U1118",
+  "applyTime": "2026-03-12T21:00:00Z",
+  "status": "ACCEPTED",
+  "recommendationScore": 0.8,
+  "explanation": [
+    "Matched required skills: Data Structures, Algorithms",
+    "Preferred skill matches: none identified yet",
+    "Skills to strengthen: no critical gaps detected",
+    "Projected workload after acceptance: 5/12 hours"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4222",
+  "jobId": "J2112",
+  "applicantId": "U1101",
+  "applyTime": "2026-03-07T15:00:00Z",
+  "status": "ACCEPTED",
+  "recommendationScore": 0.69,
+  "explanation": [
+    "Matched required skills: Communication",
+    "Preferred skill matches: Testing",
+    "Skills to strengthen: Organisation",
+    "Projected workload after acceptance: 4/12 hours"
+  ]
+}

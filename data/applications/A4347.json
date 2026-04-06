@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4347",
+  "jobId": "J2118",
+  "applicantId": "U1126",
+  "applyTime": "2026-03-10T12:00:00Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.82,
+  "explanation": [
+    "Matched required skills: Python, Machine Learning",
+    "Preferred skill matches: Data Analysis",
+    "Skills to strengthen: no critical gaps detected",
+    "Projected workload after acceptance: 6/12 hours"
+  ]
+}
