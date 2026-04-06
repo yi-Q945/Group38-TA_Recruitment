@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4783",
+  "jobId": "J2140",
+  "applicantId": "U1158",
+  "applyTime": "2026-03-18T06:00:00Z",
+  "status": "SHORTLISTED",
+  "recommendationScore": 0.97,
+  "explanation": [
+    "Matched required skills: SQL, Database Design",
+    "Preferred skill matches: Data Modelling, Debugging",
+    "Skills to strengthen: no critical gaps detected",
+    "Projected workload after acceptance: 4/12 hours"
+  ]
+}

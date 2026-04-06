@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4144",
+  "jobId": "J2108",
+  "applicantId": "U1141",
+  "applyTime": "2026-03-06T09:00:00Z",
+  "status": "SHORTLISTED",
+  "recommendationScore": 0.94,
+  "explanation": [
+    "Matched required skills: Security, Linux",
+    "Preferred skill matches: Scripting",
+    "Skills to strengthen: no critical gaps detected",
+    "Projected workload after acceptance: 5/12 hours"
+  ]
+}
