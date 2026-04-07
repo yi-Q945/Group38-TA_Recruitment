@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4493",
+  "jobId": "J2125",
+  "applicantId": "U1151",
+  "applyTime": "2026-03-13T21:00:00Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.48,
+  "explanation": [
+    "Matched required skills: limited direct overlap",
+    "Preferred skill matches: Communication",
+    "Skills to strengthen: Java, OOP",
+    "Projected workload after acceptance: 6/12 hours"
+  ]
+}
