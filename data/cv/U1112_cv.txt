@@ -1,0 +1,5 @@
+Leo Moore
+Programme: Computer Science
+Skills: Data Structures, Algorithms, C, Linux, Concurrency
+Experience: Tutored algorithm clinics, systems labs and debugging sessions for foundational modules.
+Evidence: Comfortable with systems programming, concurrency basics and lab-based teaching support. Strong skills in Data Structures, Algorithms, C, comfortable with student support, marking and technical walkthroughs.
