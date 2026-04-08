@@ -1,0 +1,20 @@
+{
+  "userId": "U1135",
+  "username": "ta.035",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Isla Li",
+  "studentId": "20261235",
+  "email": "ta_035@qmul.ac.uk",
+  "programme": "Cyber Security",
+  "skills": [
+    "Networks",
+    "Linux",
+    "Security",
+    "Scripting",
+    "Troubleshooting"
+  ],
+  "availability": "Weekdays after 14:00; occasional evening support",
+  "experience": "Ran network troubleshooting clinics and security lab walkthroughs for practical sessions.",
+  "cvText": "Hands-on with Linux tooling, shell scripting and secure systems support for teaching labs. Strong skills in Networks, Linux, Security, comfortable with student support, marking and technical walkthroughs."
+}

@@ -1,0 +1,22 @@
+{
+  "userId": "U1103",
+  "username": "ta.003",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Charlotte Patel",
+  "studentId": "20261203",
+  "email": "ta_003@qmul.ac.uk",
+  "programme": "Digital Media Technology",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Accessibility",
+    "Communication"
+  ],
+  "availability": "Weekdays after 14:00; occasional evening support",
+  "experience": "Led web UI coursework reviews, accessibility checks and front-end studio feedback sessions.",
+  "cvText": "Designed responsive interfaces, user journeys and component libraries for course prototypes. Strong skills in HTML, CSS, JavaScript, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1103_cv.txt",
+  "cvUploadedAt": "2026-03-20T07:00:00Z"
+}

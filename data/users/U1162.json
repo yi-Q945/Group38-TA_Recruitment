@@ -1,0 +1,20 @@
+{
+  "userId": "U1162",
+  "username": "ta.062",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Opal Wang",
+  "studentId": "20261262",
+  "email": "ta_062@qmul.ac.uk",
+  "programme": "Artificial Intelligence",
+  "skills": [
+    "Python",
+    "Machine Learning",
+    "Data Analysis",
+    "Algorithms",
+    "Tutoring"
+  ],
+  "availability": "Tue/Thu afternoon, available for online office hours",
+  "experience": "Assisted data labs, explained machine learning concepts and supported notebook-based workshops.",
+  "cvText": "Completed ML pipelines, exploratory analysis and group tutoring for quantitative modules. Strong skills in Python, Machine Learning, Data Analysis, comfortable with student support, marking and technical walkthroughs."
+}

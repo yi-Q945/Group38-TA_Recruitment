@@ -1,0 +1,13 @@
+{
+  "userId": "U1002",
+  "username": "ben.ta",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Ben Li",
+  "studentId": "20260002",
+  "programme": "Computer Science",
+  "skills": ["Data Structures", "Algorithms", "Communication"],
+  "availability": "Tue/Thu morning",
+  "experience": "Tutoring first-year programming labs and marking quizzes.",
+  "cvText": "Strong in algorithms, communication and helping students during lab sessions."
+}

@@ -1,0 +1,22 @@
+{
+  "userId": "U1115",
+  "username": "ta.015",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Olivia Li",
+  "studentId": "20261215",
+  "email": "ta_015@qmul.ac.uk",
+  "programme": "Digital Media Technology",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Accessibility",
+    "Communication"
+  ],
+  "availability": "Weekday mornings except Wednesday",
+  "experience": "Led web UI coursework reviews, accessibility checks and front-end studio feedback sessions.",
+  "cvText": "Designed responsive interfaces, user journeys and component libraries for course prototypes. Strong skills in HTML, CSS, JavaScript, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1115_cv.txt",
+  "cvUploadedAt": "2026-03-17T05:00:00Z"
+}

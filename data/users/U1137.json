@@ -1,0 +1,20 @@
+{
+  "userId": "U1137",
+  "username": "ta.037",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Layla Walker",
+  "studentId": "20261237",
+  "email": "ta_037@qmul.ac.uk",
+  "programme": "Software Engineering",
+  "skills": [
+    "Java",
+    "OOP",
+    "Testing",
+    "Debugging",
+    "Communication"
+  ],
+  "availability": "Wed/Fri afternoon, flexible during assessment weeks",
+  "experience": "Peer mentoring in programming labs, formative marking and debugging clinics.",
+  "cvText": "Built Java coursework projects, supported junior students and documented testing evidence. Strong skills in Java, OOP, Testing, comfortable with student support, marking and technical walkthroughs."
+}

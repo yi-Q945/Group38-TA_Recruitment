@@ -1,0 +1,22 @@
+{
+  "userId": "U1118",
+  "username": "ta.018",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Ryan Martin",
+  "studentId": "20261218",
+  "email": "ta_018@qmul.ac.uk",
+  "programme": "Computer Science",
+  "skills": [
+    "Data Structures",
+    "Algorithms",
+    "C",
+    "Linux",
+    "Concurrency"
+  ],
+  "availability": "Tue/Thu morning, Fri afternoon",
+  "experience": "Tutored algorithm clinics, systems labs and debugging sessions for foundational modules.",
+  "cvText": "Comfortable with systems programming, concurrency basics and lab-based teaching support. Strong skills in Data Structures, Algorithms, C, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1118_cv.txt",
+  "cvUploadedAt": "2026-03-14T07:00:00Z"
+}

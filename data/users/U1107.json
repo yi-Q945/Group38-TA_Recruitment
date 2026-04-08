@@ -1,0 +1,22 @@
+{
+  "userId": "U1107",
+  "username": "ta.007",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Grace Allen",
+  "studentId": "20261207",
+  "email": "ta_007@qmul.ac.uk",
+  "programme": "Software Engineering",
+  "skills": [
+    "Java",
+    "OOP",
+    "Testing",
+    "Debugging",
+    "Communication"
+  ],
+  "availability": "Weekday mornings except Wednesday",
+  "experience": "Peer mentoring in programming labs, formative marking and debugging clinics.",
+  "cvText": "Built Java coursework projects, supported junior students and documented testing evidence. Strong skills in Java, OOP, Testing, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1107_cv.txt",
+  "cvUploadedAt": "2026-03-16T08:00:00Z"
+}

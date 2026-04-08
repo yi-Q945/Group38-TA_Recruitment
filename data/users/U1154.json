@@ -1,0 +1,20 @@
+{
+  "userId": "U1154",
+  "username": "ta.054",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Gavin Scott",
+  "studentId": "20261254",
+  "email": "ta_054@qmul.ac.uk",
+  "programme": "Computer Science",
+  "skills": [
+    "Data Structures",
+    "Algorithms",
+    "C",
+    "Linux",
+    "Concurrency"
+  ],
+  "availability": "Tue/Thu afternoon, available for online office hours",
+  "experience": "Tutored algorithm clinics, systems labs and debugging sessions for foundational modules.",
+  "cvText": "Comfortable with systems programming, concurrency basics and lab-based teaching support. Strong skills in Data Structures, Algorithms, C, comfortable with student support, marking and technical walkthroughs."
+}

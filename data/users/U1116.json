@@ -1,0 +1,22 @@
+{
+  "userId": "U1116",
+  "username": "ta.016",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Patrick Taylor",
+  "studentId": "20261216",
+  "email": "ta_016@qmul.ac.uk",
+  "programme": "Data Science",
+  "skills": [
+    "SQL",
+    "Database Design",
+    "Data Modelling",
+    "Debugging",
+    "Communication"
+  ],
+  "availability": "Flexible on Mon/Thu; weekend revision sessions possible",
+  "experience": "Supported database labs, schema design exercises and SQL troubleshooting drop-ins.",
+  "cvText": "Worked on relational modelling, analytics datasets and structured query optimisation tasks. Strong skills in SQL, Database Design, Data Modelling, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1116_cv.txt",
+  "cvUploadedAt": "2026-03-16T09:00:00Z"
+}

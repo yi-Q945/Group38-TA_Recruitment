@@ -1,0 +1,22 @@
+{
+  "userId": "U1109",
+  "username": "ta.009",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Ivy Liu",
+  "studentId": "20261209",
+  "email": "ta_009@qmul.ac.uk",
+  "programme": "Digital Media Technology",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Accessibility",
+    "Communication"
+  ],
+  "availability": "Mon/Wed afternoon; flexible for lab marking",
+  "experience": "Led web UI coursework reviews, accessibility checks and front-end studio feedback sessions.",
+  "cvText": "Designed responsive interfaces, user journeys and component libraries for course prototypes. Strong skills in HTML, CSS, JavaScript, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1109_cv.txt",
+  "cvUploadedAt": "2026-03-14T06:00:00Z"
+}
