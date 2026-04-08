@@ -1,0 +1,13 @@
+{
+  "jobId": "J2003",
+  "ownerId": "U9001",
+  "title": "Exam Invigilation Support",
+  "moduleCode": "ADMIN01",
+  "description": "Assist with exam room setup, attendance checking and invigilation duties for school assessments.",
+  "requiredSkills": ["Communication", "Organisation"],
+  "preferredSkills": ["Attention to Detail", "Reliability"],
+  "deadline": "2026-04-18",
+  "quota": 2,
+  "workloadHours": 3,
+  "status": "OPEN"
+}

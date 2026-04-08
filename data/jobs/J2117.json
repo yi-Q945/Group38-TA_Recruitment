@@ -1,0 +1,19 @@
+{
+  "jobId": "J2117",
+  "ownerId": "U9101",
+  "title": "Software Testing Workshop TA",
+  "moduleCode": "EBU6312-2",
+  "description": "Coach students through unit testing, QA workflows and bug reproduction exercises.",
+  "requiredSkills": [
+    "Testing",
+    "QA"
+  ],
+  "preferredSkills": [
+    "Automation",
+    "JUnit"
+  ],
+  "deadline": "2026-04-15",
+  "quota": 2,
+  "workloadHours": 4,
+  "status": "OPEN"
+}
