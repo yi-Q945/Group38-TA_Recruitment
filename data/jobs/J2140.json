@@ -1,0 +1,19 @@
+{
+  "jobId": "J2140",
+  "ownerId": "U9108",
+  "title": "Database Systems Support TA",
+  "moduleCode": "EBU6311-4",
+  "description": "Support SQL labs, data modelling tasks and relational database debugging clinics.",
+  "requiredSkills": [
+    "SQL",
+    "Database Design"
+  ],
+  "preferredSkills": [
+    "Data Modelling",
+    "Debugging"
+  ],
+  "deadline": "2026-04-24",
+  "quota": 2,
+  "workloadHours": 4,
+  "status": "CLOSED"
+}

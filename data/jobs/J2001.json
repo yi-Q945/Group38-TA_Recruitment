@@ -1,0 +1,13 @@
+{
+  "jobId": "J2001",
+  "ownerId": "U9001",
+  "title": "Java Programming Teaching Assistant",
+  "moduleCode": "EBU6304",
+  "description": "Support lab sessions, answer student questions, and help prepare formative marking activities.",
+  "requiredSkills": ["Java", "OOP"],
+  "preferredSkills": ["Testing", "Communication"],
+  "deadline": "2026-04-10",
+  "quota": 2,
+  "workloadHours": 6,
+  "status": "OPEN"
+}

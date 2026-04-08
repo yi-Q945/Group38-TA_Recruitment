@@ -1,0 +1,19 @@
+{
+  "jobId": "J2002",
+  "ownerId": "U9001",
+  "title": "Data Structures Lab Support",
+  "moduleCode": "CS2002",
+  "description": "Guide students during data structure exercises and provide debugging support in weekly labs.",
+  "requiredSkills": [
+    "Data Structures",
+    "Algorithms"
+  ],
+  "preferredSkills": [
+    "Communication",
+    "Patience"
+  ],
+  "deadline": "2026-04-14",
+  "quota": 1,
+  "workloadHours": 4,
+  "status": "CLOSED"
+}

@@ -1,0 +1,20 @@
+{
+  "jobId": "J2103",
+  "ownerId": "U9103",
+  "title": "Web Development Studio TA",
+  "moduleCode": "EBU6310",
+  "description": "Assist front-end studio sessions, review HTML/CSS/JavaScript submissions and advise on accessible UI design.",
+  "requiredSkills": [
+    "HTML",
+    "CSS",
+    "JavaScript"
+  ],
+  "preferredSkills": [
+    "Accessibility",
+    "UI Design"
+  ],
+  "deadline": "2026-04-03",
+  "quota": 2,
+  "workloadHours": 5,
+  "status": "OPEN"
+}

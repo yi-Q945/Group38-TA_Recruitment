@@ -1,0 +1,19 @@
+{
+  "jobId": "J2122",
+  "ownerId": "U9106",
+  "title": "Operating Systems Lab TA",
+  "moduleCode": "EBU6317-2",
+  "description": "Facilitate systems programming labs, explain Linux tooling and support concurrency debugging questions.",
+  "requiredSkills": [
+    "C",
+    "Linux"
+  ],
+  "preferredSkills": [
+    "Concurrency",
+    "Debugging"
+  ],
+  "deadline": "2026-03-31",
+  "quota": 2,
+  "workloadHours": 5,
+  "status": "CLOSED"
+}
