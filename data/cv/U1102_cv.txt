@@ -1,0 +1,5 @@
+Benjamin Wang
+Programme: Artificial Intelligence
+Skills: Python, Machine Learning, Data Analysis, Algorithms, Tutoring
+Experience: Assisted data labs, explained machine learning concepts and supported notebook-based workshops.
+Evidence: Completed ML pipelines, exploratory analysis and group tutoring for quantitative modules. Strong skills in Python, Machine Learning, Data Analysis, comfortable with student support, marking and technical walkthroughs.
