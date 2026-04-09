@@ -1,0 +1,22 @@
+{
+  "userId": "U1110",
+  "username": "ta.010",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Jack Evans",
+  "studentId": "20261210",
+  "email": "ta_010@qmul.ac.uk",
+  "programme": "Data Science",
+  "skills": [
+    "SQL",
+    "Database Design",
+    "Data Modelling",
+    "Debugging",
+    "Communication"
+  ],
+  "availability": "Tue/Thu morning, Fri afternoon",
+  "experience": "Supported database labs, schema design exercises and SQL troubleshooting drop-ins.",
+  "cvText": "Worked on relational modelling, analytics datasets and structured query optimisation tasks. Strong skills in SQL, Database Design, Data Modelling, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1110_cv.txt",
+  "cvUploadedAt": "2026-03-22T05:00:00Z"
+}

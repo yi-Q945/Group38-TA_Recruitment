@@ -1,0 +1,22 @@
+{
+  "userId": "U1102",
+  "username": "ta.002",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Benjamin Wang",
+  "studentId": "20261202",
+  "email": "ta_002@qmul.ac.uk",
+  "programme": "Artificial Intelligence",
+  "skills": [
+    "Python",
+    "Machine Learning",
+    "Data Analysis",
+    "Algorithms",
+    "Tutoring"
+  ],
+  "availability": "Tue/Thu morning, Fri afternoon",
+  "experience": "Assisted data labs, explained machine learning concepts and supported notebook-based workshops.",
+  "cvText": "Completed ML pipelines, exploratory analysis and group tutoring for quantitative modules. Strong skills in Python, Machine Learning, Data Analysis, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1102_cv.txt",
+  "cvUploadedAt": "2026-03-21T08:00:00Z"
+}

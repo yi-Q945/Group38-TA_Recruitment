@@ -1,0 +1,22 @@
+{
+  "userId": "U1106",
+  "username": "ta.006",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Freya Hall",
+  "studentId": "20261206",
+  "email": "ta_006@qmul.ac.uk",
+  "programme": "Computer Science",
+  "skills": [
+    "Data Structures",
+    "Algorithms",
+    "C",
+    "Linux",
+    "Concurrency"
+  ],
+  "availability": "Tue/Thu afternoon, available for online office hours",
+  "experience": "Tutored algorithm clinics, systems labs and debugging sessions for foundational modules.",
+  "cvText": "Comfortable with systems programming, concurrency basics and lab-based teaching support. Strong skills in Data Structures, Algorithms, C, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1106_cv.txt",
+  "cvUploadedAt": "2026-03-17T09:00:00Z"
+}

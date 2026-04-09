@@ -1,0 +1,20 @@
+{
+  "userId": "U1150",
+  "username": "ta.050",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Carter Evans",
+  "studentId": "20261250",
+  "email": "ta_050@qmul.ac.uk",
+  "programme": "Artificial Intelligence",
+  "skills": [
+    "Python",
+    "Machine Learning",
+    "Data Analysis",
+    "Algorithms",
+    "Tutoring"
+  ],
+  "availability": "Tue/Thu morning, Fri afternoon",
+  "experience": "Assisted data labs, explained machine learning concepts and supported notebook-based workshops.",
+  "cvText": "Completed ML pipelines, exploratory analysis and group tutoring for quantitative modules. Strong skills in Python, Machine Learning, Data Analysis, comfortable with student support, marking and technical walkthroughs."
+}

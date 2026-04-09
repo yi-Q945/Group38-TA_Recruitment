@@ -1,0 +1,22 @@
+{
+  "userId": "U1111",
+  "username": "ta.011",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Katherine Brown",
+  "studentId": "20261211",
+  "email": "ta_011@qmul.ac.uk",
+  "programme": "Cyber Security",
+  "skills": [
+    "Networks",
+    "Linux",
+    "Security",
+    "Scripting",
+    "Troubleshooting"
+  ],
+  "availability": "Weekdays after 14:00; occasional evening support",
+  "experience": "Ran network troubleshooting clinics and security lab walkthroughs for practical sessions.",
+  "cvText": "Hands-on with Linux tooling, shell scripting and secure systems support for teaching labs. Strong skills in Networks, Linux, Security, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1111_cv.txt",
+  "cvUploadedAt": "2026-03-21T09:00:00Z"
+}

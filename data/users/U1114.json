@@ -1,0 +1,22 @@
+{
+  "userId": "U1114",
+  "username": "ta.014",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Noah Scott",
+  "studentId": "20261214",
+  "email": "ta_014@qmul.ac.uk",
+  "programme": "Artificial Intelligence",
+  "skills": [
+    "Python",
+    "Machine Learning",
+    "Data Analysis",
+    "Algorithms",
+    "Tutoring"
+  ],
+  "availability": "Tue/Thu afternoon, available for online office hours",
+  "experience": "Assisted data labs, explained machine learning concepts and supported notebook-based workshops.",
+  "cvText": "Completed ML pipelines, exploratory analysis and group tutoring for quantitative modules. Strong skills in Python, Machine Learning, Data Analysis, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1114_cv.txt",
+  "cvUploadedAt": "2026-03-18T06:00:00Z"
+}

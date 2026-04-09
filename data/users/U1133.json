@@ -1,0 +1,20 @@
+{
+  "userId": "U1133",
+  "username": "ta.033",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Georgia Young",
+  "studentId": "20261233",
+  "email": "ta_033@qmul.ac.uk",
+  "programme": "Digital Media Technology",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Accessibility",
+    "Communication"
+  ],
+  "availability": "Mon/Wed afternoon; flexible for lab marking",
+  "experience": "Led web UI coursework reviews, accessibility checks and front-end studio feedback sessions.",
+  "cvText": "Designed responsive interfaces, user journeys and component libraries for course prototypes. Strong skills in HTML, CSS, JavaScript, comfortable with student support, marking and technical walkthroughs."
+}

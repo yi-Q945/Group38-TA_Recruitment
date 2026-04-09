@@ -1,0 +1,22 @@
+{
+  "userId": "U1108",
+  "username": "ta.008",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Henry Zhang",
+  "studentId": "20261208",
+  "email": "ta_008@qmul.ac.uk",
+  "programme": "Artificial Intelligence",
+  "skills": [
+    "Python",
+    "Machine Learning",
+    "Data Analysis",
+    "Algorithms",
+    "Tutoring"
+  ],
+  "availability": "Flexible on Mon/Thu; weekend revision sessions possible",
+  "experience": "Assisted data labs, explained machine learning concepts and supported notebook-based workshops.",
+  "cvText": "Completed ML pipelines, exploratory analysis and group tutoring for quantitative modules. Strong skills in Python, Machine Learning, Data Analysis, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1108_cv.txt",
+  "cvUploadedAt": "2026-03-15T07:00:00Z"
+}

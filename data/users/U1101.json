@@ -1,0 +1,22 @@
+{
+  "userId": "U1101",
+  "username": "ta.001",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Amelia Chen",
+  "studentId": "20261201",
+  "email": "ta_001@qmul.ac.uk",
+  "programme": "Software Engineering",
+  "skills": [
+    "Java",
+    "OOP",
+    "Testing",
+    "Debugging",
+    "Communication"
+  ],
+  "availability": "Mon/Wed afternoon; flexible for lab marking",
+  "experience": "Peer mentoring in programming labs, formative marking and debugging clinics.",
+  "cvText": "Built Java coursework projects, supported junior students and documented testing evidence. Strong skills in Java, OOP, Testing, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1101_cv.txt",
+  "cvUploadedAt": "2026-03-22T09:00:00Z"
+}

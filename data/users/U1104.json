@@ -1,0 +1,22 @@
+{
+  "userId": "U1104",
+  "username": "ta.004",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Daniel Singh",
+  "studentId": "20261204",
+  "email": "ta_004@qmul.ac.uk",
+  "programme": "Data Science",
+  "skills": [
+    "SQL",
+    "Database Design",
+    "Data Modelling",
+    "Debugging",
+    "Communication"
+  ],
+  "availability": "Mon/Tue evening and weekend morning",
+  "experience": "Supported database labs, schema design exercises and SQL troubleshooting drop-ins.",
+  "cvText": "Worked on relational modelling, analytics datasets and structured query optimisation tasks. Strong skills in SQL, Database Design, Data Modelling, comfortable with student support, marking and technical walkthroughs.",
+  "cvFileName": "U1104_cv.txt",
+  "cvUploadedAt": "2026-03-19T06:00:00Z"
+}
