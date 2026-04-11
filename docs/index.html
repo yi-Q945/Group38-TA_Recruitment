@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RecruitAssist — TA Recruitment Platform</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #7c3aed;
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #334155;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --gradient: linear-gradient(135deg, #2563eb, #7c3aed);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        a { color: var(--primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 100;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        nav .logo { font-size: 1.3rem; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        nav .links { display: flex; gap: 1.5rem; }
+        nav .links a { color: var(--text-muted); font-size: 0.9rem; transition: color 0.2s; }
+        nav .links a:hover { color: var(--text); text-decoration: none; }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: radial-gradient(ellipse at top, rgba(37,99,235,0.15), transparent 60%);
+        }
+        .hero h1 { font-size: 3.2rem; margin-bottom: 1rem; }
+        .hero h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 2rem; }
+        .hero-badges { display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+        .badge { padding: 0.3rem 0.8rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; border: 1px solid var(--border); background: var(--bg-card); }
+        .badge.java { border-color: #f59e0b; color: #f59e0b; }
+        .badge.maven { border-color: #ef4444; color: #ef4444; }
+        .badge.servlet { border-color: #22c55e; color: #22c55e; }
+        .badge.json { border-color: #8b5cf6; color: #8b5cf6; }
+        .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.8rem 1.8rem; border-radius: 8px; font-size: 1rem; font-weight: 600;
+            transition: all 0.2s; cursor: pointer; border: none;
+        }
+        .btn-primary { background: var(--gradient); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,99,235,0.3); text-decoration: none; color: white; }
+        .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        .btn-outline:hover { background: var(--bg-card); text-decoration: none; }
+
+        /* Section */
+        .section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+        .section h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .section .subtitle { color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem; }
+
+        /* Cards Grid */
+        .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 1.5rem; transition: all 0.25s;
+        }
+        .card:hover { background: var(--bg-card-hover); transform: translateY(-3px); border-color: var(--primary); }
+        .card .icon { font-size: 2rem; margin-bottom: 0.8rem; }
+        .card h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+        .card p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Architecture */
+        .arch-diagram {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 2rem; font-family: 'Courier New', monospace; font-size: 0.85rem;
+            overflow-x: auto; white-space: pre; line-height: 1.5; color: var(--text-muted);
+        }
+        .arch-diagram .highlight { color: var(--primary); font-weight: bold; }
+        .arch-diagram .accent { color: var(--accent); font-weight: bold; }
+        .arch-diagram .success { color: var(--success); }
+
+        /* Roles Table */
+        .roles-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        .roles-table th, .roles-table td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .roles-table th { color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        .roles-table td { font-size: 0.9rem; }
+        .role-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+        .role-ta { background: rgba(37,99,235,0.2); color: #60a5fa; }
+        .role-mo { background: rgba(245,158,11,0.2); color: #fbbf24; }
+        .role-admin { background: rgba(239,68,68,0.2); color: #f87171; }
+
+        /* Recommendation Engine */
+        .rec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .rec-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+        .rec-card .weight { float: right; font-size: 0.85rem; color: var(--accent); font-weight: 700; }
+        .rec-card h4 { font-size: 1rem; margin-bottom: 0.3rem; }
+        .rec-card p { color: var(--text-muted); font-size: 0.85rem; }
+        .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-top: 0.5rem; overflow: hidden; }
+        .progress-bar .fill { height: 100%; border-radius: 2px; background: var(--gradient); }
+
+        /* Stats */
+        .stats { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; margin: 2rem 0; }
+        .stat { text-align: center; }
+        .stat .number { font-size: 2.5rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat .label { font-size: 0.85rem; color: var(--text-muted); }
+
+        /* Quick Start */
+        .code-block {
+            background: #0d1117; border: 1px solid var(--border); border-radius: 10px;
+            padding: 1.2rem 1.5rem; font-family: 'Courier New', monospace; font-size: 0.85rem;
+            overflow-x: auto; margin: 1rem 0; position: relative;
+        }
+        .code-block .comment { color: #6e7681; }
+        .code-block .cmd { color: #79c0ff; }
+        .code-block .string { color: #a5d6ff; }
+
+        /* Team */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+        .team-member {
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+            padding: 1.2rem; text-align: center; transition: all 0.2s;
+        }
+        .team-member:hover { border-color: var(--primary); }
+        .team-member .avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--gradient); margin: 0 auto 0.6rem; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; }
+        .team-member .name { font-size: 0.95rem; font-weight: 600; }
+        .team-member .role-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+        /* Footer */
+        footer {
+            text-align: center; padding: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted); font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            nav { padding: 0.6rem 1rem; }
+            .section { padding: 3rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">RecruitAssist</div>
+    <div class="links">
+        <a href="#features">Features</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#recommendation">Recommendation Engine</a>
+        <a href="#roles">Roles</a>
+        <a href="#quickstart">Quick Start</a>
+        <a href="#team">Team</a>
+        <a href="https://github.com/yi-Q945/Group38-TA_Recruitment">GitHub</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <h1><span>RecruitAssist</span></h1>
+    <p>A lightweight Java Servlet/JSP prototype for <strong>Teaching Assistant recruitment</strong> with an <strong>explainable recommendation engine</strong>, role-based dashboards, and file-based persistence.</p>
+    <div class="hero-badges">
+        <span class="badge java">Java 17</span>
+        <span class="badge maven">Maven</span>
+        <span class="badge servlet">Jakarta Servlet 6</span>
+        <span class="badge json">JSON Storage</span>
+        <span class="badge">JSP + JSTL</span>
+        <span class="badge">Gson</span>
+    </div>
+    <div class="stats">
+        <div class="stat"><div class="number">42</div><div class="label">Java Classes</div></div>
+        <div class="stat"><div class="number">7</div><div class="label">JSP Pages</div></div>
+        <div class="stat"><div class="number">6</div><div class="label">Scoring Dimensions</div></div>
+        <div class="stat"><div class="number">1000+</div><div class="label">Demo Records</div></div>
+    </div>
+    <div class="cta-group">
+        <a href="https://github.com/yi-Q945/Group38-TA_Recruitment" class="btn btn-primary">
+            &#9733; View on GitHub
+        </a>
+        <a href="#quickstart" class="btn btn-outline">Quick Start Guide</a>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="section" id="features">
+    <h2>Key Features</h2>
+    <p class="subtitle">A full-cycle TA recruitment workflow with intelligent matching</p>
+    <div class="cards">
+        <div class="card">
+            <div class="icon">&#128300;</div>
+            <h3>Explainable Recommendation</h3>
+            <p>6-dimensional weighted scoring engine: skill match, availability, experience, workload balance, profile evidence, and competition pressure. Every score comes with human-readable explanations.</p>
+        </div>
+        <div class="card">
+            <div class="icon">&#128101;</div>
+            <h3>Role-Based Dashboards</h3>
+            <p>Three distinct dashboards for TA, Module Organiser (MO), and Admin. Each role sees relevant data, actions, and KPIs tailored to their workflow.</p>
+        </div>
+        <div class="card">
+            <div class="icon">&#128196;</div>
+            <h3>Complete Application Lifecycle</h3>
+            <p>Apply → Shortlist → Accept/Reject → Withdraw. Full state machine with automatic job closure when quota is met or deadline passes.</p>
+        </div>
+        <div class="card">
+            <div class="icon">&#128188;</div>
+            <h3>Job Management</h3>
+            <p>MOs can create, edit, close, and reopen positions. Input validation prevents XSS, enforces deadlines, and ensures quota consistency.</p>
+        </div>
+        <div class="card">
+            <div class="icon">&#128202;</div>
+            <h3>Workload Monitoring</h3>
+            <p>Admin dashboard tracks TA workload balance across all accepted positions. Alerts when threshold is exceeded for fair distribution.</p>
+        </div>
+        <div class="card">
+            <div class="icon">&#128190;</div>
+            <h3>Zero-Database Architecture</h3>
+            <p>All data persisted as JSON/CSV/TXT files. Built-in caching with path-level read-write locks for concurrent access. No database setup required.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Architecture -->
+<section class="section" id="architecture">
+    <h2>System Architecture</h2>
+    <p class="subtitle">Clean layered design with dependency injection</p>
+    <div class="arch-diagram">
+<span class="highlight">┌─────────────────────────────────────────────────────────────┐</span>
+<span class="highlight">│                     JSP View Layer                          │</span>
+<span class="highlight">│</span>  dashboard-ta.jsp │ dashboard-mo.jsp │ dashboard-admin.jsp  <span class="highlight">│</span>
+<span class="highlight">│</span>  job-detail.jsp   │ login.jsp        │ home.jsp             <span class="highlight">│</span>
+<span class="highlight">└──────────────────────────┬──────────────────────────────────┘</span>
+                           │ forward
+<span class="accent">┌──────────────────────────┴──────────────────────────────────┐</span>
+<span class="accent">│                    Servlet Layer (14)                        │</span>
+<span class="accent">│</span>  AppServlet (base) → Login │ Logout │ Home │ Dashboard      <span class="accent">│</span>
+<span class="accent">│</span>  JobDetail │ CreateJob │ UpdateJob │ ChangeJobStatus         <span class="accent">│</span>
+<span class="accent">│</span>  Apply │ Withdraw │ UpdateStatus │ UpdateProfile             <span class="accent">│</span>
+<span class="accent">│</span>  UploadCv │ DownloadCv                                       <span class="accent">│</span>
+<span class="accent">└──────────────────────────┬──────────────────────────────────┘</span>
+                           │ delegates
+<span class="success">┌──────────────────────────┴──────────────────────────────────┐</span>
+<span class="success">│                    Service Layer (6)                         │</span>
+<span class="success">│</span>  AuthService │ UserService │ JobService                      <span class="success">│</span>
+<span class="success">│</span>  ApplicationService │ WorkloadService                         <span class="success">│</span>
+<span class="success">│</span>  <span class="accent">RecommendationService (6-dim scoring engine)</span>                 <span class="success">│</span>
+<span class="success">└──────────────────────────┬──────────────────────────────────┘</span>
+                           │ reads/writes
+┌──────────────────────────┴──────────────────────────────────┐
+│                  Repository Layer (6)                        │
+│  UserRepo │ JobRepo │ ApplicationRepo │ SystemConfigRepo    │
+│  IdCounterRepo │ AuditRepo                                  │
+└──────────────────────────┬──────────────────────────────────┘
+                           │ via
+┌──────────────────────────┴──────────────────────────────────┐
+│              <span class="accent">JsonFileStore</span> (cached, concurrent, atomic)       │
+│  Two-level cache │ Path-level R/W locks │ Atomic file write │
+└──────────────────────────┬──────────────────────────────────┘
+                           │
+┌──────────────────────────┴──────────────────────────────────┐
+│                    File System Storage                       │
+│  data/users/*.json │ data/jobs/*.json │ data/applications/  │
+│  data/system/config.json │ data/cv/ │ logs/access/audit.csv │
+└─────────────────────────────────────────────────────────────┘
+    </div>
+</section>
+
+<!-- Recommendation Engine -->
+<section class="section" id="recommendation">
+    <h2>Recommendation Engine</h2>
+    <p class="subtitle">Multi-dimensional explainable scoring with configurable weights</p>
+    <p style="color:var(--text-muted); margin-bottom:1rem;">The engine evaluates each TA-Job pair across 6 dimensions. Weights are configurable in <code>data/system/config.json</code>.</p>
+    <p style="color:var(--text-muted); margin-bottom:1.5rem;"><strong>Formula:</strong> <code>score = &Sigma;(dimension_score &times; weight) / &Sigma;(weight)</code></p>
+    <div class="rec-grid">
+        <div class="rec-card">
+            <span class="weight">40%</span>
+            <h4>&#127919; Skill Match</h4>
+            <p>Jaccard similarity + alias normalization (e.g., "OOP" = "Object Oriented Programming"). Required coverage &times;0.72 + preferred &times;0.18 + breadth bonus + full coverage bonus &minus; gap penalty.</p>
+            <div class="progress-bar"><div class="fill" style="width:100%"></div></div>
+        </div>
+        <div class="rec-card">
+            <span class="weight">18%</span>
+            <h4>&#128218; Experience Evidence</h4>
+            <p>Analyses profile text, CV content, and experience descriptions. Combines phrase coverage, token overlap, and evidence keyword matching (lab, marking, debugging, etc.).</p>
+            <div class="progress-bar"><div class="fill" style="width:45%"></div></div>
+        </div>
+        <div class="rec-card">
+            <span class="weight">12%</span>
+            <h4>&#128336; Availability</h4>
+            <p>Keyword detection in availability text: weekday/weekend, specific days, time slots (morning/afternoon/evening), flexibility indicators.</p>
+            <div class="progress-bar"><div class="fill" style="width:30%"></div></div>
+        </div>
+        <div class="rec-card">
+            <span class="weight">12%</span>
+            <h4>&#9878; Workload Balance</h4>
+            <p>Evaluates current TA workload against configurable threshold (default 12h/week). Over-threshold candidates get penalty scores to promote fair distribution.</p>
+            <div class="progress-bar"><div class="fill" style="width:30%"></div></div>
+        </div>
+        <div class="rec-card">
+            <span class="weight">10%</span>
+            <h4>&#128203; Profile Evidence</h4>
+            <p>Assesses profile completeness (5 fields) weighted at 58%, job alignment at 22%, and skill breadth signal. Encourages TAs to fill comprehensive profiles.</p>
+            <div class="progress-bar"><div class="fill" style="width:25%"></div></div>
+        </div>
+        <div class="rec-card">
+            <span class="weight">8%</span>
+            <h4>&#127941; Competition Pressure</h4>
+            <p>Calculates active-applicants-per-remaining-slot ratio. Low competition (&le;1/slot) scores 0.95; high competition (&gt;4/slot) scores progressively lower.</p>
+            <div class="progress-bar"><div class="fill" style="width:20%"></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Roles -->
+<section class="section" id="roles">
+    <h2>User Roles & Demo Accounts</h2>
+    <p class="subtitle">Three roles with distinct capabilities (demo password: <code>demo123</code>)</p>
+    <table class="roles-table">
+        <thead>
+            <tr><th>Role</th><th>Demo Account</th><th>Capabilities</th></tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="role-badge role-ta">TA</span></td>
+                <td><code>alice.ta</code>, <code>ben.ta</code></td>
+                <td>View recommended jobs with match explanations, submit/withdraw applications, upload CV, edit profile, view personal workload</td>
+            </tr>
+            <tr>
+                <td><span class="role-badge role-mo">MO</span></td>
+                <td><code>mo.chen</code>, <code>recruiter.01</code></td>
+                <td>Create/edit/close/reopen jobs, view candidate rankings with recommendation scores, accept/reject/shortlist applications, download CVs</td>
+            </tr>
+            <tr>
+                <td><span class="role-badge role-admin">Admin</span></td>
+                <td><code>admin.sarah</code></td>
+                <td>Global recruitment overview, workload balance monitoring, recent application activity, system-wide statistics by module/status</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Quick Start -->
+<section class="section" id="quickstart">
+    <h2>Quick Start</h2>
+    <p class="subtitle">Get running in under 2 minutes</p>
+
+    <h3 style="margin-top:1.5rem;font-size:1.05rem;">Prerequisites</h3>
+    <p style="color:var(--text-muted)">Java 17 &bull; Maven 3.9+</p>
+
+    <div class="code-block">
+<span class="comment"># Clone the repository</span>
+<span class="cmd">git clone</span> https://github.com/yi-Q945/Group38-TA_Recruitment.git
+<span class="cmd">cd</span> Group38-TA_Recruitment
+
+<span class="comment"># (Optional) Generate larger demo dataset</span>
+<span class="cmd">python3</span> scripts/generate_demo_load.py
+
+<span class="comment"># Start the application</span>
+<span class="cmd">export</span> RECRUITASSIST_BASE_DIR=<span class="string">$(pwd)</span>
+<span class="cmd">mvn</span> -f framework/recruitassist-web/pom.xml \
+    org.eclipse.jetty.ee10:jetty-ee10-maven-plugin:12.0.15:run \
+    -Djetty.http.port=8081 -Djetty.contextPath=/
+
+<span class="comment"># Open in browser</span>
+<span class="cmd">open</span> http://127.0.0.1:8081/
+    </div>
+
+    <h3 style="margin-top:2rem;font-size:1.05rem;">Suggested Demo Walkthrough</h3>
+    <div class="cards" style="margin-top:1rem;">
+        <div class="card">
+            <div class="icon">1&#65039;&#8419;</div>
+            <h3>Login as TA</h3>
+            <p>Use <code>alice.ta / demo123</code>. Explore recommended jobs with match scores and explanations. Submit an application.</p>
+        </div>
+        <div class="card">
+            <div class="icon">2&#65039;&#8419;</div>
+            <h3>Switch to MO</h3>
+            <p>Login as <code>mo.chen</code>. View candidate rankings, accept/reject applications, create a new job posting.</p>
+        </div>
+        <div class="card">
+            <div class="icon">3&#65039;&#8419;</div>
+            <h3>Check as Admin</h3>
+            <p>Login as <code>admin.sarah</code>. Review workload balance, monitor recent activity, and verify fair distribution.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Team -->
+<section class="section" id="team">
+    <h2>Team — Group 38</h2>
+    <p class="subtitle">EBU6304 Software Engineering Group Project</p>
+    <div class="team-grid">
+        <div class="team-member">
+            <div class="avatar">YQ</div>
+            <div class="name">Yi Qi</div>
+            <div class="role-desc">Login & Homepage & UI Assets</div>
+        </div>
+        <div class="team-member">
+            <div class="avatar">TZ</div>
+            <div class="name">Tianyu Zhao</div>
+            <div class="role-desc">TA Dashboard & Application & CV</div>
+        </div>
+        <div class="team-member">
+            <div class="avatar">JR</div>
+            <div class="name">Jie Ren</div>
+            <div class="role-desc">MO Dashboard & Job Management</div>
+        </div>
+        <div class="team-member">
+            <div class="avatar">HJ</div>
+            <div class="name">Haopeng Jin</div>
+            <div class="role-desc">Recommendation Engine & Application Service</div>
+        </div>
+        <div class="team-member">
+            <div class="avatar">ZH</div>
+            <div class="name">Zhuang Hou</div>
+            <div class="role-desc">Admin Dashboard & Workload Monitoring</div>
+        </div>
+        <div class="team-member">
+            <div class="avatar">ZD</div>
+            <div class="name">Zexuan Dong</div>
+            <div class="role-desc">Data Layer & Infrastructure & Testing</div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>RecruitAssist &copy; 2026 Group 38 &mdash; EBU6304 Software Engineering, QMUL/BUPT</p>
+    <p style="margin-top:0.3rem;">Built with Java 17, Jakarta Servlet 6, JSP/JSTL, Gson</p>
+</footer>
+
+</body>
+</html>
