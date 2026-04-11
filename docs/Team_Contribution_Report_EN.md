@@ -432,20 +432,43 @@ This ensures that expired or fully-filled jobs are automatically closed when the
 
 ---
 
-### 2.4 Haopeng Jin — Recommendation Engine & Application Service
+### 2.4 Haopeng Jin — Recommendation Engine & Application Service & Search/Filter
 
 **Responsible Files**:
 - `RecommendationService.java` (626 lines — the most complex service)
 - `ApplicationService.java` (415 lines)
-- `JobDetailServlet.java`
-- `UpdateApplicationStatusServlet.java`
+- `JobDetailServlet.java`, `UpdateApplicationStatusServlet.java`
+- `DashboardServlet.java` (search/filter logic for all 3 roles)
 - `JobRecommendation.java` (view model)
-- `job-detail.jsp`
+- `job-detail.jsp`, `dashboard-ta.jsp` (search UI), `dashboard-mo.jsp` (search UI)
+- `DownloadCvServlet.java` (friendly filename generation)
 - `data/applications/` (seed data)
 
-**Backlog Stories**: #4 Browse Positions, #8 Accept/Reject, #19 AI Skill Matching
+**Backlog Stories**: #4 Browse Positions, #8 Accept/Reject, #14 Job Search & Filter, #19 AI Skill Matching
 
 #### Feature Description (for Demo Presentation)
+
+**Cross-Role Search & Filter System** (added in v3.0.3)
+
+TA Dashboard Search (`/dashboard` — TA view):
+- **Keyword Search**: Text input matches against job title, module code, description, required skills, preferred skills, matched skills, and missing skills. Backend implementation in `DashboardServlet.matchesRecommendationQuery()` concatenates all searchable fields and uses `contains()`.
+- **Skill Filter**: Comma-separated skill input (e.g., "Python, Java") matches against job required/preferred skills. Any single skill hit includes the job. Backend in `DashboardServlet.matchesSkillFilter()`.
+- **Max Hours Filter**: Numeric input (e.g., 8) filters out jobs with weekly workload exceeding the value. Backend: `job.getWorkloadHours() <= maxHours`.
+- **Deadline Filter**: Date input (yyyy-mm-dd format) shows only jobs with deadline on or before the specified date. Backend: `LocalDate.parse(job.getDeadline()).isBefore(deadlineBefore)`.
+- **Sort Options**: Best match first (default) / Closest deadline / Lowest projected workload.
+- **Clear Filters**: "Clear filters" button resets all filters and returns to the full recommended list.
+
+MO Dashboard Search (`/dashboard` — MO view):
+- **Search Bar**: Keyword input matches job title, module code, skills, and description. Backend in `DashboardServlet.matchesMoSearch()`.
+- **Enhanced Candidate Table**: Added CV download column and programme information display.
+
+Admin Dashboard Search (`/dashboard` — Admin view):
+- **Extended Search Scope**: Now also matches skill keywords in addition to module code and title. Backend in `DashboardServlet.matchesAdminFilter()`.
+
+**CV Download Filename Optimisation**:
+- Downloaded CV files are automatically named `{Name}_{ModuleCode}.{ext}` (e.g., `Alice_Zhang_EBU6304.pdf`) instead of the raw `U1001_cv.pdf`, making it easier for MOs to identify and file CVs.
+
+**Demo Walkthrough**: Login as `alice.ta` → type "Python" in the search box → only jobs requiring Python appear → type "Java, Testing" in the skill filter → results narrow further → set max hours to 6 → only lightweight roles remain → click "Clear filters" to reset → switch sort to "Closest deadline".
 
 **Recommendation Engine** — the core innovation of RecruitAssist
 - Evaluates each TA-Job pair across **6 weighted dimensions** with configurable weights from `config.json`:

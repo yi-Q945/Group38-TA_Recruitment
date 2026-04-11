@@ -197,13 +197,35 @@ public ActionResult createJob(UserProfile actor, String title,
 
 ---
 
-### 2.4 Haopeng Jin — 推荐引擎与申请服务
+### 2.4 Haopeng Jin — 推荐引擎与申请服务与搜索过滤
 
-**负责文件**: `RecommendationService.java`(626行), `ApplicationService.java`(415行), `JobDetailServlet.java`, `UpdateApplicationStatusServlet.java`, `JobRecommendation.java`, `job-detail.jsp`, `data/applications/`
+**负责文件**: `RecommendationService.java`(626行), `ApplicationService.java`(415行), `JobDetailServlet.java`, `UpdateApplicationStatusServlet.java`, `DashboardServlet.java`(搜索/过滤逻辑), `JobRecommendation.java`, `job-detail.jsp`, `dashboard-ta.jsp`(搜索 UI), `dashboard-mo.jsp`(搜索 UI), `DownloadCvServlet.java`(文件名优化), `data/applications/`
 
-**对应 Backlog**: #4 浏览岗位, #8 接受/拒绝, #16 实时申请人数, #19 AI 技能匹配
+**对应 Backlog**: #4 浏览岗位, #8 接受/拒绝, #14 搜索过滤, #16 实时申请人数, #19 AI 技能匹配
 
 #### 功能介绍（演示说明）
+
+**全角色搜索与过滤系统** — v3.0.3 新增
+
+TA 仪表盘搜索（`/dashboard` — TA 视图）：
+- **关键词搜索**：在搜索框输入文字，会匹配岗位标题、模块代码、描述、必需技能、优选技能、已匹配技能和缺失技能。后端实现在 `DashboardServlet.matchesRecommendationQuery()` 中，将所有字段拼接为一个可搜索字符串后用 `contains()` 匹配。
+- **技能过滤**：输入逗号分隔的技能名（如 "Python, Java"），系统匹配岗位的 required/preferred skills。只要任一技能命中就显示该岗位。后端实现在 `DashboardServlet.matchesSkillFilter()` 中。
+- **最大工时过滤**：输入数字（如 8），只显示每周工时 ≤ 该值的岗位。后端通过 `job.getWorkloadHours() <= maxHours` 过滤。
+- **截止日期过滤**：输入日期（yyyy-mm-dd 格式），只显示截止日期在该日期之前的岗位。后端通过 `LocalDate.parse(job.getDeadline()).isBefore(deadlineBefore)` 过滤。
+- **排序选项**：最佳匹配优先（默认）/ 截止日期优先 / 工作量最低优先。
+- **清除过滤**："Clear filters" 按钮重置所有过滤条件，回到完整推荐列表。
+
+MO 仪表盘搜索（`/dashboard` — MO 视图）：
+- **搜索框**：输入关键词匹配岗位标题、模块代码、技能、描述。后端实现在 `DashboardServlet.matchesMoSearch()` 中。
+- **候选人表格增强**：新增 CV 下载列和 programme 信息显示。
+
+Admin 仪表盘搜索（`/dashboard` — Admin 视图）：
+- **搜索范围扩展**：除模块代码和标题外，现在也匹配技能关键词。后端在 `DashboardServlet.matchesAdminFilter()` 中扩展了搜索范围。
+
+**CV 下载文件名优化**：
+- 下载的 CV 文件自动命名为 `{姓名}_{模块代码}.{扩展名}`（如 `Alice_Zhang_EBU6304.pdf`），而非原始的 `U1001_cv.pdf`，方便 MO 识别和归档。
+
+**演示路径**：登录 `alice.ta` → 在搜索框输入 "Python" → 看到只显示含 Python 技能的岗位 → 在技能过滤输入 "Java, Testing" → 结果进一步收窄 → 设置最大工时 6 → 只保留轻量岗位 → 点击 "Clear filters" 重置 → 再按截止日期排序查看。
 
 **推荐引擎** — RecruitAssist 的核心创新
 - 对每个 TA-岗位配对进行 **6 个维度的加权评分**，权重从 `config.json` 配置：

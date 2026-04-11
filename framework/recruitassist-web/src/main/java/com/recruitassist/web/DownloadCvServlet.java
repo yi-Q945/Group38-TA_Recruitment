@@ -43,7 +43,28 @@ public class DownloadCvServlet extends AppServlet {
         String contentType = Files.probeContentType(file);
         resp.setContentType(contentType == null ? "application/octet-stream" : contentType);
         resp.setHeader("X-Content-Type-Options", "nosniff");
-        resp.setHeader("Content-Disposition", "attachment; filename=\"" + owner.getCvFileName() + "\"");
+
+        // Build friendly filename: Name_ModuleCode.ext
+        String extension = "";
+        String cvName = owner.getCvFileName();
+        int dotIndex = cvName.lastIndexOf('.');
+        if (dotIndex >= 0) {
+            extension = cvName.substring(dotIndex);
+        }
+        String jobId = req.getParameter("jobId");
+        String moduleCode = "";
+        if (jobId != null && !jobId.isBlank()) {
+            JobPosting job = services(req).jobService().findById(jobId.trim()).orElse(null);
+            if (job != null) {
+                moduleCode = job.getModuleCode().replaceAll("[^a-zA-Z0-9_-]", "_");
+            }
+        }
+        String safeName = owner.getName().replaceAll("[^a-zA-Z0-9_ -]", "").replace(' ', '_');
+        String downloadName = moduleCode.isEmpty()
+                ? safeName + "_CV" + extension
+                : safeName + "_" + moduleCode + extension;
+
+        resp.setHeader("Content-Disposition", "attachment; filename=\"" + downloadName + "\"");
         Files.copy(file, resp.getOutputStream());
     }
 

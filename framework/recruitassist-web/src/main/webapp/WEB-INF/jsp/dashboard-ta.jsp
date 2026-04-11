@@ -105,8 +105,8 @@
                 <input class="input" type="number" name="maxHours" value="${maxHours}" placeholder="e.g. 8" min="1" max="40" />
             </label>
             <label class="field-group compact-field">
-                <span>Deadline before</span>
-                <input class="input" type="date" name="deadlineBefore" value="${deadlineBefore}" />
+                <span>Deadline before (yyyy-mm-dd)</span>
+                <input class="input" type="text" name="deadlineBefore" value="${deadlineBefore}" placeholder="e.g. 2026-06-30" pattern="\d{4}-\d{2}-\d{2}" />
             </label>
             <label class="field-group compact-field">
                 <span>Sort by</span>
