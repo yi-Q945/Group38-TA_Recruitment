@@ -1,0 +1,6 @@
+RecruitAssist v1.0.0
+
+Sprint 1 基础招聘流程
+
+构建时间: 2026-04-11 15:33:09
+源项目: RecruitAssist
