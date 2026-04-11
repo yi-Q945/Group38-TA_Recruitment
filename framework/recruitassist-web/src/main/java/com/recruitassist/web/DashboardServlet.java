@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -51,9 +52,27 @@ public class DashboardServlet extends AppServlet {
             throws ServletException, IOException {
         String jobSearchQuery = normalizeText(req.getParameter("q"));
         String jobSort = normalizeTaSort(req.getParameter("sort"));
+        String skillFilter = normalizeText(req.getParameter("skillFilter"));
+        String maxHoursStr = req.getParameter("maxHours");
+        String deadlineBeforeStr = req.getParameter("deadlineBefore");
+
+        int maxHours = 0;
+        if (maxHoursStr != null && !maxHoursStr.isBlank()) {
+            try { maxHours = Integer.parseInt(maxHoursStr.trim()); } catch (NumberFormatException ignored) {}
+        }
+        LocalDate deadlineBefore = null;
+        if (deadlineBeforeStr != null && !deadlineBeforeStr.isBlank()) {
+            try { deadlineBefore = LocalDate.parse(deadlineBeforeStr.trim()); } catch (Exception ignored) {}
+        }
+
+        final int finalMaxHours = maxHours;
+        final LocalDate finalDeadlineBefore = deadlineBefore;
 
         List<JobRecommendation> recommendedJobs = services(req).recommendationService().recommendJobsFor(user).stream()
                 .filter(recommendation -> matchesRecommendationQuery(recommendation, jobSearchQuery))
+                .filter(recommendation -> matchesSkillFilter(recommendation, skillFilter))
+                .filter(recommendation -> finalMaxHours <= 0 || recommendation.getJob().getWorkloadHours() <= finalMaxHours)
+                .filter(recommendation -> finalDeadlineBefore == null || isBeforeDeadline(recommendation.getJob(), finalDeadlineBefore))
                 .sorted(taComparator(jobSort))
                 .toList();
         List<ApplicationRecord> applications = services(req).applicationService().findByApplicantId(user.getUserId());
@@ -74,6 +93,9 @@ public class DashboardServlet extends AppServlet {
         req.setAttribute("profileReady", user.isProfileReady());
         req.setAttribute("workloadThreshold", services(req).workloadService().getThreshold());
         req.setAttribute("jobSearchQuery", req.getParameter("q") == null ? "" : req.getParameter("q").trim());
+        req.setAttribute("skillFilter", req.getParameter("skillFilter") == null ? "" : req.getParameter("skillFilter").trim());
+        req.setAttribute("maxHours", maxHoursStr == null ? "" : maxHoursStr.trim());
+        req.setAttribute("deadlineBefore", deadlineBeforeStr == null ? "" : deadlineBeforeStr.trim());
         req.setAttribute("jobSort", jobSort);
         req.setAttribute("jobSortLabel", describeTaSort(jobSort));
         req.getRequestDispatcher("/WEB-INF/jsp/dashboard-ta.jsp").forward(req, resp);
@@ -81,7 +103,13 @@ public class DashboardServlet extends AppServlet {
 
     private void renderMoDashboard(HttpServletRequest req, HttpServletResponse resp, UserProfile user)
             throws ServletException, IOException {
+        String moSearch = normalizeText(req.getParameter("moSearch"));
+
         List<JobPosting> jobs = services(req).jobService().listJobsForOwner(user.getUserId());
+        if (!moSearch.isBlank()) {
+            jobs = jobs.stream().filter(job -> matchesMoSearch(job, moSearch)).toList();
+        }
+
         Map<String, Integer> workloadByUserId = services(req).workloadService().workloadByUserId();
         Map<String, List<ApplicationRecord>> applicationsByJobId = services(req).applicationService().groupByJobIdsForReview(
                 jobs.stream().map(JobPosting::getJobId).toList(),
@@ -106,6 +134,7 @@ public class DashboardServlet extends AppServlet {
         req.setAttribute("totalApplicationCount", totalApplicationCount);
         req.setAttribute("acceptedCandidateCount", acceptedCandidateCount);
         req.setAttribute("shortlistedCandidateCount", shortlistedCount);
+        req.setAttribute("moSearchQuery", req.getParameter("moSearch") == null ? "" : req.getParameter("moSearch").trim());
         req.getRequestDispatcher("/WEB-INF/jsp/dashboard-mo.jsp").forward(req, resp);
     }
 
@@ -147,6 +176,30 @@ public class DashboardServlet extends AppServlet {
         req.getRequestDispatcher("/WEB-INF/jsp/dashboard-admin.jsp").forward(req, resp);
     }
 
+    private boolean matchesSkillFilter(JobRecommendation recommendation, String skillFilter) {
+        if (skillFilter.isBlank()) return true;
+        String[] skills = skillFilter.split("[,;]+");
+        String searchable = (recommendation.getJob().getRequiredSkillsSummary() + " " +
+                recommendation.getJob().getPreferredSkillsSummary()).toLowerCase();
+        for (String skill : skills) {
+            String s = skill.trim().toLowerCase();
+            if (!s.isBlank() && searchable.contains(s)) return true;
+        }
+        return false;
+    }
+
+    private boolean isBeforeDeadline(JobPosting job, LocalDate before) {
+        try {
+            return LocalDate.parse(job.getDeadline()).isBefore(before) || LocalDate.parse(job.getDeadline()).isEqual(before);
+        } catch (Exception e) { return true; }
+    }
+
+    private boolean matchesMoSearch(JobPosting job, String query) {
+        String searchable = (job.getTitle() + " " + job.getModuleCode() + " " +
+                job.getRequiredSkillsSummary() + " " + job.getDescription()).toLowerCase();
+        return searchable.contains(query);
+    }
+
     private Comparator<JobRecommendation> taComparator(String jobSort) {
         return switch (jobSort) {
             case "deadline" -> Comparator.comparing((JobRecommendation recommendation) -> recommendation.getJob().getDeadline())
@@ -180,7 +233,8 @@ public class DashboardServlet extends AppServlet {
         if (moduleQuery.isBlank()) {
             return true;
         }
-        String searchable = (job.getModuleCode() + " " + job.getTitle() + " " + job.getDescription()).toLowerCase();
+        String searchable = (job.getModuleCode() + " " + job.getTitle() + " " + job.getDescription()
+                + " " + job.getRequiredSkillsSummary() + " " + job.getPreferredSkillsSummary()).toLowerCase();
         return searchable.contains(moduleQuery);
     }
 

@@ -240,6 +240,18 @@
                 <input class="input" type="text" name="q" value="${jobSearchQuery}" placeholder="Search by module, skill or keyword" />
             </label>
             <label class="field-group compact-field">
+                <span>Filter by skill</span>
+                <input class="input" type="text" name="skillFilter" value="${skillFilter}" placeholder="e.g. Python, Java" />
+            </label>
+            <label class="field-group compact-field">
+                <span>Max hours/week</span>
+                <input class="input" type="number" name="maxHours" value="${maxHours}" placeholder="e.g. 8" min="1" max="40" />
+            </label>
+            <label class="field-group compact-field">
+                <span>Deadline before</span>
+                <input class="input" type="date" name="deadlineBefore" value="${deadlineBefore}" />
+            </label>
+            <label class="field-group compact-field">
                 <span>Sort by</span>
                 <select class="select" name="sort">
                     <option value="${jobSort}">${jobSortLabel} (current)</option>
@@ -250,7 +262,7 @@
             </label>
             <div class="form-actions compact-actions">
                 <button class="secondary-button small-button" type="submit">Apply filters</button>
-                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/dashboard">Reset</a>
+                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/dashboard">Clear filters</a>
             </div>
         </form>
 

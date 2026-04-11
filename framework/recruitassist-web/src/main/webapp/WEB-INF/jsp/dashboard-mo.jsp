@@ -74,6 +74,16 @@
                 </div>
                 <span class="metric-pill">${jobs.size()} owned roles</span>
             </div>
+            <form class="filter-bar section-gap" method="get" action="${pageContext.request.contextPath}/dashboard">
+                <label class="field-group compact-field">
+                    <span>Search jobs or candidates</span>
+                    <input class="input" type="text" name="moSearch" value="${moSearchQuery}" placeholder="Search by module, title, skill or candidate name" />
+                </label>
+                <div class="form-actions compact-actions">
+                    <button class="secondary-button small-button" type="submit">Search</button>
+                    <a class="secondary-button small-button" href="${pageContext.request.contextPath}/dashboard">Clear</a>
+                </div>
+            </form>
             <div class="showcase-grid">
                 <c:forEach var="job" items="${jobs}">
                     <c:set var="jobApplications" value="${applicationsByJobId[job.jobId]}" />
@@ -201,6 +211,7 @@
                         <th>Skills</th>
                         <th>Current workload</th>
                         <th>Recommendation</th>
+                        <th>CV</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -211,7 +222,7 @@
                         <tr>
                             <td>
                                 <strong>${candidate.name}</strong>
-                                <div class="muted-copy">${candidate.studentId}</div>
+                                <div class="muted-copy">${candidate.studentId} · ${candidate.programme}</div>
                                 <div class="muted-copy">${candidate.availability}</div>
                             </td>
                             <td>${candidate.skillsSummary}</td>
@@ -221,6 +232,14 @@
                             <td>
                                 <strong>${application.recommendationPercent}%</strong>
                                 <div class="muted-copy">${application.explanationSummary}</div>
+                            </td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${candidate.cvAvailable}">
+                                        <a class="secondary-button small-button" href="${pageContext.request.contextPath}/cv/download?userId=${candidate.userId}&jobId=${job.jobId}">Download</a>
+                                    </c:when>
+                                    <c:otherwise><span class="muted-copy">No CV</span></c:otherwise>
+                                </c:choose>
                             </td>
                             <td><span class="status-pill status-${application.status.cssClass}">${application.status.label}</span></td>
                             <td>
@@ -247,7 +266,7 @@
                         </tr>
                     </c:forEach>
                     <c:if test="${empty applicationsByJobId[job.jobId]}">
-                        <tr><td colspan="6" class="empty-state">No applications received yet for this job.</td></tr>
+                        <tr><td colspan="7" class="empty-state">No applications received yet for this job.</td></tr>
                     </c:if>
                     </tbody>
                 </table>

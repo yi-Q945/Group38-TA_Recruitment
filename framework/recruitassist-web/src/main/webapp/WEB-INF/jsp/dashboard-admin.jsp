@@ -77,7 +77,7 @@
         <form class="filter-bar" method="get" action="${pageContext.request.contextPath}/dashboard">
             <label class="field-group compact-field">
                 <span>Module or keyword</span>
-                <input class="input" type="text" name="module" value="${moduleQuery}" placeholder="Search by module code or title" />
+                <input class="input" type="text" name="module" value="${moduleQuery}" placeholder="Search by module code, title or skill" />
             </label>
             <label class="field-group compact-field">
                 <span>Status</span>
@@ -90,7 +90,7 @@
             </label>
             <div class="form-actions compact-actions">
                 <button class="secondary-button small-button" type="submit">Apply filters</button>
-                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/dashboard">Reset</a>
+                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/dashboard">Clear filters</a>
             </div>
         </form>
 
