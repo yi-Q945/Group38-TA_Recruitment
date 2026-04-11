@@ -16,6 +16,7 @@ public class RegisterServlet extends AppServlet {
         if (currentUser(req) != null) {
             redirect(req, resp, "/dashboard");
             return;
+            
         }
         moveFlashToRequest(req);
         req.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(req, resp);
