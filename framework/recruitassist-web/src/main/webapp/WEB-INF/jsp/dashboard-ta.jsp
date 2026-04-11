@@ -159,11 +159,21 @@
                 </label>
                 <div class="action-row">
                     <button class="secondary-button" type="submit" data-loading-text="Uploading CV...">Upload CV</button>
-                    <c:if test="${user.cvAvailable}">
-                        <a class="secondary-button" href="${pageContext.request.contextPath}/cv/download?userId=${user.userId}">Download current CV</a>
-                    </c:if>
                 </div>
             </form>
+            <c:if test="${user.cvAvailable}">
+                <div class="surface-note section-gap" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                    <strong>Current CV:</strong>
+                    <code>${user.cvFileLabel}</code>
+                    <span class="muted-copy">Uploaded ${user.cvUploadedAtLabel}</span>
+                    <a class="primary-button small-button" href="${pageContext.request.contextPath}/cv/download?userId=${user.userId}">Download CV</a>
+                </div>
+            </c:if>
+            <c:if test="${not user.cvAvailable}">
+                <div class="surface-note section-gap">
+                    <strong>No CV uploaded yet.</strong> Upload a PDF or DOC file above to improve your recommendation score.
+                </div>
+            </c:if>
         </section>
 
         <section class="panel">

@@ -15,14 +15,20 @@
   }
 
   function enhanceRevealMotion() {
-    var selector = '.hero-card, .panel, .kpi-card, .job-card, .spotlight-card, .feature-card, .journey-step, .signal-card';
+    var selector = '.hero-card, .panel, .kpi-card, .job-card, .spotlight-card, .feature-card, .journey-step';
     var items = document.querySelectorAll(selector);
 
     if (!items.length) {
       return;
     }
 
+    var MAX_ANIMATED = 12;
+
     items.forEach(function (item, index) {
+      if (index >= MAX_ANIMATED || prefersReducedMotion || !('IntersectionObserver' in window)) {
+        item.classList.add('is-visible');
+        return;
+      }
       if (!item.classList.contains('reveal-ready')) {
         item.classList.add('reveal-ready');
         item.style.setProperty('--reveal-delay', Math.min(index * 45, 260) + 'ms');
@@ -30,9 +36,6 @@
     });
 
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      items.forEach(function (item) {
-        item.classList.add('is-visible');
-      });
       return;
     }
 
@@ -44,8 +47,8 @@
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: '0px 0px -24px 0px'
+      threshold: 0.05,
+      rootMargin: '0px 0px 200px 0px'
     });
 
     items.forEach(function (item) {
