@@ -54,6 +54,13 @@
     items.forEach(function (item) {
       observer.observe(item);
     });
+
+    // Safety net: force all items visible after 2s in case observer fails
+    window.setTimeout(function () {
+      items.forEach(function (item) {
+        item.classList.add('is-visible');
+      });
+    }, 2000);
   }
 
   function enhanceAlerts() {
