@@ -1102,19 +1102,13 @@ code {
 }
 
 .reveal-ready {
-    opacity: 0;
-    transform: translateY(18px);
-    transition:
-        opacity 0.5s ease var(--reveal-delay, 0ms),
-        transform 0.5s ease var(--reveal-delay, 0ms),
-        box-shadow 0.24s ease,
-        border-color 0.24s ease,
-        background 0.24s ease;
+    opacity: 1;
+    transform: none;
 }
 
 .reveal-ready.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
 @keyframes floatBlob {

@@ -15,52 +15,8 @@
   }
 
   function enhanceRevealMotion() {
-    var selector = '.hero-card, .panel, .kpi-card, .job-card, .spotlight-card, .feature-card, .journey-step';
-    var items = document.querySelectorAll(selector);
-
-    if (!items.length) {
-      return;
-    }
-
-    var MAX_ANIMATED = 12;
-
-    items.forEach(function (item, index) {
-      if (index >= MAX_ANIMATED || prefersReducedMotion || !('IntersectionObserver' in window)) {
-        item.classList.add('is-visible');
-        return;
-      }
-      if (!item.classList.contains('reveal-ready')) {
-        item.classList.add('reveal-ready');
-        item.style.setProperty('--reveal-delay', Math.min(index * 45, 260) + 'ms');
-      }
-    });
-
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      return;
-    }
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.05,
-      rootMargin: '0px 0px 200px 0px'
-    });
-
-    items.forEach(function (item) {
-      observer.observe(item);
-    });
-
-    // Safety net: force all items visible after 2s in case observer fails
-    window.setTimeout(function () {
-      items.forEach(function (item) {
-        item.classList.add('is-visible');
-      });
-    }, 2000);
+    // Disabled: reveal animations were hiding content on large pages.
+    // All elements are now visible by default via CSS.
   }
 
   function enhanceAlerts() {
