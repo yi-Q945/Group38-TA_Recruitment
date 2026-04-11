@@ -160,6 +160,11 @@
         return;
       }
 
+      // GET forms (filters, search) should NOT lock the button — the page navigates away anyway
+      if (form.method.toUpperCase() === 'GET') {
+        return;
+      }
+
       var submitter = event.submitter || form.querySelector('button[type="submit"], input[type="submit"]');
       if (!submitter || submitter.dataset.loadingApplied === 'true') {
         return;
@@ -170,6 +175,16 @@
       submitter.classList.add('is-loading');
       submitter.disabled = true;
       submitter.textContent = submitter.getAttribute('data-loading-text') || (submitter.textContent.replace(/\.\.\.$/, '') + '...');
+
+      // Safety net: restore button after 8 seconds in case redirect doesn't happen
+      window.setTimeout(function () {
+        if (submitter.dataset.loadingApplied === 'true') {
+          submitter.disabled = false;
+          submitter.classList.remove('is-loading');
+          submitter.textContent = submitter.dataset.originalText || 'Submit';
+          delete submitter.dataset.loadingApplied;
+        }
+      }, 8000);
     }, true);
   }
 
