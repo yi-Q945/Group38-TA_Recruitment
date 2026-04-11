@@ -1,0 +1,19 @@
+{
+  "jobId": "J2125",
+  "ownerId": "U9101",
+  "title": "Java Programming Teaching Assistant",
+  "moduleCode": "EBU6304-3",
+  "description": "Support weekly Java labs, guide OOP exercises and help with formative code review activities.",
+  "requiredSkills": [
+    "Java",
+    "OOP"
+  ],
+  "preferredSkills": [
+    "Testing",
+    "Communication"
+  ],
+  "deadline": "2026-04-09",
+  "quota": 3,
+  "workloadHours": 6,
+  "status": "OPEN"
+}
