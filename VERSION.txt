@@ -1,6 +1,6 @@
-RecruitAssist v2.0.0
+RecruitAssist v3.0.0
 
-Sprint 2 审核与监控
+Sprint 3 完整功能版
 
-构建时间: 2026-04-11 15:33:10
+构建时间: 2026-04-11 15:33:11
 源项目: RecruitAssist

@@ -1,0 +1,19 @@
+{
+  "userId": "U9102",
+  "username": "recruiter.02",
+  "password": "demo123",
+  "role": "MO",
+  "name": "Dr Liam Patel",
+  "studentId": "",
+  "email": "recruiter_02@qmul.ac.uk",
+  "programme": "Module Organiser",
+  "skills": [
+    "Curriculum Design",
+    "Assessment",
+    "Module Delivery",
+    "Candidate Review"
+  ],
+  "availability": "Weekdays; live interview and review coverage",
+  "experience": "Coordinates recruitment, ranking, shortlisting and workload-aware staffing across multiple modules.",
+  "cvText": "Owns module staffing plans, publishes jobs and reviews candidate fit under timeline pressure."
+}
