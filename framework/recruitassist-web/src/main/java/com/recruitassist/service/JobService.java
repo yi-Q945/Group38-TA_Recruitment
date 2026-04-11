@@ -1,6 +1,8 @@
 package com.recruitassist.service;
 
 import com.recruitassist.model.ActionResult;
+import com.recruitassist.model.ApplicationRecord;
+import com.recruitassist.model.ApplicationStatus;
 import com.recruitassist.model.JobPosting;
 import com.recruitassist.model.JobStatus;
 import com.recruitassist.model.UserProfile;
@@ -15,6 +17,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.function.Function;
@@ -39,11 +42,11 @@ public class JobService {
     }
 
     public List<JobPosting> listAllJobs() {
-        lock.readLock().lock();
+        lock.writeLock().lock();
         try {
-            return jobRepository.findAll();
+            return synchronizeOperationalStates(jobRepository.findAll());
         } finally {
-            lock.readLock().unlock();
+            lock.writeLock().unlock();
         }
     }
 
@@ -124,6 +127,144 @@ public class JobService {
         }
     }
 
+    public ActionResult updateJob(
+            UserProfile actor,
+            String jobId,
+            String title,
+            String moduleCode,
+            String description,
+            String requiredSkillsRaw,
+            String preferredSkillsRaw,
+            String deadline,
+            String quotaRaw,
+            String workloadHoursRaw) {
+        if (actor == null || actor.getRole() != UserRole.MO) {
+            return ActionResult.failure("Only module organisers can update jobs.");
+        }
+
+        lock.writeLock().lock();
+        try {
+            String cleanJobId = clean(jobId);
+            if (cleanJobId.isBlank()) {
+                return ActionResult.failure("A valid job id is required.");
+            }
+
+            JobPosting existingJob = jobRepository.findById(cleanJobId).orElse(null);
+            if (existingJob == null) {
+                return ActionResult.failure("The selected job could not be found.");
+            }
+            if (!Objects.equals(existingJob.getOwnerId(), actor.getUserId())) {
+                return ActionResult.failure("You can only edit jobs that you own.");
+            }
+
+            ValidatedJobInput input;
+            try {
+                input = validateJobInput(
+                        title,
+                        moduleCode,
+                        description,
+                        requiredSkillsRaw,
+                        preferredSkillsRaw,
+                        deadline,
+                        quotaRaw,
+                        workloadHoursRaw);
+            } catch (IllegalArgumentException ex) {
+                return ActionResult.failure(ex.getMessage());
+            }
+
+            long acceptedCount = countAcceptedApplications(cleanJobId);
+            if (input.quota() < acceptedCount) {
+                return ActionResult.failure("Quota cannot be lower than the current accepted count of " + acceptedCount + '.');
+            }
+
+            applyJobInput(existingJob, input);
+            if (existingJob.isExpired() || acceptedCount >= existingJob.getQuota()) {
+                existingJob.setStatus(JobStatus.CLOSED);
+            }
+            jobRepository.save(existingJob);
+            auditRepository.append(
+                    actor.getUserId(),
+                    "UPDATE_JOB",
+                    existingJob.getJobId(),
+                    "SUCCESS",
+                    input.moduleCode() + " · " + input.title());
+            return ActionResult.success("Job " + existingJob.getJobId() + " updated successfully.");
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    public ActionResult changeJobStatus(UserProfile actor, String jobId, JobStatus targetStatus) {
+        if (actor == null || actor.getRole() != UserRole.MO) {
+            return ActionResult.failure("Only module organisers can change job status.");
+        }
+        if (targetStatus == null) {
+            return ActionResult.failure("Please choose a valid job status.");
+        }
+
+        lock.writeLock().lock();
+        try {
+            String cleanJobId = clean(jobId);
+            JobPosting jobPosting = jobRepository.findById(cleanJobId).orElse(null);
+            if (jobPosting == null) {
+                return ActionResult.failure("The selected job could not be found.");
+            }
+            if (!Objects.equals(jobPosting.getOwnerId(), actor.getUserId())) {
+                return ActionResult.failure("You can only manage jobs that you own.");
+            }
+            if (jobPosting.getStatus() == targetStatus) {
+                return ActionResult.success("Job " + cleanJobId + " is already " + targetStatus.getLabel().toLowerCase() + '.');
+            }
+            if (targetStatus == JobStatus.OPEN) {
+                if (jobPosting.isExpired()) {
+                    return ActionResult.failure("This job cannot be reopened because its deadline has already passed.");
+                }
+                if (countAcceptedApplications(cleanJobId) >= jobPosting.getQuota()) {
+                    return ActionResult.failure("This job cannot be reopened because the quota is already full.");
+                }
+            }
+
+            jobPosting.setStatus(targetStatus);
+            jobRepository.save(jobPosting);
+            auditRepository.append(
+                    actor.getUserId(),
+                    "CHANGE_JOB_STATUS",
+                    cleanJobId,
+                    "SUCCESS",
+                    targetStatus.getCode());
+
+            if (targetStatus == JobStatus.CLOSED) {
+                return ActionResult.success("Applications are now closed for job " + cleanJobId + '.');
+            }
+            return ActionResult.success("Job " + cleanJobId + " has been reopened for applications.");
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    private List<JobPosting> synchronizeOperationalStates(List<JobPosting> jobs) {
+        Map<String, Long> acceptedCountsByJobId = applicationRepository.findAll().stream()
+                .filter(application -> application.getStatus() == ApplicationStatus.ACCEPTED)
+                .collect(Collectors.groupingBy(ApplicationRecord::getJobId, Collectors.counting()));
+
+        boolean changed = false;
+        for (JobPosting job : jobs) {
+            long acceptedCount = acceptedCountsByJobId.getOrDefault(job.getJobId(), 0L);
+            if (job.isOpen() && (job.isExpired() || acceptedCount >= job.getQuota())) {
+                job.setStatus(JobStatus.CLOSED);
+                jobRepository.save(job);
+                changed = true;
+            }
+        }
+        return changed ? jobRepository.findAll() : jobs;
+    }
+
+    private long countAcceptedApplications(String jobId) {
+        return applicationRepository.findByJobId(jobId).stream()
+                .filter(application -> application.getStatus() == ApplicationStatus.ACCEPTED)
+                .count();
+    }
+
     private ValidatedJobInput validateJobInput(
             String title,
             String moduleCode,
@@ -134,7 +275,7 @@ public class JobService {
             String quotaRaw,
             String workloadHoursRaw) {
         String cleanTitle = cleanText(title, 120);
-        String cleanModuleCode = cleanText(moduleCode, 24).toUpperCase().replaceAll("\s+", "");
+        String cleanModuleCode = cleanText(moduleCode, 24).toUpperCase().replaceAll("\\s+", "");
         String cleanDescription = cleanText(description, 2000);
         String cleanDeadline = clean(deadline);
         List<String> requiredSkills = parseSkills(requiredSkillsRaw);
@@ -216,8 +357,8 @@ public class JobService {
         String cleaned = rawValue
                 .replace('<', ' ')
                 .replace('>', ' ')
-                .replaceAll("[\p{Cntrl}&&[^\n\r\t]]", " ")
-                .replace("", "")
+                .replaceAll("[\\p{Cntrl}&&[^\\n\\r\\t]]", " ")
+                .replace("\r", "")
                 .trim();
         if (cleaned.length() <= maxLength) {
             return cleaned;

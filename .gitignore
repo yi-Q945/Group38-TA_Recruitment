@@ -1,0 +1,13 @@
+framework/recruitassist-web/target/
+*.class
+.DS_Store
+.codebuddy/
+__pycache__/
+*.py
+*.pyc
+*.pdf
+EBU6304_GroupProjectHandout_extracted.txt
+plan.log
+logs/app/*.log
+logs/build/*.log
+git.log
