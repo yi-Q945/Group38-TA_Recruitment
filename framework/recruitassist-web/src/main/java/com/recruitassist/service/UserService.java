@@ -45,6 +45,15 @@ public class UserService {
             return ActionResult.failure("Username '" + cleanUsername + "' is already taken.");
         }
 
+        String cleanName = cleanText(name, 80);
+        if (!cleanName.isBlank()) {
+            boolean nameTaken = listAllUsers().stream()
+                    .anyMatch(u -> u.getName().equalsIgnoreCase(cleanName));
+            if (nameTaken) {
+                return ActionResult.failure("Display name '" + cleanName + "' is already in use. Please choose a different name.");
+            }
+        }
+
         UserRole role;
         try {
             role = UserRole.valueOf(roleStr != null ? roleStr.trim().toUpperCase() : "TA");
@@ -55,7 +64,6 @@ public class UserService {
             return ActionResult.failure("Admin accounts cannot be created through registration. Please contact a system administrator.");
         }
 
-        String cleanName = cleanText(name, 80);
         String cleanEmail = cleanText(email, 120).toLowerCase();
         if (!cleanEmail.isBlank() && !EMAIL_PATTERN.matcher(cleanEmail).matches()) {
             return ActionResult.failure("Please provide a valid email address.");

@@ -207,6 +207,7 @@
 
     var indicators = document.querySelectorAll('[data-refresh-countdown]');
     var remaining = refreshSeconds;
+    var reloading = false;
 
     function isEditing() {
       var active = document.activeElement;
@@ -215,13 +216,23 @@
 
     function render(paused) {
       indicators.forEach(function (indicator) {
-        indicator.textContent = paused ? 'Auto-refresh paused while you edit' : 'Refresh in ' + remaining + 's';
+        if (reloading) {
+          indicator.textContent = 'Refreshing...';
+        } else if (paused) {
+          indicator.textContent = 'Auto-refresh paused while you edit';
+        } else {
+          indicator.textContent = 'Refresh in ' + remaining + 's';
+        }
       });
     }
 
     render(false);
 
-    window.setInterval(function () {
+    var intervalId = window.setInterval(function () {
+      if (reloading) {
+        return;
+      }
+
       var paused = document.hidden || isEditing();
       if (paused) {
         remaining = refreshSeconds;
@@ -231,6 +242,9 @@
 
       remaining -= 1;
       if (remaining <= 0) {
+        reloading = true;
+        window.clearInterval(intervalId);
+        render(false);
         window.location.reload();
         return;
       }

@@ -19,7 +19,7 @@ import java.util.Map;
 
 @WebServlet("/dashboard")
 public class DashboardServlet extends AppServlet {
-    private static final int AUTO_REFRESH_SECONDS = 30;
+    private static final int AUTO_REFRESH_SECONDS = 60;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,12 +31,15 @@ public class DashboardServlet extends AppServlet {
         moveFlashToRequest(req);
         req.setAttribute("user", user);
         req.setAttribute("appName", services(req).systemConfig().getAppName());
-        req.setAttribute("autoRefreshSeconds", AUTO_REFRESH_SECONDS);
 
         if (user.getRole() == UserRole.TA) {
+            req.setAttribute("autoRefreshSeconds", 0);
             renderTaDashboard(req, resp, user);
             return;
         }
+
+        req.setAttribute("autoRefreshSeconds", AUTO_REFRESH_SECONDS);
+
         if (user.getRole() == UserRole.MO) {
             renderMoDashboard(req, resp, user);
             return;
