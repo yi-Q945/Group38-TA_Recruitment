@@ -1,0 +1,19 @@
+{
+  "jobId": "J2119",
+  "ownerId": "U9103",
+  "title": "Networks Practical TA",
+  "moduleCode": "EBU6314-2",
+  "description": "Assist packet analysis labs, troubleshoot connectivity issues and support networking practical exercises.",
+  "requiredSkills": [
+    "Networks",
+    "Troubleshooting"
+  ],
+  "preferredSkills": [
+    "Linux",
+    "Communication"
+  ],
+  "deadline": "2026-04-21",
+  "quota": 2,
+  "workloadHours": 4,
+  "status": "OPEN"
+}

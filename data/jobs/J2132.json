@@ -1,0 +1,19 @@
+{
+  "jobId": "J2132",
+  "ownerId": "U9108",
+  "title": "Cyber Security Lab TA",
+  "moduleCode": "EBU6315-3",
+  "description": "Support secure systems labs, risk review discussions and Linux-based security exercises.",
+  "requiredSkills": [
+    "Security",
+    "Linux"
+  ],
+  "preferredSkills": [
+    "Risk Analysis",
+    "Scripting"
+  ],
+  "deadline": "2026-03-31",
+  "quota": 2,
+  "workloadHours": 5,
+  "status": "CLOSED"
+}

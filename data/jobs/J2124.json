@@ -1,0 +1,19 @@
+{
+  "jobId": "J2124",
+  "ownerId": "U9108",
+  "title": "Agile Project Support TA",
+  "moduleCode": "EBU6319-2",
+  "description": "Coach team ceremonies, review sprint artefacts and support project communication during development cycles.",
+  "requiredSkills": [
+    "Communication",
+    "Organisation"
+  ],
+  "preferredSkills": [
+    "Testing",
+    "Mentoring"
+  ],
+  "deadline": "2026-04-06",
+  "quota": 2,
+  "workloadHours": 4,
+  "status": "CLOSED"
+}

@@ -1,0 +1,20 @@
+{
+  "userId": "U1153",
+  "username": "ta.053",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Farah Young",
+  "studentId": "20261253",
+  "email": "ta_053@qmul.ac.uk",
+  "programme": "Cyber Security",
+  "skills": [
+    "Networks",
+    "Linux",
+    "Security",
+    "Scripting",
+    "Troubleshooting"
+  ],
+  "availability": "Wed/Fri afternoon, flexible during assessment weeks",
+  "experience": "Ran network troubleshooting clinics and security lab walkthroughs for practical sessions.",
+  "cvText": "Hands-on with Linux tooling, shell scripting and secure systems support for teaching labs. Strong skills in Networks, Linux, Security, comfortable with student support, marking and technical walkthroughs."
+}
