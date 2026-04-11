@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4314",
+  "jobId": "J2116",
+  "applicantId": "U1113",
+  "applyTime": "2026-03-10T15:00:00Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.48,
+  "explanation": [
+    "Matched required skills: limited direct overlap",
+    "Preferred skill matches: Debugging",
+    "Skills to strengthen: SQL, Database Design",
+    "Projected workload after acceptance: 4/12 hours"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "userId": "U1160",
+  "username": "ta.060",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Mila King",
+  "studentId": "20261260",
+  "email": "ta_060@qmul.ac.uk",
+  "programme": "Computer Science",
+  "skills": [
+    "Data Structures",
+    "Algorithms",
+    "C",
+    "Linux",
+    "Concurrency"
+  ],
+  "availability": "Mon/Tue evening and weekend morning",
+  "experience": "Tutored algorithm clinics, systems labs and debugging sessions for foundational modules.",
+  "cvText": "Comfortable with systems programming, concurrency basics and lab-based teaching support. Strong skills in Data Structures, Algorithms, C, comfortable with student support, marking and technical walkthroughs."
+}

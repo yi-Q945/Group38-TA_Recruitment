@@ -1,0 +1,19 @@
+{
+  "jobId": "J2147",
+  "ownerId": "U9107",
+  "title": "Data Analytics Workshop TA",
+  "moduleCode": "EBU6318-4",
+  "description": "Support analytics workshops, help students interpret datasets and guide dashboard-based insights.",
+  "requiredSkills": [
+    "Data Analysis",
+    "Python"
+  ],
+  "preferredSkills": [
+    "Communication",
+    "SQL"
+  ],
+  "deadline": "2026-04-15",
+  "quota": 3,
+  "workloadHours": 4,
+  "status": "OPEN"
+}

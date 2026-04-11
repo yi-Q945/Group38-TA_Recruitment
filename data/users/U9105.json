@@ -1,0 +1,19 @@
+{
+  "userId": "U9105",
+  "username": "recruiter.05",
+  "password": "demo123",
+  "role": "MO",
+  "name": "Dr Sophia Walker",
+  "studentId": "",
+  "email": "recruiter_05@qmul.ac.uk",
+  "programme": "Module Organiser",
+  "skills": [
+    "Curriculum Design",
+    "Assessment",
+    "Module Delivery",
+    "Candidate Review"
+  ],
+  "availability": "Weekdays; live interview and review coverage",
+  "experience": "Coordinates recruitment, ranking, shortlisting and workload-aware staffing across multiple modules.",
+  "cvText": "Owns module staffing plans, publishes jobs and reviews candidate fit under timeline pressure."
+}
