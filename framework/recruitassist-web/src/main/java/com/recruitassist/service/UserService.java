@@ -3,6 +3,7 @@ package com.recruitassist.service;
 import com.recruitassist.model.ActionResult;
 import com.recruitassist.model.UserProfile;
 import com.recruitassist.model.UserRole;
+import com.recruitassist.repository.IdCounterRepository;
 import com.recruitassist.repository.UserRepository;
 
 import java.time.Instant;
@@ -17,10 +18,60 @@ import java.util.stream.Collectors;
 
 public class UserService {
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    private static final Pattern USERNAME_PATTERN = Pattern.compile("^[a-zA-Z0-9._-]{3,30}$");
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public ActionResult registerUser(String username, String password, String confirmPassword,
+                                     String roleStr, String name, String email,
+                                     IdCounterRepository idCounterRepository) {
+        if (username == null || username.isBlank()) {
+            return ActionResult.failure("Username is required.");
+        }
+        String cleanUsername = cleanText(username.trim().toLowerCase(), 30);
+        if (!USERNAME_PATTERN.matcher(cleanUsername).matches()) {
+            return ActionResult.failure("Username must be 3-30 characters, using only letters, numbers, dots, hyphens or underscores.");
+        }
+        if (password == null || password.length() < 6) {
+            return ActionResult.failure("Password must be at least 6 characters.");
+        }
+        if (!password.equals(confirmPassword)) {
+            return ActionResult.failure("Passwords do not match.");
+        }
+        if (findByUsername(cleanUsername).isPresent()) {
+            return ActionResult.failure("Username '" + cleanUsername + "' is already taken.");
+        }
+
+        UserRole role;
+        try {
+            role = UserRole.valueOf(roleStr != null ? roleStr.trim().toUpperCase() : "TA");
+        } catch (IllegalArgumentException e) {
+            role = UserRole.TA;
+        }
+        if (role == UserRole.ADMIN) {
+            return ActionResult.failure("Admin accounts cannot be created through registration. Please contact a system administrator.");
+        }
+
+        String cleanName = cleanText(name, 80);
+        String cleanEmail = cleanText(email, 120).toLowerCase();
+        if (!cleanEmail.isBlank() && !EMAIL_PATTERN.matcher(cleanEmail).matches()) {
+            return ActionResult.failure("Please provide a valid email address.");
+        }
+
+        String userId = idCounterRepository.nextUserId();
+        UserProfile newUser = new UserProfile();
+        newUser.setUserId(userId);
+        newUser.setUsername(cleanUsername);
+        newUser.setPassword(password);
+        newUser.setRole(role);
+        newUser.setName(cleanName.isBlank() ? cleanUsername : cleanName);
+        newUser.setEmail(cleanEmail);
+        save(newUser);
+
+        return ActionResult.success("Account created successfully! You can now sign in as '" + cleanUsername + "'.");
     }
 
     public List<UserProfile> listAllUsers() {

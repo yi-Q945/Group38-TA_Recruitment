@@ -23,6 +23,7 @@ public class AppServices {
     private final WorkloadService workloadService;
     private final RecommendationService recommendationService;
     private final ApplicationService applicationService;
+    private final IdCounterRepository idCounterRepository;
 
     public AppServices() {
         JsonFileStore jsonFileStore = new JsonFileStore();
@@ -32,6 +33,7 @@ public class AppServices {
         ApplicationRepository applicationRepository = new ApplicationRepository(jsonFileStore);
         AuditRepository auditRepository = new AuditRepository(jsonFileStore);
         IdCounterRepository idCounterRepository = new IdCounterRepository(jsonFileStore);
+        this.idCounterRepository = idCounterRepository;
 
         this.systemConfig = systemConfigRepository.load();
         this.userService = new UserService(userRepository);
@@ -78,5 +80,9 @@ public class AppServices {
 
     public ApplicationService applicationService() {
         return applicationService;
+    }
+
+    public IdCounterRepository idCounterRepository() {
+        return idCounterRepository;
     }
 }

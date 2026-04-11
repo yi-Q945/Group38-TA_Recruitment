@@ -52,6 +52,7 @@
                     <strong>Tip:</strong> click any <em>Use account</em> button to prefill the form. All generated demo accounts still use <code>${demoPassword}</code>.
                 </div>
                 <button class="primary-button" type="submit" data-loading-text="Signing in...">Sign in</button>
+                <a class="secondary-button" href="${pageContext.request.contextPath}/register">Create a new account</a>
                 <a class="secondary-button" href="${pageContext.request.contextPath}/home">Back to home</a>
             </form>
         </section>

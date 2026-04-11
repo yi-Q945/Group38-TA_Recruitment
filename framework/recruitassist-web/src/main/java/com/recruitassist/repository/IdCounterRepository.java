@@ -27,6 +27,10 @@ public class IdCounterRepository {
         return next("application", "A");
     }
 
+    public String nextUserId() {
+        return next("user", "U");
+    }
+
     private String next(String key, String prefix) {
         lock.lock();
         try {
