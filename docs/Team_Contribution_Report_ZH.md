@@ -452,4 +452,5 @@ public void write(Path file, Object value) {
 | 17 | 隐私与角色访问控制 | ✅ 完成 | Zexuan Dong + Tianyu Zhao |
 | 18 | MO 编辑/关闭岗位 | ✅ 完成 | Jie Ren |
 | 19 | AI 技能匹配与排序 | ✅ 完成 | Haopeng Jin |
+| 20 | AI 缺失技能识别 | ✅ 完成 | Haopeng Jin |
 | 21 | 工作量监控与预警 | ✅ 完成 | Zhuang Hou |

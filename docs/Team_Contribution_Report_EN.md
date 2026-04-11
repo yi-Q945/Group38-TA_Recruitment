@@ -1037,4 +1037,5 @@ public void log(String action, String userId, String targetId) {
 | 17 | Privacy & Role-Based Access | ✅ Done | Zexuan Dong (AppServlet) + Tianyu Zhao (DownloadCvServlet) |
 | 18 | MO Edit / Close Job | ✅ Done | Jie Ren |
 | 19 | AI Skill Matching & Ranking | ✅ Done | Haopeng Jin |
+| 20 | AI Missing Skills Identification | ✅ Done | Haopeng Jin |
 | 21 | Workload Monitoring | ✅ Done | Zhuang Hou |
