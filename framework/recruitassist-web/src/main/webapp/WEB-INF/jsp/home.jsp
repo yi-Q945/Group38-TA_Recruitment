@@ -6,8 +6,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${appName}</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css" />
-    <script defer src="${pageContext.request.contextPath}/assets/js/app.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css?v=302" />
+    <script defer src="${pageContext.request.contextPath}/assets/js/app.js?v=302"></script>
 </head>
 <body>
 <div class="page-shell">
