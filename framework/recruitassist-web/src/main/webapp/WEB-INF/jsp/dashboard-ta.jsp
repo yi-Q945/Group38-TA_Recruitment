@@ -6,8 +6,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TA Dashboard · RecruitAssist</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css?v=302" />
-    <script defer src="${pageContext.request.contextPath}/assets/js/app.js?v=302"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/app.css" />
+    <script defer src="${pageContext.request.contextPath}/assets/js/app.js"></script>
 </head>
 <body>
 <div class="page-shell">
@@ -81,32 +81,159 @@
         </article>
     </section>
 
-    <!-- ===== RECOMMENDED JOBS (primary content — shown first) ===== -->
+    <main class="dashboard-grid">
+        <section class="panel">
+            <div class="section-head">
+                <div>
+                    <h2>Profile manager</h2>
+                    <p class="muted-copy">This closes the gap between the prototype and the backlog: your applicant profile can now be maintained directly in the system.</p>
+                </div>
+                <span class="status-pill status-ta"><c:choose><c:when test="${profileReady}">Profile ready</c:when><c:otherwise>Update required</c:otherwise></c:choose></span>
+            </div>
+
+            <div class="detail-pairs compact-pairs section-gap">
+                <div class="detail-pair">
+                    <span>Current CV file</span>
+                    <strong>${user.cvFileLabel}</strong>
+                </div>
+                <div class="detail-pair">
+                    <span>Last uploaded</span>
+                    <strong>${user.cvUploadedAtLabel}</strong>
+                </div>
+            </div>
+
+            <form class="form-grid section-gap" method="post" action="${pageContext.request.contextPath}/profile/cv/upload" enctype="multipart/form-data">
+                <label class="upload-zone" data-upload-zone>
+                    <span class="upload-zone-title">Upload CV evidence</span>
+                    <span class="upload-zone-hint" data-upload-filename>Drop your file here or choose from your device</span>
+                    <span class="upload-zone-meta" data-upload-hint>Accepted: PDF, DOC, DOCX, TXT · max 5MB · PDF is preferred for cleaner review and sharing.</span>
+                    <div class="upload-chip-row">
+                        <span class="upload-chip">Preferred: PDF</span>
+                        <span class="upload-chip">Max: 5MB</span>
+                        <span class="upload-chip">Private by role</span>
+                    </div>
+                    <span class="secondary-button small-button upload-trigger">Choose file</span>
+                    <input class="upload-input" type="file" name="cvFile" accept=".pdf,.doc,.docx,.txt" data-max-mb="5" required />
+                </label>
+                <div class="action-row">
+                    <button class="secondary-button" type="submit" data-loading-text="Uploading CV...">Upload CV</button>
+                    <c:if test="${user.cvAvailable}">
+                        <a class="secondary-button" href="${pageContext.request.contextPath}/cv/download?userId=${user.userId}">Download current CV</a>
+                    </c:if>
+                </div>
+            </form>
+
+            <form class="form-grid two-column-form section-gap" method="post" action="${pageContext.request.contextPath}/profile/update">
+                <label class="field-group">
+                    <span>Full name</span>
+                    <input class="input" type="text" name="name" value="${user.name}" required />
+                </label>
+                <label class="field-group">
+                    <span>Student ID</span>
+                    <input class="input" type="text" name="studentId" value="${user.studentId}" required />
+                </label>
+                <label class="field-group">
+                    <span>Email</span>
+                    <input class="input" type="email" name="email" value="${user.email}" placeholder="optional@qmul.ac.uk" />
+                </label>
+                <label class="field-group">
+                    <span>Programme</span>
+                    <input class="input" type="text" name="programme" value="${user.programme}" required />
+                </label>
+                <div class="field-group full-width">
+                    <span>Skills</span>
+                    <textarea class="textarea" name="skills" rows="3" required>${user.skillsSummary}</textarea>
+                </div>
+                <div class="field-group full-width">
+                    <span>Availability</span>
+                    <textarea class="textarea" name="availability" rows="2" required>${user.availability}</textarea>
+                </div>
+                <div class="field-group full-width">
+                    <span>Experience</span>
+                    <textarea class="textarea" name="experience" rows="4">${user.experience}</textarea>
+                </div>
+                <div class="field-group full-width">
+                    <span>CV evidence summary for AI matching</span>
+                    <textarea class="textarea" name="cvText" rows="5">${user.cvText}</textarea>
+                </div>
+                <div class="form-actions full-width">
+                    <button class="primary-button" type="submit" data-loading-text="Saving profile...">Save profile</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="panel">
+            <div class="section-head">
+                <h2>Application history</h2>
+                <span class="metric-pill">Live recommendation snapshot</span>
+            </div>
+            <div class="table-wrapper">
+                <table class="data-table compact-table">
+                    <thead>
+                    <tr>
+                        <th>Job</th>
+                        <th>Status</th>
+                        <th>Score</th>
+                        <th>Submitted</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="application" items="${applications}">
+                        <c:set var="applicationJob" value="${jobsById[application.jobId]}" />
+                        <tr>
+                            <td>
+                                <strong>
+                                    <a class="inline-link" href="${pageContext.request.contextPath}/jobs/detail?jobId=${application.jobId}">
+                                        ${applicationJob.title}
+                                    </a>
+                                </strong>
+                                <div class="muted-copy">${applicationJob.moduleCode}</div>
+                            </td>
+                            <td><span class="status-pill status-${application.status.cssClass}">${application.status.label}</span></td>
+                            <td>${application.recommendationPercent}%</td>
+                            <td>${application.applyTimeLabel}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${application.status.code != 'WITHDRAWN' and application.status.code != 'REJECTED'}">
+                                        <form class="inline-form inline-form-tight" method="post" action="${pageContext.request.contextPath}/applications/withdraw">
+                                            <input type="hidden" name="applicationId" value="${application.applicationId}" />
+                                            <input type="hidden" name="jobId" value="${application.jobId}" />
+                                            <button class="secondary-button small-button" type="submit" data-loading-text="Withdrawing...">Withdraw</button>
+                                        </form>
+                                    </c:when>
+                                    <c:when test="${application.status.code == 'WITHDRAWN' and applicationJob.open}">
+                                        <span class="muted-copy">You can apply again while this job stays open.</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span class="muted-copy">No action</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    <c:if test="${empty applications}">
+                        <tr><td colspan="5" class="empty-state">You have not applied for any job yet.</td></tr>
+                    </c:if>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
     <section class="panel section-gap">
         <div class="section-head">
             <div>
-                <h2>Browse &amp; apply for TA positions</h2>
-                <p class="muted-copy">Search, filter, and apply for open positions. Each card shows your personalised match score and explanation.</p>
+                <h2>Recommended open jobs</h2>
+                <p class="muted-copy">The ranking now blends structured skill coverage, availability quality, richer evidence matching, workload balance and competition pressure.</p>
             </div>
-            <span class="metric-pill">${recommendedJobs.size()} jobs · ${jobSortLabel}</span>
+            <span class="metric-pill">${jobSortLabel}</span>
         </div>
 
         <form class="filter-bar section-gap" method="get" action="${pageContext.request.contextPath}/dashboard">
             <label class="field-group compact-field">
                 <span>Search jobs</span>
                 <input class="input" type="text" name="q" value="${jobSearchQuery}" placeholder="Search by module, skill or keyword" />
-            </label>
-            <label class="field-group compact-field">
-                <span>Filter by skill</span>
-                <input class="input" type="text" name="skillFilter" value="${skillFilter}" placeholder="e.g. Python, Java" />
-            </label>
-            <label class="field-group compact-field">
-                <span>Max hours/week</span>
-                <input class="input" type="number" name="maxHours" value="${maxHours}" placeholder="e.g. 8" min="1" max="40" />
-            </label>
-            <label class="field-group compact-field">
-                <span>Deadline before (yyyy-mm-dd)</span>
-                <input class="input" type="text" name="deadlineBefore" value="${deadlineBefore}" placeholder="e.g. 2026-06-30" pattern="\d{4}-\d{2}-\d{2}" />
             </label>
             <label class="field-group compact-field">
                 <span>Sort by</span>
@@ -119,7 +246,7 @@
             </label>
             <div class="form-actions compact-actions">
                 <button class="secondary-button small-button" type="submit">Apply filters</button>
-                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/dashboard">Clear filters</a>
+                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/dashboard">Reset</a>
             </div>
         </form>
 
@@ -215,82 +342,6 @@
         </div>
         <c:if test="${empty recommendedJobs}">
             <div class="empty-state large-empty">No open jobs match your current search or filter.</div>
-        </c:if>
-    </section>
-
-    <!-- ===== APPLICATION HISTORY ===== -->
-    <section class="panel section-gap">
-        <div class="section-head">
-            <h2>My applications</h2>
-            <span class="metric-pill">${applications.size()} total</span>
-        </div>
-        <div class="table-wrapper">
-            <table class="data-table compact-table">
-                <thead><tr><th>Job</th><th>Status</th><th>Score</th><th>Submitted</th><th>Action</th></tr></thead>
-                <tbody>
-                <c:forEach var="application" items="${applications}">
-                    <c:set var="applicationJob" value="${jobsById[application.jobId]}" />
-                    <tr>
-                        <td><strong><a class="inline-link" href="${pageContext.request.contextPath}/jobs/detail?jobId=${application.jobId}">${applicationJob.title}</a></strong><div class="muted-copy">${applicationJob.moduleCode}</div></td>
-                        <td><span class="status-pill status-${application.status.cssClass}">${application.status.label}</span></td>
-                        <td>${application.recommendationPercent}%</td>
-                        <td>${application.applyTimeLabel}</td>
-                        <td>
-                            <c:choose>
-                                <c:when test="${application.status.code != 'WITHDRAWN' and application.status.code != 'REJECTED'}">
-                                    <form class="inline-form inline-form-tight" method="post" action="${pageContext.request.contextPath}/applications/withdraw">
-                                        <input type="hidden" name="applicationId" value="${application.applicationId}" />
-                                        <input type="hidden" name="jobId" value="${application.jobId}" />
-                                        <button class="secondary-button small-button" type="submit" data-loading-text="Withdrawing...">Withdraw</button>
-                                    </form>
-                                </c:when>
-                                <c:otherwise><span class="muted-copy">No action</span></c:otherwise>
-                            </c:choose>
-                        </td>
-                    </tr>
-                </c:forEach>
-                <c:if test="${empty applications}"><tr><td colspan="5" class="empty-state">You have not applied yet. Browse the positions above and click Apply!</td></tr></c:if>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- ===== PROFILE & CV ===== -->
-    <section class="panel section-gap">
-        <div class="section-head">
-            <div><h2>Profile &amp; CV management</h2><p class="muted-copy">Keep your profile updated for better recommendation scores.</p></div>
-            <span class="status-pill status-ta"><c:choose><c:when test="${profileReady}">Profile ready</c:when><c:otherwise>Update required</c:otherwise></c:choose></span>
-        </div>
-        <form class="form-grid two-column-form section-gap" method="post" action="${pageContext.request.contextPath}/profile/update">
-            <label class="field-group"><span>Full name</span><input class="input" type="text" name="name" value="${user.name}" required /></label>
-            <label class="field-group"><span>Student ID</span><input class="input" type="text" name="studentId" value="${user.studentId}" required /></label>
-            <label class="field-group"><span>Email</span><input class="input" type="email" name="email" value="${user.email}" /></label>
-            <label class="field-group"><span>Programme</span><input class="input" type="text" name="programme" value="${user.programme}" required /></label>
-            <div class="field-group full-width"><span>Skills</span><textarea class="textarea" name="skills" rows="2" required>${user.skillsSummary}</textarea></div>
-            <div class="field-group full-width"><span>Availability</span><textarea class="textarea" name="availability" rows="2" required>${user.availability}</textarea></div>
-            <div class="field-group full-width"><span>Experience</span><textarea class="textarea" name="experience" rows="3">${user.experience}</textarea></div>
-            <div class="field-group full-width"><span>CV text for AI matching</span><textarea class="textarea" name="cvText" rows="3">${user.cvText}</textarea></div>
-            <div class="form-actions full-width"><button class="primary-button" type="submit" data-loading-text="Saving...">Save profile</button></div>
-        </form>
-        <form class="form-grid section-gap" method="post" action="${pageContext.request.contextPath}/profile/cv/upload" enctype="multipart/form-data">
-            <label class="upload-zone" data-upload-zone>
-                <span class="upload-zone-title">Upload CV file</span>
-                <span class="upload-zone-hint" data-upload-filename>Drop file here or choose from device</span>
-                <span class="upload-zone-meta" data-upload-hint>PDF, DOC, DOCX, TXT · max 5MB</span>
-                <span class="secondary-button small-button upload-trigger">Choose file</span>
-                <input class="upload-input" type="file" name="cvFile" accept=".pdf,.doc,.docx,.txt" data-max-mb="5" required />
-            </label>
-            <div class="action-row"><button class="secondary-button" type="submit" data-loading-text="Uploading...">Upload CV</button></div>
-        </form>
-        <c:if test="${user.cvAvailable}">
-            <div class="surface-note section-gap" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-                <strong>Current CV:</strong> <code>${user.cvFileLabel}</code>
-                <span class="muted-copy">Uploaded ${user.cvUploadedAtLabel}</span>
-                <a class="primary-button small-button" href="${pageContext.request.contextPath}/cv/download?userId=${user.userId}">Download CV</a>
-            </div>
-        </c:if>
-        <c:if test="${not user.cvAvailable}">
-            <div class="surface-note section-gap"><strong>No CV uploaded yet.</strong> Upload a file to boost your score.</div>
         </c:if>
     </section>
 </div>
