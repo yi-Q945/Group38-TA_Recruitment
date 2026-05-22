@@ -31,18 +31,24 @@ public class IdCounterRepository {
         return next("user", "U");
     }
 
+    public String nextNotificationId() {
+        return next("notification", "N");
+    }
+
     private String next(String key, String prefix) {
         lock.lock();
         try {
-            Map<String, Long> counters = jsonFileStore.read(AppPaths.idCountersFile(), COUNTER_TYPE);
-            if (counters == null) {
-                counters = new LinkedHashMap<>();
-            }
+            return jsonFileStore.withExclusiveFileLock(AppPaths.idCountersFile(), () -> {
+                Map<String, Long> counters = jsonFileStore.read(AppPaths.idCountersFile(), COUNTER_TYPE);
+                if (counters == null) {
+                    counters = new LinkedHashMap<>();
+                }
 
-            long nextValue = counters.getOrDefault(key, defaultSeed(key)) + 1;
-            counters.put(key, nextValue);
-            jsonFileStore.write(AppPaths.idCountersFile(), counters);
-            return prefix + nextValue;
+                long nextValue = counters.getOrDefault(key, defaultSeed(key)) + 1;
+                counters.put(key, nextValue);
+                jsonFileStore.writeWithCallerFileLock(AppPaths.idCountersFile(), counters);
+                return prefix + nextValue;
+            });
         } finally {
             lock.unlock();
         }
@@ -53,6 +59,7 @@ public class IdCounterRepository {
             case "user" -> 1000L;
             case "job" -> 2000L;
             case "application" -> 3000L;
+            case "notification" -> 5000L;
             default -> 0L;
         };
     }

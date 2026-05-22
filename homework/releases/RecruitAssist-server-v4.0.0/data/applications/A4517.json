@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4517",
+  "jobId": "J2126",
+  "applicantId": "U1108",
+  "applyTime": "2026-03-14T18:00:00Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.65,
+  "explanation": [
+    "Matched required skills: Algorithms",
+    "Preferred skill matches: Tutoring",
+    "Skills to strengthen: Data Structures",
+    "Projected workload after acceptance: 5/12 hours"
+  ]
+}

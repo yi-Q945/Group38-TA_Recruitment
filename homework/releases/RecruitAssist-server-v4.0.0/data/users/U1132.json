@@ -1,0 +1,20 @@
+{
+  "userId": "U1132",
+  "username": "ta.032",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Felix Moore",
+  "studentId": "20261232",
+  "email": "ta_032@qmul.ac.uk",
+  "programme": "Artificial Intelligence",
+  "skills": [
+    "Python",
+    "Machine Learning",
+    "Data Analysis",
+    "Algorithms",
+    "Tutoring"
+  ],
+  "availability": "Flexible on Mon/Thu; weekend revision sessions possible",
+  "experience": "Assisted data labs, explained machine learning concepts and supported notebook-based workshops.",
+  "cvText": "Completed ML pipelines, exploratory analysis and group tutoring for quantitative modules. Strong skills in Python, Machine Learning, Data Analysis, comfortable with student support, marking and technical walkthroughs."
+}

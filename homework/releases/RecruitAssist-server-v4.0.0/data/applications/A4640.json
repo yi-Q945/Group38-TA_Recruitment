@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4640",
+  "jobId": "J2132",
+  "applicantId": "U1148",
+  "applyTime": "2026-03-17T09:00:00Z",
+  "status": "REJECTED",
+  "recommendationScore": 0.53,
+  "explanation": [
+    "Matched required skills: Linux",
+    "Preferred skill matches: none identified yet",
+    "Skills to strengthen: Security",
+    "Projected workload after acceptance: 5/12 hours"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "userId": "U1001",
+  "username": "alice.ta",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Alice Zhang",
+  "studentId": "20260001",
+  "programme": "Software Engineering",
+  "skills": ["Java", "OOP", "Testing"],
+  "availability": "Mon/Wed afternoon",
+  "experience": "Peer mentoring and lab assistance",
+  "cvText": "Experienced in Java, teamwork and software testing."
+}

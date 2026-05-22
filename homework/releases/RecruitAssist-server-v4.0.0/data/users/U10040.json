@@ -1,0 +1,20 @@
+{
+  "userId": "U10040",
+  "username": "ta.112",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Mei Wong",
+  "studentId": "20261312",
+  "email": "ta_112@qmul.ac.uk",
+  "programme": "Artificial Intelligence",
+  "skills": [
+    "NLP",
+    "Python",
+    "Machine Learning",
+    "Research Support",
+    "Communication"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in NLP, Python, Machine Learning, Research Support, with experience explaining concepts and supporting students during labs."
+}

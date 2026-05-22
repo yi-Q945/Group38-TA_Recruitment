@@ -1,0 +1,20 @@
+{
+  "userId": "U1121",
+  "username": "ta.021",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Uma Chen",
+  "studentId": "20261221",
+  "email": "ta_021@qmul.ac.uk",
+  "programme": "Digital Media Technology",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Accessibility",
+    "Communication"
+  ],
+  "availability": "Wed/Fri afternoon, flexible during assessment weeks",
+  "experience": "Led web UI coursework reviews, accessibility checks and front-end studio feedback sessions.",
+  "cvText": "Designed responsive interfaces, user journeys and component libraries for course prototypes. Strong skills in HTML, CSS, JavaScript, comfortable with student support, marking and technical walkthroughs."
+}

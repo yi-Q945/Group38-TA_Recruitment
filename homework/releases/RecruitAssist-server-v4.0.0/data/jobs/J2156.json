@@ -1,0 +1,20 @@
+{
+  "jobId": "J2156",
+  "ownerId": "U9104",
+  "title": "Operating Systems Debug Clinic TA",
+  "moduleCode": "EBU6327",
+  "description": "Support C, Linux process and concurrency debugging sessions.",
+  "requiredSkills": [
+    "C",
+    "Linux",
+    "Concurrency"
+  ],
+  "preferredSkills": [
+    "Debugging",
+    "Operating Systems"
+  ],
+  "deadline": "2026-08-15",
+  "quota": 4,
+  "workloadHours": 5,
+  "status": "OPEN"
+}

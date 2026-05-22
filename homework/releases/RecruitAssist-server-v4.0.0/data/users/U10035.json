@@ -1,0 +1,20 @@
+{
+  "userId": "U10035",
+  "username": "ta.107",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Hannah Smith",
+  "studentId": "20261307",
+  "email": "ta_107@qmul.ac.uk",
+  "programme": "Human-Computer Interaction",
+  "skills": [
+    "UX Research",
+    "Prototyping",
+    "Communication",
+    "Accessibility",
+    "Feedback"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in UX Research, Prototyping, Communication, Accessibility, with experience explaining concepts and supporting students during labs."
+}

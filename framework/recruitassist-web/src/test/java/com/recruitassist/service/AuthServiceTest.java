@@ -63,6 +63,20 @@ class AuthServiceTest {
     }
 
     @Test
+    @DisplayName("Repeated failed attempts should temporarily lock an account key")
+    void repeatedFailuresLockTemporarily() {
+        for (int attempt = 0; attempt < 5; attempt++) {
+            assertTrue(authService.authenticate("alice.ta", "wrongpass").isEmpty());
+        }
+
+        assertTrue(authService.isTemporarilyLocked("alice.ta"));
+        assertTrue(authService.authenticate("alice.ta", "demo123").isEmpty(),
+                "Correct password should still be blocked during lockout");
+        authService.clearLoginAttemptsForTesting("alice.ta");
+        assertTrue(authService.authenticate("alice.ta", "demo123").isPresent());
+    }
+
+    @Test
     @DisplayName("Non-existent user should return empty")
     void nonExistentUser() {
         Optional<UserProfile> result = authService.authenticate("nobody", "demo123");

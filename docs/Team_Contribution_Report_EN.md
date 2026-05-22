@@ -1,7 +1,7 @@
 # RecruitAssist — Team Contribution & Implementation Report
 
-> **Version**: v3.0.0 (Sprint 3)  
-> **Date**: April 2026  
+> **Version**: v4.0.0 + Sprint 5 Deployment Addendum  
+> **Date**: May 2026  
 > **Course**: EBU6304 Software Engineering — Group 38
 
 ---
@@ -10,7 +10,7 @@
 
 1. [Team Overview](#1-team-overview)
 2. [Member Contributions](#2-member-contributions)
-   - 2.1 [Yi Qi — Login & Register & Homepage & UI Assets](#21-yi-qi--login--register--homepage--ui-assets)
+   - 2.1 [Yi Qi — Login & Registration & Homepage & UI Assets](#21-yi-qi--login--registration--homepage--ui-assets)
    - 2.2 [Tianyu Zhao — TA Dashboard & Application & CV](#22-tianyu-zhao--ta-dashboard--application--cv)
    - 2.3 [Jie Ren — MO Dashboard & Job Management](#23-jie-ren--mo-dashboard--job-management)
    - 2.4 [Haopeng Jin — Recommendation Engine & Application Service](#24-haopeng-jin--recommendation-engine--application-service)
@@ -25,21 +25,36 @@
 
 | Member | Primary Responsibility | Key Files | Lines of Code (approx.) |
 |--------|----------------------|-----------|------------------------|
-| Yi Qi | Login & Register & Homepage & UI | 8 files | ~550 |
+| Yi Qi | Login & Registration & Homepage & UI | 12 files | ~900 |
 | Tianyu Zhao | TA Dashboard & CV & Apply | 8 files | ~700 |
 | Jie Ren | MO Dashboard & Job CRUD | 6 files | ~700 |
-| Haopeng Jin | Recommendation Engine & Application | 7 files | ~1,500 |
+| Haopeng Jin | Recommendation Engine, Application, PDF Token Sharing, Sprint 5 Server Deployment, Security & Availability | 18 files | ~2,400 |
 | Zhuang Hou | Admin Dashboard & Workload | 6 files | ~500 |
 | Zexuan Dong | Data Layer & Infrastructure | 15 files | ~1,200 |
+
+### 1.1 Presentation-Ready Ownership Map
+
+This table is designed for demos and viva questions. It explains each member's feature ownership, where the code lives, and one concrete example that can be shown in the running system.
+
+| Member | Owned Feature Area | Main Code Paths | Clear Feature Description | Concrete Example / Demo Evidence |
+|--------|--------------------|-----------------|---------------------------|----------------------------------|
+| Yi Qi | Login, registration, homepage, session entry flow, and UI polish | `LoginServlet.java`, `RegisterServlet.java`, `LogoutServlet.java`, `HomeServlet.java`, `AuthService.java`, `UserService.registerUser()`, `login.jsp`, `register.jsp`, `home.jsp`, `assets/css/app.css`, `assets/js/app.js` | Built the entry experience for all roles: users can land on the home page, see live system statistics, use demo quick-login, register as TA/MO, sign in, receive flash messages, and be routed to the correct role dashboard. The login/registration path includes input validation, sticky forms, generic login errors, password hashing, lockout, and session cleanup. | Demo: open `/home`, use the TA quick sign-in card or go to `/login`, choose `alice.ta`, sign in, then log out through the POST logout form. Registration example: create a new TA account, see the success flash, then sign in with the new user. |
+| Tianyu Zhao | TA dashboard, TA profile editing, CV upload/download, application submission and withdrawal UI | `DashboardServlet.renderTaDashboard()`, `UpdateProfileServlet.java`, `UploadCvServlet.java`, `DownloadCvServlet.java`, `ApplyServlet.java`, `WithdrawApplicationServlet.java`, `dashboard-ta.jsp`, `UserService.updateTaProfile()` | Implemented the TA working area: TAs can maintain profile evidence, upload a CV, view recommendation cards, apply to suitable roles, withdraw eligible applications, and track application history. The CV flow validates file type and size, replaces old CV files safely, and applies role-based access permissions. | Demo: sign in as `alice.ta`, edit skills or availability, upload a `.txt`/PDF CV, apply for a recommended role, then confirm the application appears in the history table with score and status. |
+| Jie Ren | MO dashboard, job creation/editing, job open/close controls, candidate review table | `CreateJobServlet.java`, `UpdateJobServlet.java`, `ChangeJobStatusServlet.java`, `JobService.java`, `UpdateApplicationStatusServlet.java`, `dashboard-mo.jsp`, `job-detail.jsp`, `data/jobs/` | Implemented the recruiter/module organiser workflow: MOs can create validated job postings, edit owned postings, close or reopen jobs, inspect candidate lists, download eligible CVs, and update candidate statuses. Job validation covers required fields, future deadlines, positive quota/workload values, skill parsing, and XSS-safe text cleaning. | Demo: sign in as `mo.chen`, create a job with required skills such as `Java, Testing`, open the job detail page, view candidate ranking, then shortlist or accept a TA from the candidate table. |
+| Haopeng Jin | Recommendation engine, application lifecycle, search/filter, permanent PDF token sharing, Sprint 5 server deployment, security and high-availability hardening | `RecommendationService.java`, `ApplicationService.java`, `JobDetailServlet.java`, `DashboardServlet.java`, `AppServlet.java`, `JsonFileStore.java`, `IdCounterRepository.java`, `LogoutServlet.java`, `PdfShareService.java`, `SharedPdfServlet.java`, `scripts/load_test_recruitassist.py`, `homework/releases/server/`, `homework/plan/服务器端指令.md` | Built the explainable matching and critical state-change layer and moved the system toward real deployment. The recommendation engine scores TA-job pairs across six dimensions; the application service prevents duplicate active applications, updates statuses, logs actions, and closes full jobs; Sprint 5 adds public server deployment, permanent protected PDF token links, package data verification, Java 17/Jetty 12 compatibility handling, and load-test support. | Demo: visit `http://RecruitAssistGroup38.21.214.216.122.nip.io:8080/home`, sign in as `alice.ta`, compare recommendations and apply to a job, then sign in as `mo.chen` and accept/reject it. Security/deployment evidence: inspect hidden `csrfToken`, open `/pdf/share?token=...`, call `/health`, and show `homework/releases/server/` plus `服务器端指令.md`. |
+| Zhuang Hou | Admin dashboard, workload monitoring, global recruitment overview, CSV export | `DashboardServlet.renderAdminDashboard()`, `WorkloadService.java`, `AdminExportServlet.java`, `dashboard-admin.jsp`, `WorkloadEntry.java`, `SystemConfig.java`, `data/system/config.json` | Built the administrator overview: Admin can monitor all jobs and recent applications, inspect TA workload against the configured threshold, identify overloaded assistants, filter jobs, and export jobs/applications/workload as CSV for reporting. | Demo: sign in as `admin`, open the dashboard, filter jobs by status/keyword, inspect the TA workload table, then click the CSV export buttons for jobs, applications, and workload. |
+| Zexuan Dong | File-backed data layer, repositories, application bootstrap, seed data, audit logging and tests | `AppPaths.java`, `AppServices.java`, `JsonFileStore.java`, `UserRepository.java`, `JobRepository.java`, `ApplicationRepository.java`, `AuditRepository.java`, `SystemConfigRepository.java`, `IdCounterRepository.java`, `AppBootstrapListener.java`, `src/test/java/**` | Implemented the zero-database persistence foundation required by the coursework: users, jobs, applications, notifications, config, counters, CV files, and audit logs are stored in JSON/CSV/TXT files. Repositories centralise file access, service wiring happens in `AppServices`, required directories are bootstrapped on startup, and tests protect core data integrity. | Demo evidence: show `data/users`, `data/jobs`, `data/applications`, `data/system/config.json`, and `logs/access/audit.csv`; run `mvn verify` to show repository/service tests and JaCoCo coverage generation. |
 
 ---
 
 ## 2. Member Contributions
 
-### 2.1 Yi Qi — Login & Register & Homepage & UI Assets
+### 2.1 Yi Qi — Login & Registration & Homepage & UI Assets
 
 **Responsible Files**:
 - `LoginServlet.java`, `LogoutServlet.java`, `HomeServlet.java`, `RegisterServlet.java`
+- `AuthService.java` (authentication logic)
+- `UserService.java` — `registerUser()` method (registration validation & persistence)
 - `login.jsp`, `register.jsp`, `home.jsp`, `index.jsp`
 - `README.md`, `README_zh.md`, `figure/*.png`
 
@@ -48,31 +63,52 @@
 #### Feature Description (for Demo Presentation)
 
 **Login Page** (`/login`)
-- Username + password form-based authentication with session management
-- A **Demo User Quick-Select Panel** is displayed on the login page, showing up to 3 TA accounts, 2 MO accounts, and 1 Admin account for easy demo access
-- On successful login, the old session is invalidated and a new one is created (prevents session fixation attacks)
-- Flash message system displays success/error feedback (e.g., "Welcome back, Alice!")
-- Failed login shows a generic "Invalid username or password" error without revealing which field was wrong
+- Username + password form-based authentication with `HttpSession`-based session management
+- A **Demo User Quick-Select Panel** is displayed on the login page, showing up to 3 TA accounts, 2 MO accounts, and 1 Admin account for easy demo access. Each featured user has a "Use account" button that auto-fills the login form via JavaScript `data-fill-login` attribute
+- **Real-time user statistics** are shown in the login page header: total demo accounts, TA count, MO count, and Admin count
+- On successful login, the old session is explicitly invalidated and a new one is created (prevents **session fixation attacks**)
+- Flash message system displays success/error feedback (e.g., "Signed in as Amelia Chen.")
+- Failed login shows a generic "Invalid username or password" error without revealing which field was wrong (prevents **username enumeration**)
+- If the user is already authenticated, GET `/login` automatically redirects to `/dashboard` to avoid re-login
+
+**Registration Page** (`/register`)
+- New account creation form with 6 fields: username (required), display name, email, role (TA or MO), password (required, min 6 chars), confirm password
+- **Admin registration is blocked** — the role dropdown only offers TA and MO. Attempting to submit `role=ADMIN` via request manipulation returns an explicit error: "Admin accounts cannot be created through registration."
+- **Username validation**: 3–30 characters, regex `[a-zA-Z0-9._-]`, automatically lowercased, uniqueness check against all existing users
+- **Display name uniqueness check**: case-insensitive comparison against all existing user names to prevent duplicate display names
+- **Email format validation**: regex `^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$`
+- **Password confirmation**: client-side `minlength=6` + server-side length check + password match verification
+- **Password storage hardening**: accepted passwords are hashed with PBKDF2-HMAC-SHA256 before being written to JSON
+- **Input sanitisation**: all text fields are cleaned via `cleanText()` — strips `<>` tags (XSS prevention), removes control characters, enforces per-field max length
+- **Sticky form fields**: on validation failure, previously entered username, name, email, and selected role are preserved in the form to avoid re-typing
+- On success, a flash message is set ("Account created successfully!") and the user is redirected to `/login` to sign in with their new credentials
 
 **Logout** (`/logout`)
-- Invalidates the current session, creates a new session with "Logged out" flash message, and redirects to the login page
+- Invalidates the current session via `session.invalidate()`, creates a fresh session with a "You have been signed out." flash message, and redirects to the login page
+- Prevents stale session data from lingering after sign-out
 
 **Home Page** (`/home`)
-- Public landing page for unauthenticated users
-- Displays real-time system statistics: total number of TAs, MOs, Admins, job postings, and applications
+- Public landing page for unauthenticated users with a modern hero layout
+- Displays **real-time system statistics**: TA accounts, MOs, Admins, job postings, and application count — all computed live from the data layer
+- **Quick Sign-In cards**: one curated account per role (TA, MO, Admin) with a direct sign-in button that posts to `/login` via hidden form fields, enabling one-click role switching for demos
+- **Feature showcase grid**: three cards highlighting TA workflow (recommendation), MO workflow (job management), and Admin workflow (workload monitoring)
+- **Project layout panel**: shows the framework directory, data directory, and logs directory paths
+- **Suggested demo path**: a 3-step journey guide for presentation (Step 1: Login as TA → Step 2: Switch to MO → Step 3: Finish as Admin)
 - Authenticated users are automatically redirected to their role-specific dashboard
 
-**Register** (`/register`)
-- Unauthenticated users can create a new account as either TA or MO
-- The form includes username, display name, email, role, password, and confirm password
-- Server-side validation checks username format, password length, password confirmation, email format, and username uniqueness
-- Admin accounts cannot be created through the public registration page; successful registration redirects back to login with a success flash message
+**Authentication Service** (`AuthService.java`)
+- Accepts username and password, trims and normalises whitespace
+- Looks up user by username via `UserService.findByUsername()`
+- Verifies PBKDF2 password hashes while keeping legacy demo plaintext seed accounts compatible
+- Tracks failed login attempts and temporarily locks a username key after 5 consecutive failures
+- Returns `Optional<UserProfile>` — empty on failure, present on success
+- Null-safe: returns empty Optional immediately if either username or password is null or blank
 
-**Demo Walkthrough**: Open the app → you see the Home page with system stats → click Login to open the login page, or Register to create a new account → after successful registration, return to Login → use the quick-select panel for `alice.ta` or sign in with the new account → you are redirected to the role-specific dashboard.
+**Demo Walkthrough**: Open the app → see the Home page with system stats and feature showcase → click "Open demo login" → on the Login page, see the statistics header and quick-select table → click "Use account" on `alice.ta` → form auto-fills → click "Sign in" → redirected to TA Dashboard with a welcome flash. Alternatively: click "Create a new account" → fill in the registration form → submit → flash message "Account created!" → sign in with new credentials.
 
 #### Implementation Details
 
-**1. Login Authentication Flow** (`LoginServlet.java`)
+**1. Login Authentication Flow with Session Security** (`LoginServlet.java`)
 
 The login process implements session-based authentication with security best practices:
 
@@ -84,63 +120,300 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp)
     String username = req.getParameter("username");
     String password = req.getParameter("password");
 
-    Optional<UserProfile> userOpt = services(req).authService()
+    Optional<UserProfile> authenticatedUser = services(req).authService()
             .authenticate(username, password);
 
-    if (userOpt.isEmpty()) {
-        req.setAttribute("loginError", "Invalid username or password.");
+    if (authenticatedUser.isEmpty()) {
+        req.setAttribute("error", "Invalid username or password.");
+        req.setAttribute("username", username);  // Sticky field
         populateLoginView(req);
         req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
         return;
     }
 
     // Security: invalidate old session to prevent session fixation
-    req.getSession().invalidate();
+    HttpSession existingSession = req.getSession(false);
+    if (existingSession != null) {
+        existingSession.invalidate();
+    }
+
     HttpSession session = req.getSession(true);
-    session.setAttribute("userId", userOpt.get().getUserId());
-    setFlash(req, "success", "Welcome back, " + userOpt.get().getName() + "!");
+    session.setAttribute(SESSION_USER_ID, authenticatedUser.get().getUserId());
+    setFlash(req, "success", "Signed in as " + authenticatedUser.get().getName() + ".");
     redirect(req, resp, "/dashboard");
 }
 ```
 
 Key security measures:
-- Session invalidation before creating new session (prevents session fixation attacks)
-- Flash message system for user feedback
-- Failed login shows error without revealing whether username or password was wrong
+- **Session fixation prevention**: old session is explicitly checked and invalidated before creating a new session with `getSession(true)`
+- **Username enumeration prevention**: failed login shows a single generic error "Invalid username or password" without distinguishing which field was wrong
+- **Sticky username field**: on failure, the entered username is preserved in the form via `req.setAttribute("username", username)` so the user doesn't have to retype it
+- **Flash message system**: success/error notifications carried across redirects via session attributes
 
-**2. Demo User Quick-Select Panel** (`LoginServlet.java`)
+**2. Registration with Multi-Layer Validation** (`RegisterServlet.java` + `UserService.registerUser()`)
+
+The registration flow enforces comprehensive validation at both client (HTML5) and server (Java) layers:
+
+```java
+// RegisterServlet.java — doPost() (lines 25-54)
+@Override
+protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+        throws ServletException, IOException {
+    if (currentUser(req) != null) {
+        redirect(req, resp, "/dashboard");  // Block logged-in users
+        return;
+    }
+
+    String username = req.getParameter("username");
+    String password = req.getParameter("password");
+    String confirmPassword = req.getParameter("confirmPassword");
+    String role = req.getParameter("role");
+    String name = req.getParameter("name");
+    String email = req.getParameter("email");
+
+    ActionResult result = services(req).userService().registerUser(
+            username, password, confirmPassword, role, name, email,
+            services(req).idCounterRepository());
+
+    if (!result.isSuccess()) {
+        // Sticky fields: preserve all inputs on validation failure
+        req.setAttribute("error", result.getMessage());
+        req.setAttribute("username", username);
+        req.setAttribute("name", name);
+        req.setAttribute("email", email);
+        req.setAttribute("selectedRole", role);
+        req.getRequestDispatcher("/WEB-INF/jsp/register.jsp").forward(req, resp);
+        return;
+    }
+
+    setFlash(req, "success", result.getMessage());
+    redirect(req, resp, "/login");
+}
+```
+
+Server-side validation chain in `UserService.registerUser()`:
+
+```java
+// UserService.java — registerUser() (lines 28-83)
+public ActionResult registerUser(String username, String password,
+        String confirmPassword, String roleStr, String name,
+        String email, IdCounterRepository idCounterRepository) {
+
+    // 1. Username validation: required, cleaned, regex pattern, uniqueness
+    String cleanUsername = cleanText(username.trim().toLowerCase(), 30);
+    if (!USERNAME_PATTERN.matcher(cleanUsername).matches()) {
+        return ActionResult.failure("Username must be 3-30 characters...");
+    }
+
+    // 2. Password validation: min length + confirmation match
+    if (password == null || password.length() < 6) {
+        return ActionResult.failure("Password must be at least 6 characters.");
+    }
+    if (!password.equals(confirmPassword)) {
+        return ActionResult.failure("Passwords do not match.");
+    }
+
+    // 3. Username uniqueness check
+    if (findByUsername(cleanUsername).isPresent()) {
+        return ActionResult.failure("Username '" + cleanUsername
+                + "' is already taken.");
+    }
+
+    // 4. Display name uniqueness check (case-insensitive)
+    if (!cleanName.isBlank()) {
+        boolean nameTaken = listAllUsers().stream()
+                .anyMatch(u -> u.getName().equalsIgnoreCase(cleanName));
+        if (nameTaken) {
+            return ActionResult.failure("Display name '" + cleanName
+                    + "' is already in use.");
+        }
+    }
+
+    // 5. Admin role blocked
+    if (role == UserRole.ADMIN) {
+        return ActionResult.failure("Admin accounts cannot be created "
+                + "through registration.");
+    }
+
+    // 6. Email format validation (optional field)
+    if (!cleanEmail.isBlank() && !EMAIL_PATTERN.matcher(cleanEmail).matches()) {
+        return ActionResult.failure("Please provide a valid email address.");
+    }
+
+    // 7. Generate unique ID and persist
+    String userId = idCounterRepository.nextUserId();
+    UserProfile newUser = new UserProfile();
+    newUser.setUserId(userId);
+    newUser.setUsername(cleanUsername);
+    newUser.setPassword(PasswordHasher.hash(password));
+    newUser.setRole(role);
+    newUser.setName(cleanName.isBlank() ? cleanUsername : cleanName);
+    newUser.setEmail(cleanEmail);
+    save(newUser);  // Writes to data/users/{userId}.json
+
+    return ActionResult.success("Account created successfully! "
+            + "You can now sign in as '" + cleanUsername + "'.");
+}
+```
+
+Validation summary:
+
+| Check | Layer | Detail |
+|-------|-------|--------|
+| Username format | Client + Server | HTML5 `pattern="[a-zA-Z0-9._-]{3,30}"` + Java regex |
+| Username uniqueness | Server | `findByUsername()` lookup |
+| Display name uniqueness | Server | Case-insensitive scan of all users |
+| Password length | Client + Server | HTML5 `minlength=6` + Java `length < 6` check |
+| Password match | Server | `password.equals(confirmPassword)` |
+| Admin role block | Server | `role == ADMIN` → reject |
+| Email format | Client + Server | HTML5 `type=email` + Java regex |
+| XSS prevention | Server | `cleanText()` strips `<>` and control chars |
+
+**3. Demo User Quick-Select Panel** (`LoginServlet.java`)
 
 ```java
 // LoginServlet.java — populateLoginView() (lines 55-68)
 private void populateLoginView(HttpServletRequest req) {
     List<UserProfile> allUsers = services(req).userService().listAllUsers();
-    req.setAttribute("demoTAs", allUsers.stream()
-            .filter(u -> u.getRole() == UserRole.TA).limit(3).toList());
-    req.setAttribute("demoMOs", allUsers.stream()
-            .filter(u -> u.getRole() == UserRole.MO).limit(2).toList());
-    req.setAttribute("demoAdmins", allUsers.stream()
-            .filter(u -> u.getRole() == UserRole.ADMIN).limit(1).toList());
+    List<UserProfile> featuredUsers = new ArrayList<>();
+    featuredUsers.addAll(allUsers.stream()
+            .filter(user -> user.getRole() == UserRole.TA).limit(3).toList());
+    featuredUsers.addAll(allUsers.stream()
+            .filter(user -> user.getRole() == UserRole.MO).limit(2).toList());
+    featuredUsers.addAll(allUsers.stream()
+            .filter(user -> user.getRole() == UserRole.ADMIN).limit(1).toList());
+
+    req.setAttribute("featuredDemoUsers", featuredUsers);
+    req.setAttribute("demoPassword", "demo123");
+    req.setAttribute("totalUserCount", allUsers.size());
+    req.setAttribute("taCount", allUsers.stream()
+            .filter(user -> user.getRole() == UserRole.TA).count());
+    req.setAttribute("moCount", allUsers.stream()
+            .filter(user -> user.getRole() == UserRole.MO).count());
+    req.setAttribute("adminCount", allUsers.stream()
+            .filter(user -> user.getRole() == UserRole.ADMIN).count());
 }
 ```
 
-**3. Registration Flow** (`RegisterServlet.java`)
+The featured users table uses a JavaScript-driven quick-fill mechanism:
 
-The registration process accepts the form submission, delegates validation and persistence to `UserService.registerUser()`, repopulates the form on failure, and redirects to the login page with a flash message on success.
+```html
+<!-- login.jsp — Quick fill button -->
+<button class="secondary-button small-button" type="button"
+        data-fill-login
+        data-username="${demoUser.username}"
+        data-password="${demoPassword}">
+    Use account
+</button>
+```
 
-**3. Home Page System Statistics** (`HomeServlet.java`)
+When clicked, `app.js` reads the `data-username` and `data-password` attributes and populates the login form fields, enabling one-click demo access.
+
+**4. Authentication Service** (`AuthService.java`)
 
 ```java
-// HomeServlet.java — doGet() (lines 22-53)
-long taCount = allUsers.stream()
-        .filter(u -> u.getRole() == UserRole.TA).count();
-long moCount = allUsers.stream()
-        .filter(u -> u.getRole() == UserRole.MO).count();
-long adminCount = allUsers.stream()
-        .filter(u -> u.getRole() == UserRole.ADMIN).count();
-req.setAttribute("taCount", taCount);
-req.setAttribute("jobCount", allJobs.size());
-req.setAttribute("applicationCount", allApplications.size());
+// AuthService.java — authenticate() (excerpt)
+public class AuthService {
+    private final UserService userService;
+
+    public AuthService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public Optional<UserProfile> authenticate(String username, String password) {
+        if (username == null || password == null) {
+            return Optional.empty();
+        }
+
+        String normalizedUsername = username.trim();
+        String normalizedPassword = password.trim();
+        if (normalizedUsername.isEmpty() || normalizedPassword.isEmpty()) {
+            return Optional.empty();
+        }
+
+        if (isTemporarilyLocked(normalizedUsername)) {
+            return Optional.empty();
+        }
+
+        Optional<UserProfile> authenticated = userService.findByUsername(normalizedUsername)
+                .filter(user -> PasswordHasher.verify(normalizedPassword, user.getPassword()));
+        if (authenticated.isPresent()) {
+            loginAttempts.remove(normalizedUsername.toLowerCase());
+            return authenticated;
+        }
+
+        recordFailure(normalizedUsername);
+        return Optional.empty();
+    }
+}
 ```
+
+Design decisions:
+- **Null-safe**: returns `Optional.empty()` immediately for null/blank inputs
+- **Input normalisation**: trims whitespace before lookup and verification
+- **Hash-first verification**: `PasswordHasher.verify()` checks PBKDF2 hashes and legacy demo plaintext values using constant-time comparison
+- **Brute-force resistance**: 5 failed attempts temporarily lock the username key for 5 minutes
+- **Separation of concerns**: `AuthService` handles authentication logic; `UserService` handles user lookup and persistence
+- Returns `Optional<UserProfile>` rather than throwing exceptions — callers use `.isEmpty()` / `.isPresent()` for clean control flow
+
+**5. Home Page with Real-Time Statistics & Quick Sign-In** (`HomeServlet.java`)
+
+```java
+// HomeServlet.java — doGet() (lines 18-43)
+@Override
+protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+        throws ServletException, IOException {
+    if (currentUser(req) != null) {
+        redirect(req, resp, "/dashboard");  // Auto-redirect if already logged in
+        return;
+    }
+
+    List<UserProfile> allUsers = services(req).userService().listAllUsers();
+    long taCount = allUsers.stream()
+            .filter(user -> user.getRole() == UserRole.TA).count();
+    long recruiterCount = allUsers.stream()
+            .filter(user -> user.getRole() == UserRole.MO).count();
+    long adminCount = allUsers.stream()
+            .filter(user -> user.getRole() == UserRole.ADMIN).count();
+    int jobCount = services(req).jobService().listAllJobs().size();
+    int applicationCount = services(req).applicationService().findAll().size();
+
+    req.setAttribute("taCount", taCount);
+    req.setAttribute("recruiterCount", recruiterCount);
+    req.setAttribute("adminCount", adminCount);
+    req.setAttribute("jobCount", jobCount);
+    req.setAttribute("applicationCount", applicationCount);
+    req.setAttribute("featuredDemoUsers", buildFeaturedUsers(allUsers));
+    req.getRequestDispatcher("/WEB-INF/jsp/home.jsp").forward(req, resp);
+}
+```
+
+The home page provides:
+- **5 real-time KPI metrics** computed live from the data layer (not hardcoded)
+- **One featured user per role** for Quick Sign-In cards with direct POST forms
+- **Feature showcase** explaining TA/MO/Admin workflows
+- **3-step demo path** guide for presentation structure
+
+**6. Logout with Session Cleanup** (`LogoutServlet.java`)
+
+```java
+// LogoutServlet.java (lines 13-23)
+@Override
+protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+        throws IOException {
+    HttpSession session = req.getSession(false);
+    if (session != null) {
+        session.invalidate();  // Destroy all session data
+    }
+
+    HttpSession newSession = req.getSession(true);
+    newSession.setAttribute("flashTone", "success");
+    newSession.setAttribute("flashMessage", "You have been signed out.");
+    redirect(req, resp, "/login");
+}
+```
+
+The logout flow ensures complete session cleanup: the old session is fully invalidated (removing userId, flash data, and any other attributes), then a fresh session is created solely to carry the sign-out confirmation message to the login page.
 
 ---
 
@@ -442,20 +715,64 @@ This ensures that expired or fully-filled jobs are automatically closed when the
 
 ---
 
-### 2.4 Haopeng Jin — Recommendation Engine & Application Service
+### 2.4 Haopeng Jin — Recommendation Engine & Application Service & Sprint 4 Security/Availability
 
 **Responsible Files**:
 - `RecommendationService.java` (626 lines — the most complex service)
 - `ApplicationService.java` (415 lines)
-- `JobDetailServlet.java`
-- `UpdateApplicationStatusServlet.java`
+- `AppServlet.java`, `LogoutServlet.java`, `UserService.java`
+- `JsonFileStore.java`, `IdCounterRepository.java`
+- `HealthServlet.java`, `PasswordHasher.java`
+- `PdfShareService.java`, `SharedPdfServlet.java` (permanent protected PDF token sharing)
+- `JobDetailServlet.java`, `UpdateApplicationStatusServlet.java`
+- `DashboardServlet.java` (search/filter logic for all 3 roles)
 - `JobRecommendation.java` (view model)
-- `job-detail.jsp`
+- `job-detail.jsp`, `dashboard-ta.jsp` (search UI), `dashboard-mo.jsp` (search UI)
+- `DownloadCvServlet.java` (friendly filename generation)
 - `data/applications/` (seed data)
 
-**Backlog Stories**: #4 Browse Positions, #8 Accept/Reject, #19 AI Skill Matching
+**Backlog Stories**: #4 Browse Positions, #8 Accept/Reject, #14 Job Search & Filter, #19 AI Skill Matching, Sprint 4 Security & High Availability Hardening
 
 #### Feature Description (for Demo Presentation)
+
+**Sprint 5 Server Deployment, Permanent PDF Link and Concurrency Readiness**:
+- **Public URL**: `http://RecruitAssistGroup38.21.214.216.122.nip.io:8080/home`. The deployment process is documented in `homework/plan/服务器端指令.md`, including the explicit `JAVA_HOME=/usr/lib/jvm/java-17-openjdk` setting needed because the server's default Java 8 runtime is incompatible with Jetty 12.
+- **Server startup**: Runs in the background via `nohup env JAVA_HOME=... PORT=8080 ./scripts/start-maven-jetty.sh > logs/server/jetty.log 2>&1 &`, stores the PID in `logs/server/jetty.pid`, and writes server logs to `logs/server/jetty.log`.
+- **Release package and data verification**: The server package lives under `homework/releases/server/RecruitAssist-server-v4.0.0/` and `RecruitAssist-server-v4.0.0.tar.gz`. It includes the WAR, source module, `data/`, `logs/`, docs, startup scripts and `DATA_MANIFEST.json` so user/job/application/CV/config data completeness can be checked before deployment.
+- **Health check**: `/health` returns JSON such as `{"status":"UP","users":99,"jobs":67,"applications":965}`, proving the deployed server reads the intended packaged data directory.
+- **Permanent protected PDF token sharing**: `PdfShareService.java` assigns a stable random token to each CV owner; `SharedPdfServlet.java` serves `/pdf/share?token=...` inline only after login and TA self-access, MO job ownership, or Admin role checks, so `data/cv/` is not exposed as a public static directory.
+- **Concurrency and availability extension**: Carries Sprint 4's CSRF validation, POST logout, synchronized registration, cross-process file locks, atomic writes, corrupted JSON isolation and `scripts/load_test_recruitassist.py` into the real Java 17 / Jetty 12 server deployment.
+
+**Sprint 4 Security & High Availability Hardening**:
+- Added system-wide CSRF protection in `AppServlet`: every POST form carries a session token, and missing/mismatched tokens are rejected with HTTP 403.
+- Converted logout from GET to POST, so a crawler, preview, or malicious image/link cannot trigger a sign-out state change.
+- Added a synchronized registration critical section in `UserService.registerUser()` so username uniqueness checks and user creation stay atomic under concurrent attempts.
+- Hardened file-backed persistence in `JsonFileStore`: JSON/CSV writes now acquire a sibling `.lock` file through `FileChannel.lock()`, failed writes clean up temp files, and corrupted JSON files are skipped during directory listing instead of breaking the whole page.
+- Wrapped `IdCounterRepository` counter updates in a cross-process file lock, reducing duplicate-ID risk when multiple local server processes share the same `data/` directory.
+- Added permanent protected PDF token sharing: `PdfShareService` assigns each CV owner a stable random token, while `SharedPdfServlet` still requires login and checks TA self-access, MO job ownership, or Admin role before streaming the file inline.
+- Kept `/health` as a readiness endpoint so deployment and load-balancing experiments can check whether file-backed storage is readable before routing traffic.
+
+**Cross-Role Search & Filter System** (added in v3.0.3)
+
+TA Dashboard Search (`/dashboard` — TA view):
+- **Keyword Search**: Text input matches against job title, module code, description, required skills, preferred skills, matched skills, and missing skills. Backend implementation in `DashboardServlet.matchesRecommendationQuery()` concatenates all searchable fields and uses `contains()`.
+- **Skill Filter**: Comma-separated skill input (e.g., "Python, Java") matches against job required/preferred skills. Any single skill hit includes the job. Backend in `DashboardServlet.matchesSkillFilter()`.
+- **Max Hours Filter**: Numeric input (e.g., 8) filters out jobs with weekly workload exceeding the value. Backend: `job.getWorkloadHours() <= maxHours`.
+- **Deadline Filter**: Date input (yyyy-mm-dd format) shows only jobs with deadline on or before the specified date. Backend: `LocalDate.parse(job.getDeadline()).isBefore(deadlineBefore)`.
+- **Sort Options**: Best match first (default) / Closest deadline / Lowest projected workload.
+- **Clear Filters**: "Clear filters" button resets all filters and returns to the full recommended list.
+
+MO Dashboard Search (`/dashboard` — MO view):
+- **Search Bar**: Keyword input matches job title, module code, skills, and description. Backend in `DashboardServlet.matchesMoSearch()`.
+- **Enhanced Candidate Table**: Added CV download column and programme information display.
+
+Admin Dashboard Search (`/dashboard` — Admin view):
+- **Extended Search Scope**: Now also matches skill keywords in addition to module code and title. Backend in `DashboardServlet.matchesAdminFilter()`.
+
+**CV Download Filename Optimisation**:
+- Downloaded CV files are automatically named `{Name}_{ModuleCode}.{ext}` (e.g., `Alice_Zhang_EBU6304.pdf`) instead of the raw `U1001_cv.pdf`, making it easier for MOs to identify and file CVs.
+
+**Demo Walkthrough**: Login as `alice.ta` → type "Python" in the search box → only jobs requiring Python appear → type "Java, Testing" in the skill filter → results narrow further → set max hours to 6 → only lightweight roles remain → click "Clear filters" to reset → switch sort to "Closest deadline".
 
 **Recommendation Engine** — the core innovation of RecruitAssist
 - Evaluates each TA-Job pair across **6 weighted dimensions** with configurable weights from `config.json`:
@@ -845,7 +1162,7 @@ public List<WorkloadEntry> buildEntries() {
 - On startup, `AppBootstrapListener` initializes the `AppServices` singleton which creates: `JsonFileStore` → 6 Repositories → 6 Services in dependency order. All services receive their dependencies via constructor injection.
 
 **Authentication** (`AuthService.java`)
-- Accepts username and password, trims whitespace, looks up user by username, and compares passwords. Returns `Optional<UserProfile>` — empty on failure, present on success. (Note: currently plaintext comparison for demo purposes.)
+- Accepts username and password, trims whitespace, looks up user by username, verifies PBKDF2 password hashes with legacy seed-data compatibility, and temporarily locks repeated failed attempts. Returns `Optional<UserProfile>` — empty on failure, present on success.
 
 **Data Structure**: `data/users/` (UserProfile JSON), `data/jobs/` (JobPosting JSON), `data/applications/` (ApplicationRecord JSON), `data/cv/` (uploaded files), `data/system/config.json` (system config), `data/system/id-counters.json` (auto-increment IDs), `logs/access/audit.csv` (audit trail).
 
@@ -1039,7 +1356,7 @@ public void log(String action, String userId, String targetId) {
 | 9 | TA Check Application Status | ✅ Done | Tianyu Zhao (dashboard-ta.jsp) |
 | 10 | Admin Overview Dashboard | ✅ Done | Zhuang Hou |
 | 11 | JSON Data Persistence Layer | ✅ Done | Zexuan Dong |
-| 12 | User Registration & Auth | ✅ Done | Zexuan Dong (AuthService) |
+| 12 | User Registration & Auth | ✅ Done | Yi Qi (RegisterServlet, AuthService) + Zexuan Dong (infrastructure) |
 | 13 | Responsive & Consistent UI | ✅ Done | Yi Qi + Tianyu Zhao |
 | 14 | TA Job Search & Filter | ✅ Done | Zhuang Hou (DashboardServlet search) |
 | 15 | Admin Historical Records | ✅ Done | Zhuang Hou (admin dashboard) |

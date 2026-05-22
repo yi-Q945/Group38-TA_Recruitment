@@ -1,0 +1,20 @@
+{
+  "userId": "U10036",
+  "username": "ta.108",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Diego Garcia",
+  "studentId": "20261308",
+  "email": "ta_108@qmul.ac.uk",
+  "programme": "Computer Science",
+  "skills": [
+    "Algorithms",
+    "Data Structures",
+    "Java",
+    "Mentoring",
+    "Assessment"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in Algorithms, Data Structures, Java, Mentoring, with experience explaining concepts and supporting students during labs."
+}

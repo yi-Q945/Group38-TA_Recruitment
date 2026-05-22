@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4576",
+  "jobId": "J2129",
+  "applicantId": "U1142",
+  "applyTime": "2026-03-15T18:00:00Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.42,
+  "explanation": [
+    "Matched required skills: limited direct overlap",
+    "Preferred skill matches: none identified yet",
+    "Skills to strengthen: Testing, QA",
+    "Projected workload after acceptance: 9/12 hours"
+  ]
+}

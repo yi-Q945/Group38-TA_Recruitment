@@ -1,0 +1,20 @@
+{
+  "userId": "U1131",
+  "username": "ta.031",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Elena Brown",
+  "studentId": "20261231",
+  "email": "ta_031@qmul.ac.uk",
+  "programme": "Software Engineering",
+  "skills": [
+    "Java",
+    "OOP",
+    "Testing",
+    "Debugging",
+    "Communication"
+  ],
+  "availability": "Weekday mornings except Wednesday",
+  "experience": "Peer mentoring in programming labs, formative marking and debugging clinics.",
+  "cvText": "Built Java coursework projects, supported junior students and documented testing evidence. Strong skills in Java, OOP, Testing, comfortable with student support, marking and technical walkthroughs."
+}

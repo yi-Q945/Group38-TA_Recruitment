@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4173",
+  "jobId": "J2109",
+  "applicantId": "U1136",
+  "applyTime": "2026-03-07T21:00:00Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.5,
+  "explanation": [
+    "Matched required skills: limited direct overlap",
+    "Preferred skill matches: none identified yet",
+    "Skills to strengthen: UI Design, Prototyping",
+    "Projected workload after acceptance: 4/12 hours"
+  ]
+}

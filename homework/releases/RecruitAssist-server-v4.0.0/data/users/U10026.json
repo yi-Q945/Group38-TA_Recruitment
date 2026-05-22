@@ -1,0 +1,19 @@
+{
+  "userId": "U10026",
+  "username": "recruiter.10",
+  "password": "demo123",
+  "role": "MO",
+  "name": "Dr Marcus Lee",
+  "studentId": "",
+  "email": "recruiter_10@qmul.ac.uk",
+  "programme": "Module Organiser",
+  "skills": [
+    "Curriculum Design",
+    "Assessment",
+    "Candidate Review",
+    "Teaching Operations"
+  ],
+  "availability": "Weekdays; available for application review and interview panels",
+  "experience": "Software Engineering project coordinator with workload-aware TA recruitment and applicant feedback.",
+  "cvText": "Publishes module support roles, reviews candidate evidence and manages status decisions."
+}

@@ -1,0 +1,19 @@
+{
+  "userId": "U10025",
+  "username": "recruiter.09",
+  "password": "demo123",
+  "role": "MO",
+  "name": "Dr Priya Raman",
+  "studentId": "",
+  "email": "recruiter_09@qmul.ac.uk",
+  "programme": "Module Organiser",
+  "skills": [
+    "Curriculum Design",
+    "Assessment",
+    "Candidate Review",
+    "Teaching Operations"
+  ],
+  "availability": "Weekdays; available for application review and interview panels",
+  "experience": "Distributed Systems staffing lead with workload-aware TA recruitment and applicant feedback.",
+  "cvText": "Publishes module support roles, reviews candidate evidence and manages status decisions."
+}

@@ -1,0 +1,20 @@
+{
+  "jobId": "J2161",
+  "ownerId": "U10025",
+  "title": "HCI Prototype Review TA",
+  "moduleCode": "EBU6332",
+  "description": "Facilitate prototype critique sessions and usability evidence review.",
+  "requiredSkills": [
+    "UX Research",
+    "Prototyping",
+    "Communication"
+  ],
+  "preferredSkills": [
+    "Accessibility",
+    "Feedback"
+  ],
+  "deadline": "2026-08-25",
+  "quota": 4,
+  "workloadHours": 3,
+  "status": "OPEN"
+}

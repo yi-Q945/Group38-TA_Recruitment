@@ -1,0 +1,20 @@
+{
+  "userId": "U1146",
+  "username": "ta.046",
+  "password": "demo123",
+  "role": "TA",
+  "name": "William Hall",
+  "studentId": "20261246",
+  "email": "ta_046@qmul.ac.uk",
+  "programme": "Data Science",
+  "skills": [
+    "SQL",
+    "Database Design",
+    "Data Modelling",
+    "Debugging",
+    "Communication"
+  ],
+  "availability": "Tue/Thu afternoon, available for online office hours",
+  "experience": "Supported database labs, schema design exercises and SQL troubleshooting drop-ins.",
+  "cvText": "Worked on relational modelling, analytics datasets and structured query optimisation tasks. Strong skills in SQL, Database Design, Data Modelling, comfortable with student support, marking and technical walkthroughs."
+}

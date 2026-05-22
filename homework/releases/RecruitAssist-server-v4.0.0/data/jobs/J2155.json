@@ -1,0 +1,20 @@
+{
+  "jobId": "J2155",
+  "ownerId": "U9103",
+  "title": "Agile Delivery Coach TA",
+  "moduleCode": "EBU6326",
+  "description": "Coach sprint planning, retrospectives and coursework delivery evidence.",
+  "requiredSkills": [
+    "Agile",
+    "Scrum",
+    "Communication"
+  ],
+  "preferredSkills": [
+    "Documentation",
+    "Team Support"
+  ],
+  "deadline": "2026-08-13",
+  "quota": 4,
+  "workloadHours": 3,
+  "status": "OPEN"
+}

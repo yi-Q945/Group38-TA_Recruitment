@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4240",
+  "jobId": "J2112",
+  "applicantId": "U1140",
+  "applyTime": "2026-03-09T21:00:00Z",
+  "status": "REJECTED",
+  "recommendationScore": 0.53,
+  "explanation": [
+    "Matched required skills: Communication",
+    "Preferred skill matches: none identified yet",
+    "Skills to strengthen: Organisation",
+    "Projected workload after acceptance: 4/12 hours"
+  ]
+}

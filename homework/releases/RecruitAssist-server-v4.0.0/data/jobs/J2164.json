@@ -1,0 +1,20 @@
+{
+  "jobId": "J2164",
+  "ownerId": "U10028",
+  "title": "Intro Programming Helpdesk TA",
+  "moduleCode": "EBU6335",
+  "description": "Provide drop-in support for beginners with Java, OOP and debugging.",
+  "requiredSkills": [
+    "Java",
+    "OOP",
+    "Communication"
+  ],
+  "preferredSkills": [
+    "Mentoring",
+    "Assessment"
+  ],
+  "deadline": "2026-08-31",
+  "quota": 4,
+  "workloadHours": 4,
+  "status": "OPEN"
+}

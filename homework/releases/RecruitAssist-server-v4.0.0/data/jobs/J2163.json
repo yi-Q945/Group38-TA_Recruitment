@@ -1,0 +1,20 @@
+{
+  "jobId": "J2163",
+  "ownerId": "U10027",
+  "title": "DevOps Coursework Support TA",
+  "moduleCode": "EBU6334",
+  "description": "Support pipeline setup, deployment logs and release-readiness checks.",
+  "requiredSkills": [
+    "DevOps",
+    "Docker",
+    "Testing"
+  ],
+  "preferredSkills": [
+    "Cloud Computing",
+    "Documentation"
+  ],
+  "deadline": "2026-08-29",
+  "quota": 4,
+  "workloadHours": 4,
+  "status": "OPEN"
+}

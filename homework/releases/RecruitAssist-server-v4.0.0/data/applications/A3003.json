@@ -1,0 +1,14 @@
+{
+  "applicationId": "A3003",
+  "jobId": "J2003",
+  "applicantId": "U1001",
+  "applyTime": "2026-03-11T15:20:00Z",
+  "status": "SHORTLISTED",
+  "recommendationScore": 0.63,
+  "explanation": [
+    "Matched required skills: Communication",
+    "No preferred skill matches yet",
+    "Missing required skills: Organisation",
+    "Current workload: 0/12 hours"
+  ]
+}

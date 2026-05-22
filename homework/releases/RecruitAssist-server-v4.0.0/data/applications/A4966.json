@@ -1,0 +1,16 @@
+{
+  "applicationId": "A4966",
+  "jobId": "J2137",
+  "applicantId": "U1001",
+  "applyTime": "2026-05-22T11:30:49.366009716Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.8176466666666667,
+  "explanation": [
+    "Required skill coverage: 2/2. Preferred alignment: 1/2.",
+    "Availability is detailed enough for planning: Mon/Wed afternoon.",
+    "Profile evidence aligns with the role through Java, OOP, Testing, lab, lifting the experience score.",
+    "Profile evidence is usable, and a few strong signals are already visible.",
+    "Current accepted workload is 0h; this role would project to 6h within the 12h threshold.",
+    "Competition is heavier here: 17 active applicants for 3 remaining slots."
+  ]
+}

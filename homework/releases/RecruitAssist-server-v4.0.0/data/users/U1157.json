@@ -1,0 +1,20 @@
+{
+  "userId": "U1157",
+  "username": "ta.057",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Jasmine Walker",
+  "studentId": "20261257",
+  "email": "ta_057@qmul.ac.uk",
+  "programme": "Digital Media Technology",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Accessibility",
+    "Communication"
+  ],
+  "availability": "Mon/Wed afternoon; flexible for lab marking",
+  "experience": "Led web UI coursework reviews, accessibility checks and front-end studio feedback sessions.",
+  "cvText": "Designed responsive interfaces, user journeys and component libraries for course prototypes. Strong skills in HTML, CSS, JavaScript, comfortable with student support, marking and technical walkthroughs."
+}

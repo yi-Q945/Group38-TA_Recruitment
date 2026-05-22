@@ -1,0 +1,20 @@
+{
+  "userId": "U10031",
+  "username": "ta.103",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Maya Patel",
+  "studentId": "20261303",
+  "email": "ta_103@qmul.ac.uk",
+  "programme": "Software Engineering",
+  "skills": [
+    "Web Development",
+    "JavaScript",
+    "HTML",
+    "CSS",
+    "Accessibility"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in Web Development, JavaScript, HTML, CSS, with experience explaining concepts and supporting students during labs."
+}

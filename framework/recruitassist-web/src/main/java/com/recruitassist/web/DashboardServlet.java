@@ -80,9 +80,15 @@ public class DashboardServlet extends AppServlet {
                 .filter(application -> application.getStatus() == ApplicationStatus.ACCEPTED)
                 .count();
 
+        long unreadNotificationCount = services(req).notificationService().unreadCountForUser(user.getUserId());
+        if (user.isCvAvailable()) {
+            services(req).pdfShareService().ensureToken(user);
+        }
         req.setAttribute("recommendedJobs", recommendedJobs);
         req.setAttribute("topRecommendation", recommendedJobs.isEmpty() ? null : recommendedJobs.get(0));
         req.setAttribute("applications", applications);
+        req.setAttribute("notifications", services(req).notificationService().findRecentForUser(user.getUserId(), 5));
+        req.setAttribute("unreadNotificationCount", unreadNotificationCount);
         req.setAttribute("applicationsByJobId", services(req).applicationService().mapByJobIdForApplicant(user.getUserId()));
         req.setAttribute("jobsById", services(req).jobService().indexById());
         req.setAttribute("currentWorkload", services(req).workloadService().workloadForUser(user.getUserId()));
@@ -125,9 +131,12 @@ public class DashboardServlet extends AppServlet {
                 .filter(application -> application.getStatus() == ApplicationStatus.SHORTLISTED)
                 .count();
 
+        Map<String, UserProfile> usersById = services(req).userService().indexById();
+        services(req).pdfShareService().ensureTokensForCvOwners(usersById.values());
+
         req.setAttribute("jobs", jobs);
         req.setAttribute("applicationsByJobId", applicationsByJobId);
-        req.setAttribute("usersById", services(req).userService().indexById());
+        req.setAttribute("usersById", usersById);
         req.setAttribute("workloadByUserId", workloadByUserId);
         req.setAttribute("workloadThreshold", services(req).workloadService().getThreshold());
         req.setAttribute("openJobCount", openJobCount);
@@ -157,10 +166,13 @@ public class DashboardServlet extends AppServlet {
             acceptedByJobId.put(job.getJobId(), accepted);
         }
 
+        Map<String, UserProfile> usersById = services(req).userService().indexById();
+        services(req).pdfShareService().ensureTokensForCvOwners(usersById.values());
+
         req.setAttribute("user", user);
         req.setAttribute("workloadEntries", services(req).workloadService().buildEntries());
         req.setAttribute("latestApplications", services(req).applicationService().findRecentApplications(10));
-        req.setAttribute("usersById", services(req).userService().indexById());
+        req.setAttribute("usersById", usersById);
         req.setAttribute("jobsById", services(req).jobService().indexById());
         req.setAttribute("workloadThreshold", services(req).workloadService().getThreshold());
         req.setAttribute("adminJobs", visibleJobs);

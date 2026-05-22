@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.lang.reflect.Type;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.AtomicMoveNotSupportedException;
 import java.nio.file.Files;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class JsonFileStore {
@@ -47,7 +50,7 @@ public class JsonFileStore {
                         .filter(Files::isRegularFile)
                         .filter(path -> path.toString().endsWith(".json"))
                         .sorted()
-                        .map(path -> read(path, clazz))
+                        .map(path -> readLenient(path, clazz))
                         .filter(Objects::nonNull)
                         .toList();
                 directoryCache.put(cacheKey, new DirectoryCacheEntry(directoryModifiedAt, values));
@@ -97,12 +100,35 @@ public class JsonFileStore {
         ReentrantReadWriteLock lock = lockFor(normalized);
         lock.writeLock().lock();
         try {
+            withExclusiveFileLock(normalized, () -> {
+                writeWithoutProcessLock(normalized, value);
+                return null;
+            });
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    public void writeWithCallerFileLock(Path file, Object value) {
+        Path normalized = normalize(file);
+        ReentrantReadWriteLock lock = lockFor(normalized);
+        lock.writeLock().lock();
+        try {
+            writeWithoutProcessLock(normalized, value);
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    private void writeWithoutProcessLock(Path normalized, Object value) {
+        Path tempFile = null;
+        try {
             Path parent = normalized.getParent();
             if (parent != null) {
                 Files.createDirectories(parent);
             }
 
-            Path tempFile = Files.createTempFile(parent, normalized.getFileName().toString(), ".tmp");
+            tempFile = Files.createTempFile(parent, normalized.getFileName().toString(), ".tmp");
             try (Writer writer = Files.newBufferedWriter(
                     tempFile,
                     StandardCharsets.UTF_8,
@@ -121,7 +147,13 @@ public class JsonFileStore {
         } catch (IOException ex) {
             throw new IllegalStateException("Failed to write JSON file: " + normalized, ex);
         } finally {
-            lock.writeLock().unlock();
+            if (tempFile != null) {
+                try {
+                    Files.deleteIfExists(tempFile);
+                } catch (IOException ignored) {
+                    // Best-effort cleanup; the original write exception is more important.
+                }
+            }
         }
     }
 
@@ -129,6 +161,37 @@ public class JsonFileStore {
         Path normalized = normalize(file);
         ReentrantReadWriteLock lock = lockFor(normalized);
         lock.writeLock().lock();
+        try {
+            withExclusiveFileLock(normalized, () -> {
+                appendLineWithoutProcessLock(normalized, line);
+                return null;
+            });
+        } finally {
+            lock.writeLock().unlock();
+        }
+    }
+
+    public <T> T withExclusiveFileLock(Path file, Supplier<T> action) {
+        Path normalized = normalize(file);
+        Path parent = normalized.getParent();
+        Path lockFile = normalized.resolveSibling(normalized.getFileName().toString() + ".lock");
+        try {
+            if (parent != null) {
+                Files.createDirectories(parent);
+            }
+            try (FileChannel channel = FileChannel.open(
+                    lockFile,
+                    StandardOpenOption.CREATE,
+                    StandardOpenOption.WRITE);
+                 FileLock ignored = channel.lock()) {
+                return action.get();
+            }
+        } catch (IOException ex) {
+            throw new IllegalStateException("Failed to lock file: " + normalized, ex);
+        }
+    }
+
+    private void appendLineWithoutProcessLock(Path normalized, String line) {
         try {
             Path parent = normalized.getParent();
             if (parent != null) {
@@ -139,13 +202,20 @@ public class JsonFileStore {
                     line,
                     StandardCharsets.UTF_8,
                     StandardOpenOption.CREATE,
-                    StandardOpenOption.APPEND);
+                    StandardOpenOption.APPEND,
+                    StandardOpenOption.SYNC);
             fileCache.remove(normalized);
             invalidateDirectoryCache(parent);
         } catch (IOException ex) {
             throw new IllegalStateException("Failed to append file: " + normalized, ex);
-        } finally {
-            lock.writeLock().unlock();
+        }
+    }
+
+    private <T> T readLenient(Path file, Class<T> clazz) {
+        try {
+            return read(file, clazz);
+        } catch (IllegalStateException ex) {
+            return null;
         }
     }
 

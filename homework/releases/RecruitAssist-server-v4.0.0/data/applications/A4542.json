@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4542",
+  "jobId": "J2128",
+  "applicantId": "U1110",
+  "applyTime": "2026-03-13T15:00:00Z",
+  "status": "ACCEPTED",
+  "recommendationScore": 0.97,
+  "explanation": [
+    "Matched required skills: SQL, Database Design",
+    "Preferred skill matches: Data Modelling, Debugging",
+    "Skills to strengthen: no critical gaps detected",
+    "Projected workload after acceptance: 4/12 hours"
+  ]
+}

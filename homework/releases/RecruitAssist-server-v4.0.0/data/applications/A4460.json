@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4460",
+  "jobId": "J2123",
+  "applicantId": "U1158",
+  "applyTime": "2026-03-14T00:00:00Z",
+  "status": "REJECTED",
+  "recommendationScore": 0.56,
+  "explanation": [
+    "Matched required skills: limited direct overlap",
+    "Preferred skill matches: Communication, SQL",
+    "Skills to strengthen: Data Analysis, Python",
+    "Projected workload after acceptance: 4/12 hours"
+  ]
+}

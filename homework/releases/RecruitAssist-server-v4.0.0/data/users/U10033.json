@@ -1,0 +1,20 @@
+{
+  "userId": "U10033",
+  "username": "ta.105",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Sara Ahmed",
+  "studentId": "20261305",
+  "email": "ta_105@qmul.ac.uk",
+  "programme": "Data Science",
+  "skills": [
+    "SQL",
+    "Data Visualisation",
+    "Python",
+    "Statistics",
+    "Marking"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in SQL, Data Visualisation, Python, Statistics, with experience explaining concepts and supporting students during labs."
+}

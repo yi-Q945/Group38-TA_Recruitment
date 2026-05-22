@@ -1,0 +1,8 @@
+/data/workspace/code/Server/RecruitAssist-server-v4.0.0/framework/recruitassist-web/src/test/java/com/recruitassist/service/ApplicationConcurrencyTest.java
+/data/workspace/code/Server/RecruitAssist-server-v4.0.0/framework/recruitassist-web/src/test/java/com/recruitassist/service/NotificationServiceTest.java
+/data/workspace/code/Server/RecruitAssist-server-v4.0.0/framework/recruitassist-web/src/test/java/com/recruitassist/service/DataIntegrityTest.java
+/data/workspace/code/Server/RecruitAssist-server-v4.0.0/framework/recruitassist-web/src/test/java/com/recruitassist/config/AppPathsTest.java
+/data/workspace/code/Server/RecruitAssist-server-v4.0.0/framework/recruitassist-web/src/test/java/com/recruitassist/service/RegisterServiceTest.java
+/data/workspace/code/Server/RecruitAssist-server-v4.0.0/framework/recruitassist-web/src/test/java/com/recruitassist/service/RecommendationServiceTest.java
+/data/workspace/code/Server/RecruitAssist-server-v4.0.0/framework/recruitassist-web/src/test/java/com/recruitassist/service/PasswordHasherTest.java
+/data/workspace/code/Server/RecruitAssist-server-v4.0.0/framework/recruitassist-web/src/test/java/com/recruitassist/service/AuthServiceTest.java

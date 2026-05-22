@@ -1,0 +1,20 @@
+{
+  "userId": "U1123",
+  "username": "ta.023",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Willow Patel",
+  "studentId": "20261223",
+  "email": "ta_023@qmul.ac.uk",
+  "programme": "Cyber Security",
+  "skills": [
+    "Networks",
+    "Linux",
+    "Security",
+    "Scripting",
+    "Troubleshooting"
+  ],
+  "availability": "Weekday mornings except Wednesday",
+  "experience": "Ran network troubleshooting clinics and security lab walkthroughs for practical sessions.",
+  "cvText": "Hands-on with Linux tooling, shell scripting and secure systems support for teaching labs. Strong skills in Networks, Linux, Security, comfortable with student support, marking and technical walkthroughs."
+}

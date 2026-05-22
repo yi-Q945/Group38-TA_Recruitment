@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4760",
+  "jobId": "J2138",
+  "applicantId": "U1162",
+  "applyTime": "2026-03-19T15:00:00Z",
+  "status": "REJECTED",
+  "recommendationScore": 0.59,
+  "explanation": [
+    "Matched required skills: Algorithms",
+    "Preferred skill matches: Tutoring",
+    "Skills to strengthen: Data Structures",
+    "Projected workload after acceptance: 9/12 hours"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "jobId": "J2149",
+  "ownerId": "U10025",
+  "title": "Advanced Java Lab TA",
+  "moduleCode": "EBU6320",
+  "description": "Support generics, collections, threading and unit-testing labs.",
+  "requiredSkills": [
+    "Java",
+    "OOP",
+    "Testing"
+  ],
+  "preferredSkills": [
+    "Git",
+    "Mentoring"
+  ],
+  "deadline": "2026-08-01",
+  "quota": 4,
+  "workloadHours": 4,
+  "status": "OPEN"
+}
