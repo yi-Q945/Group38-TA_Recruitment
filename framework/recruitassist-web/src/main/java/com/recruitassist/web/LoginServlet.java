@@ -15,6 +15,8 @@ import java.util.Optional;
 
 @WebServlet("/login")
 public class LoginServlet extends AppServlet {
+    private static final int SESSION_TIMEOUT_SECONDS = 30 * 60;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (currentUser(req) != null) {
@@ -47,6 +49,7 @@ public class LoginServlet extends AppServlet {
         }
 
         HttpSession session = req.getSession(true);
+        session.setMaxInactiveInterval(SESSION_TIMEOUT_SECONDS);
         session.setAttribute(SESSION_USER_ID, authenticatedUser.get().getUserId());
         setFlash(req, "success", "Signed in as " + authenticatedUser.get().getName() + ".");
         redirect(req, resp, "/dashboard");

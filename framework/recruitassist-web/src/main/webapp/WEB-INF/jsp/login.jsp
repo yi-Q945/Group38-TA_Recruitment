@@ -40,6 +40,7 @@
                 <span class="metric-pill">Fast demo entry</span>
             </div>
             <form class="form-grid" method="post" action="${pageContext.request.contextPath}/login">
+                <input type="hidden" name="csrfToken" value="${csrfToken}" />
                 <label class="field-group">
                     <span>Username</span>
                     <input class="input" type="text" name="username" value="${username}" placeholder="e.g. alice.ta" required data-login-username />

@@ -85,6 +85,7 @@
                             <span class="meta-chip">Password: <code>${demoPassword}</code></span>
                         </div>
                         <form class="action-row section-gap" method="post" action="${pageContext.request.contextPath}/login">
+                            <input type="hidden" name="csrfToken" value="${csrfToken}" />
                             <input type="hidden" name="username" value="${demoUser.username}" />
                             <input type="hidden" name="password" value="${demoPassword}" />
                             <button class="primary-button small-button" type="submit" data-loading-text="Signing in...">Quick sign in</button>
