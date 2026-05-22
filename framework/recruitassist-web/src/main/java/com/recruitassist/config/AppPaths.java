@@ -61,6 +61,10 @@ public final class AppPaths {
         return dataDir().resolve("applications");
     }
 
+    public static Path notificationsDir() {
+        return dataDir().resolve("notifications");
+    }
+
     public static Path systemDir() {
         return dataDir().resolve("system");
     }
@@ -103,6 +107,7 @@ public final class AppPaths {
                 usersDir(),
                 jobsDir(),
                 applicationsDir(),
+                notificationsDir(),
                 systemDir(),
                 cvDir(),
                 appLogsDir(),
