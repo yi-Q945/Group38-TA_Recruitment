@@ -147,6 +147,7 @@
                                 <span class="status-pill status-${existingApplication.status.cssClass}">Applied · ${existingApplication.status.label}</span>
                                 <c:if test="${canWithdrawApplication}">
                                     <form class="inline-form inline-form-tight" method="post" action="${pageContext.request.contextPath}/applications/withdraw">
+                                        <input type="hidden" name="csrfToken" value="${csrfToken}" />
                                         <input type="hidden" name="applicationId" value="${existingApplication.applicationId}" />
                                         <input type="hidden" name="jobId" value="${job.jobId}" />
                                         <input type="hidden" name="returnTo" value="detail" />
@@ -156,6 +157,7 @@
                             </c:when>
                             <c:when test="${canApplyToJob}">
                                 <form class="inline-form inline-form-tight" method="post" action="${pageContext.request.contextPath}/apply">
+                                    <input type="hidden" name="csrfToken" value="${csrfToken}" />
                                     <input type="hidden" name="jobId" value="${job.jobId}" />
                                     <input type="hidden" name="returnTo" value="detail" />
                                     <button class="primary-button" type="submit" data-loading-text="Submitting application...">Apply for this job</button>
@@ -179,6 +181,7 @@
                         <span class="metric-pill">Owner controls</span>
                     </div>
                     <form class="form-grid two-column-form" method="post" action="${pageContext.request.contextPath}/jobs/update">
+                        <input type="hidden" name="csrfToken" value="${csrfToken}" />
                         <input type="hidden" name="jobId" value="${job.jobId}" />
                         <input type="hidden" name="returnTo" value="detail" />
                         <input type="hidden" name="sort" value="${candidateSort}" />
@@ -222,6 +225,7 @@
                     <div class="action-row section-gap">
                         <span class="status-pill status-${job.status.cssClass}">${job.status.label}</span>
                         <form class="inline-form inline-form-tight" method="post" action="${pageContext.request.contextPath}/jobs/status">
+                            <input type="hidden" name="csrfToken" value="${csrfToken}" />
                             <input type="hidden" name="jobId" value="${job.jobId}" />
                             <input type="hidden" name="returnTo" value="detail" />
                             <input type="hidden" name="sort" value="${candidateSort}" />
@@ -323,7 +327,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${candidate.cvAvailable}">
-                                        <a class="inline-link" href="${pageContext.request.contextPath}/cv/download?userId=${candidate.userId}&jobId=${job.jobId}">Download CV</a>
+                                        <a class="inline-link" href="${pageContext.request.contextPath}/pdf/share?token=${candidate.pdfShareToken}&jobId=${job.jobId}" target="_blank" rel="noopener">Open PDF link</a>
                                         <div class="muted-copy">${candidate.cvUploadedAtLabel}</div>
                                     </c:when>
                                     <c:otherwise>
@@ -335,6 +339,7 @@
                                 <c:choose>
                                     <c:when test="${canReview and application.status.code != 'WITHDRAWN'}">
                                         <form class="inline-form" method="post" action="${pageContext.request.contextPath}/applications/status">
+                                            <input type="hidden" name="csrfToken" value="${csrfToken}" />
                                             <input type="hidden" name="applicationId" value="${application.applicationId}" />
                                             <input type="hidden" name="jobId" value="${job.jobId}" />
                                             <input type="hidden" name="returnTo" value="detail" />
