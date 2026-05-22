@@ -1,0 +1,20 @@
+{
+  "jobId": "J2150",
+  "ownerId": "U10026",
+  "title": "Cloud Deployment Workshop TA",
+  "moduleCode": "EBU6321",
+  "description": "Assist Docker, Linux deployment and health-check workshops.",
+  "requiredSkills": [
+    "Cloud Computing",
+    "Docker",
+    "Linux"
+  ],
+  "preferredSkills": [
+    "DevOps",
+    "Python"
+  ],
+  "deadline": "2026-08-03",
+  "quota": 4,
+  "workloadHours": 5,
+  "status": "OPEN"
+}

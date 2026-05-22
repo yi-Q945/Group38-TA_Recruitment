@@ -1,0 +1,16 @@
+{
+  "applicationId": "A4963",
+  "jobId": "J2149",
+  "applicantId": "U1001",
+  "applyTime": "2026-05-22T11:30:19.611824188Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.8459561904761906,
+  "explanation": [
+    "Required skill coverage: 3/3. Preferred alignment: 0/2.",
+    "Availability is detailed enough for planning: Mon/Wed afternoon.",
+    "Profile evidence aligns with the role through Java, OOP, Testing, lab, lifting the experience score.",
+    "Profile evidence is strong and consistent with the job signals.",
+    "Current accepted workload is 0h; this role would project to 4h within the 12h threshold.",
+    "Demand pressure is manageable: 0 active applicants for 4 remaining slots."
+  ]
+}

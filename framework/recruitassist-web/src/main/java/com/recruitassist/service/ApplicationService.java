@@ -32,6 +32,7 @@ public class ApplicationService {
     private final JobRepository jobRepository;
     private final IdCounterRepository idCounterRepository;
     private final AuditRepository auditRepository;
+    private final NotificationService notificationService;
     private final RecommendationService recommendationService;
     private final UserService userService;
     private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
@@ -41,12 +42,14 @@ public class ApplicationService {
             JobRepository jobRepository,
             IdCounterRepository idCounterRepository,
             AuditRepository auditRepository,
+            NotificationService notificationService,
             RecommendationService recommendationService,
             UserService userService) {
         this.applicationRepository = applicationRepository;
         this.jobRepository = jobRepository;
         this.idCounterRepository = idCounterRepository;
         this.auditRepository = auditRepository;
+        this.notificationService = notificationService;
         this.recommendationService = recommendationService;
         this.userService = userService;
     }
@@ -275,6 +278,7 @@ public class ApplicationService {
 
             application.setStatus(newStatus);
             applicationRepository.save(application);
+            notificationService.notifyStatusChange(application, job, newStatus);
             auditRepository.append(actor.getUserId(), "UPDATE_STATUS", applicationId, "SUCCESS", newStatus.getCode());
 
             String message = "Application updated to " + newStatus.getLabel() + '.';

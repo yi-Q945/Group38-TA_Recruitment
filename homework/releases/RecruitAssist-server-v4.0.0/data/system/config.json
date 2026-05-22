@@ -1,0 +1,18 @@
+{
+  "appName": "RecruitAssist",
+  "storage": {
+    "mode": "text-files-only",
+    "formats": ["json", "csv", "txt"]
+  },
+  "workload": {
+    "defaultMaxHours": 12
+  },
+  "recommendation": {
+    "skillMatchWeight": 0.4,
+    "availabilityWeight": 0.12,
+    "experienceWeight": 0.18,
+    "workloadBalanceWeight": 0.12,
+    "profileEvidenceWeight": 0.1,
+    "competitionWeight": 0.08
+  }
+}

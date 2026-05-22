@@ -1,0 +1,20 @@
+{
+  "jobId": "J2154",
+  "ownerId": "U9102",
+  "title": "Accessible Web Design TA",
+  "moduleCode": "EBU6325",
+  "description": "Review HTML/CSS/JavaScript prototypes with accessibility checks.",
+  "requiredSkills": [
+    "Web Development",
+    "JavaScript",
+    "Accessibility"
+  ],
+  "preferredSkills": [
+    "CSS",
+    "UX Research"
+  ],
+  "deadline": "2026-08-11",
+  "quota": 4,
+  "workloadHours": 3,
+  "status": "OPEN"
+}

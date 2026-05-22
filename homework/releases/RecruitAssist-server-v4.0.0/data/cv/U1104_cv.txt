@@ -1,0 +1,5 @@
+Daniel Singh
+Programme: Data Science
+Skills: SQL, Database Design, Data Modelling, Debugging, Communication
+Experience: Supported database labs, schema design exercises and SQL troubleshooting drop-ins.
+Evidence: Worked on relational modelling, analytics datasets and structured query optimisation tasks. Strong skills in SQL, Database Design, Data Modelling, comfortable with student support, marking and technical walkthroughs.

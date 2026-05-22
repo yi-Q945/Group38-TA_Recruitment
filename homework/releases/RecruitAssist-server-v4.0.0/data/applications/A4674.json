@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4674",
+  "jobId": "J2134",
+  "applicantId": "U1129",
+  "applyTime": "2026-03-17T09:00:00Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.59,
+  "explanation": [
+    "Matched required skills: Linux",
+    "Preferred skill matches: none identified yet",
+    "Skills to strengthen: C",
+    "Projected workload after acceptance: 10/12 hours"
+  ]
+}

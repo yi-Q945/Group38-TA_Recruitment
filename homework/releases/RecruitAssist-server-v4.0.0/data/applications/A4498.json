@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4498",
+  "jobId": "J2125",
+  "applicantId": "U1116",
+  "applyTime": "2026-03-14T12:00:00Z",
+  "status": "REJECTED",
+  "recommendationScore": 0.42,
+  "explanation": [
+    "Matched required skills: limited direct overlap",
+    "Preferred skill matches: Communication",
+    "Skills to strengthen: Java, OOP",
+    "Projected workload after acceptance: 10/12 hours"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "applicationId": "A4968",
+  "jobId": "J2117",
+  "applicantId": "U1001",
+  "applyTime": "2026-05-22T11:31:08.026143986Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.8133466666666668,
+  "explanation": [
+    "Required skill coverage: 2/2. Preferred alignment: 1/2.",
+    "Availability is detailed enough for planning: Mon/Wed afternoon.",
+    "Profile evidence aligns with the role through Testing, QA, JUnit, lab, lifting the experience score.",
+    "Profile evidence is usable, and a few strong signals are already visible.",
+    "Current accepted workload is 0h; this role would project to 4h within the 12h threshold.",
+    "Competition is heavier here: 18 active applicants for 3 remaining slots."
+  ]
+}

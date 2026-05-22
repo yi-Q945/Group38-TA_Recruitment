@@ -1,0 +1,20 @@
+{
+  "jobId": "J2153",
+  "ownerId": "U9101",
+  "title": "Secure Networks Practical TA",
+  "moduleCode": "EBU6324",
+  "description": "Help students configure networks and analyse security incidents.",
+  "requiredSkills": [
+    "Networking",
+    "Security",
+    "Linux"
+  ],
+  "preferredSkills": [
+    "Lab Support",
+    "Communication"
+  ],
+  "deadline": "2026-08-09",
+  "quota": 4,
+  "workloadHours": 4,
+  "status": "OPEN"
+}

@@ -1,0 +1,20 @@
+{
+  "userId": "U10032",
+  "username": "ta.104",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Noah Wilson",
+  "studentId": "20261304",
+  "email": "ta_104@qmul.ac.uk",
+  "programme": "Computer Science",
+  "skills": [
+    "Linux",
+    "C",
+    "Operating Systems",
+    "Concurrency",
+    "Debugging"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in Linux, C, Operating Systems, Concurrency, with experience explaining concepts and supporting students during labs."
+}

@@ -1,0 +1,20 @@
+{
+  "userId": "U1128",
+  "username": "ta.028",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Bella Zhang",
+  "studentId": "20261228",
+  "email": "ta_028@qmul.ac.uk",
+  "programme": "Data Science",
+  "skills": [
+    "SQL",
+    "Database Design",
+    "Data Modelling",
+    "Debugging",
+    "Communication"
+  ],
+  "availability": "Mon/Tue evening and weekend morning",
+  "experience": "Supported database labs, schema design exercises and SQL troubleshooting drop-ins.",
+  "cvText": "Worked on relational modelling, analytics datasets and structured query optimisation tasks. Strong skills in SQL, Database Design, Data Modelling, comfortable with student support, marking and technical walkthroughs."
+}

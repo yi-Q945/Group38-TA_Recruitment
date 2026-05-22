@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4425",
+  "jobId": "J2122",
+  "applicantId": "U1166",
+  "applyTime": "2026-03-11T18:00:00Z",
+  "status": "SHORTLISTED",
+  "recommendationScore": 0.86,
+  "explanation": [
+    "Matched required skills: C, Linux",
+    "Preferred skill matches: Concurrency",
+    "Skills to strengthen: no critical gaps detected",
+    "Projected workload after acceptance: 5/12 hours"
+  ]
+}

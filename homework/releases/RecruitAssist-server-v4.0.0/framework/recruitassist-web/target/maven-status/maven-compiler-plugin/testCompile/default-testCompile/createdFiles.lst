@@ -1,0 +1,8 @@
+com/recruitassist/service/DataIntegrityTest.class
+com/recruitassist/service/ApplicationConcurrencyTest.class
+com/recruitassist/service/PasswordHasherTest.class
+com/recruitassist/service/RecommendationServiceTest.class
+com/recruitassist/service/RegisterServiceTest.class
+com/recruitassist/service/AuthServiceTest.class
+com/recruitassist/service/NotificationServiceTest.class
+com/recruitassist/config/AppPathsTest.class

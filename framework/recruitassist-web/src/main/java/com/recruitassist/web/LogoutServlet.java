@@ -11,6 +11,11 @@ import java.io.IOException;
 public class LogoutServlet extends AppServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        redirect(req, resp, currentUser(req) == null ? "/login" : "/dashboard");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession(false);
         if (session != null) {
             session.invalidate();

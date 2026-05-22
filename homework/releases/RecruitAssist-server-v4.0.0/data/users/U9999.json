@@ -1,0 +1,13 @@
+{
+  "userId": "U9999",
+  "username": "admin.sarah",
+  "password": "demo123",
+  "role": "ADMIN",
+  "name": "Sarah Admin",
+  "studentId": "",
+  "programme": "School Administration",
+  "skills": ["Coordination", "Scheduling", "Operations"],
+  "availability": "Weekdays",
+  "experience": "Oversees workload balance and administrative reporting.",
+  "cvText": "Administrative lead for workload checks and hiring process monitoring."
+}

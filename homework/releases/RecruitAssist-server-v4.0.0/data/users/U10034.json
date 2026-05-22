@@ -1,0 +1,20 @@
+{
+  "userId": "U10034",
+  "username": "ta.106",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Ethan Brooks",
+  "studentId": "20261306",
+  "email": "ta_106@qmul.ac.uk",
+  "programme": "Cyber Security",
+  "skills": [
+    "Networking",
+    "Security",
+    "Linux",
+    "Incident Response",
+    "Lab Support"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in Networking, Security, Linux, Incident Response, with experience explaining concepts and supporting students during labs."
+}

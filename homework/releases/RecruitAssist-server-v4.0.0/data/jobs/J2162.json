@@ -1,0 +1,20 @@
+{
+  "jobId": "J2162",
+  "ownerId": "U10026",
+  "title": "Systems Programming Lab TA",
+  "moduleCode": "EBU6333",
+  "description": "Guide pointers, memory, processes and low-level debugging exercises.",
+  "requiredSkills": [
+    "C",
+    "Linux",
+    "Debugging"
+  ],
+  "preferredSkills": [
+    "Concurrency",
+    "Teaching"
+  ],
+  "deadline": "2026-08-27",
+  "quota": 4,
+  "workloadHours": 5,
+  "status": "OPEN"
+}

@@ -1,0 +1,20 @@
+{
+  "userId": "U10030",
+  "username": "ta.102",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Omar Khan",
+  "studentId": "20261302",
+  "email": "ta_102@qmul.ac.uk",
+  "programme": "Computer Science",
+  "skills": [
+    "Java",
+    "OOP",
+    "Testing",
+    "Git",
+    "Agile"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in Java, OOP, Testing, Git, with experience explaining concepts and supporting students during labs."
+}

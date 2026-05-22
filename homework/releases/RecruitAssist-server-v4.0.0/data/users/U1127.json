@@ -1,0 +1,20 @@
+{
+  "userId": "U1127",
+  "username": "ta.027",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Aiden Allen",
+  "studentId": "20261227",
+  "email": "ta_027@qmul.ac.uk",
+  "programme": "Digital Media Technology",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Accessibility",
+    "Communication"
+  ],
+  "availability": "Weekdays after 14:00; occasional evening support",
+  "experience": "Led web UI coursework reviews, accessibility checks and front-end studio feedback sessions.",
+  "cvText": "Designed responsive interfaces, user journeys and component libraries for course prototypes. Strong skills in HTML, CSS, JavaScript, comfortable with student support, marking and technical walkthroughs."
+}

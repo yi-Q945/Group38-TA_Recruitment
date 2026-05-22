@@ -1,0 +1,20 @@
+{
+  "jobId": "J2158",
+  "ownerId": "U9106",
+  "title": "Data Visualisation Studio TA",
+  "moduleCode": "EBU6329",
+  "description": "Support Python visualisation labs and dashboard interpretation.",
+  "requiredSkills": [
+    "Python",
+    "Data Visualisation",
+    "Statistics"
+  ],
+  "preferredSkills": [
+    "Communication",
+    "Marking"
+  ],
+  "deadline": "2026-08-19",
+  "quota": 4,
+  "workloadHours": 3,
+  "status": "OPEN"
+}

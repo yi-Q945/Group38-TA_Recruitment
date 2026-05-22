@@ -5,11 +5,14 @@ import com.recruitassist.repository.ApplicationRepository;
 import com.recruitassist.repository.AuditRepository;
 import com.recruitassist.repository.IdCounterRepository;
 import com.recruitassist.repository.JobRepository;
+import com.recruitassist.repository.NotificationRepository;
 import com.recruitassist.repository.SystemConfigRepository;
 import com.recruitassist.repository.UserRepository;
 import com.recruitassist.service.ApplicationService;
 import com.recruitassist.service.AuthService;
 import com.recruitassist.service.JobService;
+import com.recruitassist.service.NotificationService;
+import com.recruitassist.service.PdfShareService;
 import com.recruitassist.service.RecommendationService;
 import com.recruitassist.service.UserService;
 import com.recruitassist.service.WorkloadService;
@@ -21,6 +24,8 @@ public class AppServices {
     private final AuthService authService;
     private final JobService jobService;
     private final WorkloadService workloadService;
+    private final NotificationService notificationService;
+    private final PdfShareService pdfShareService;
     private final RecommendationService recommendationService;
     private final ApplicationService applicationService;
     private final IdCounterRepository idCounterRepository;
@@ -31,6 +36,7 @@ public class AppServices {
         UserRepository userRepository = new UserRepository(jsonFileStore);
         JobRepository jobRepository = new JobRepository(jsonFileStore);
         ApplicationRepository applicationRepository = new ApplicationRepository(jsonFileStore);
+        NotificationRepository notificationRepository = new NotificationRepository(jsonFileStore);
         AuditRepository auditRepository = new AuditRepository(jsonFileStore);
         IdCounterRepository idCounterRepository = new IdCounterRepository(jsonFileStore);
         this.idCounterRepository = idCounterRepository;
@@ -40,6 +46,7 @@ public class AppServices {
         this.authService = new AuthService(userService);
         this.jobService = new JobService(jobRepository, applicationRepository, idCounterRepository, auditRepository);
         this.workloadService = new WorkloadService(userService, jobRepository, applicationRepository, systemConfig);
+        this.notificationService = new NotificationService(notificationRepository, idCounterRepository);
         this.recommendationService = new RecommendationService(
                 jobRepository,
                 applicationRepository,
@@ -50,8 +57,10 @@ public class AppServices {
                 jobRepository,
                 idCounterRepository,
                 auditRepository,
+                notificationService,
                 recommendationService,
                 userService);
+        this.pdfShareService = new PdfShareService(userService, jobService, applicationService);
     }
 
     public SystemConfig systemConfig() {
@@ -76,6 +85,14 @@ public class AppServices {
 
     public RecommendationService recommendationService() {
         return recommendationService;
+    }
+
+    public NotificationService notificationService() {
+        return notificationService;
+    }
+
+    public PdfShareService pdfShareService() {
+        return pdfShareService;
     }
 
     public ApplicationService applicationService() {

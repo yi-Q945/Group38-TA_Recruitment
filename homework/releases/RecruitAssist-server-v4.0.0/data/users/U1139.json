@@ -1,0 +1,20 @@
+{
+  "userId": "U1139",
+  "username": "ta.039",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Nora Davies",
+  "studentId": "20261239",
+  "email": "ta_039@qmul.ac.uk",
+  "programme": "Digital Media Technology",
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Accessibility",
+    "Communication"
+  ],
+  "availability": "Weekday mornings except Wednesday",
+  "experience": "Led web UI coursework reviews, accessibility checks and front-end studio feedback sessions.",
+  "cvText": "Designed responsive interfaces, user journeys and component libraries for course prototypes. Strong skills in HTML, CSS, JavaScript, comfortable with student support, marking and technical walkthroughs."
+}

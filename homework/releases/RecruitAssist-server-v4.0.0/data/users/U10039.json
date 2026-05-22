@@ -1,0 +1,20 @@
+{
+  "userId": "U10039",
+  "username": "ta.111",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Ivan Petrov",
+  "studentId": "20261311",
+  "email": "ta_111@qmul.ac.uk",
+  "programme": "Computer Science",
+  "skills": [
+    "Databases",
+    "SQL",
+    "Transactions",
+    "Java",
+    "Debugging"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in Databases, SQL, Transactions, Java, with experience explaining concepts and supporting students during labs."
+}

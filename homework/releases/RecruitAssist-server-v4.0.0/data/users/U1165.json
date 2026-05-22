@@ -1,0 +1,20 @@
+{
+  "userId": "U1165",
+  "username": "ta.065",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Riley Clark",
+  "studentId": "20261265",
+  "email": "ta_065@qmul.ac.uk",
+  "programme": "Cyber Security",
+  "skills": [
+    "Networks",
+    "Linux",
+    "Security",
+    "Scripting",
+    "Troubleshooting"
+  ],
+  "availability": "Mon/Wed afternoon; flexible for lab marking",
+  "experience": "Ran network troubleshooting clinics and security lab walkthroughs for practical sessions.",
+  "cvText": "Hands-on with Linux tooling, shell scripting and secure systems support for teaching labs. Strong skills in Networks, Linux, Security, comfortable with student support, marking and technical walkthroughs."
+}

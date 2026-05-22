@@ -1,0 +1,20 @@
+{
+  "jobId": "J2159",
+  "ownerId": "U9107",
+  "title": "NLP Research Methods TA",
+  "moduleCode": "EBU6330",
+  "description": "Help with tokenisation, evaluation and responsible NLP experiments.",
+  "requiredSkills": [
+    "NLP",
+    "Python",
+    "Machine Learning"
+  ],
+  "preferredSkills": [
+    "Research Support",
+    "Communication"
+  ],
+  "deadline": "2026-08-21",
+  "quota": 4,
+  "workloadHours": 4,
+  "status": "OPEN"
+}

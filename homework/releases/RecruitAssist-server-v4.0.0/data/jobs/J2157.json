@@ -1,0 +1,20 @@
+{
+  "jobId": "J2157",
+  "ownerId": "U9105",
+  "title": "Algorithms Revision TA",
+  "moduleCode": "EBU6328",
+  "description": "Run revision clinics for graph algorithms, complexity and data structures.",
+  "requiredSkills": [
+    "Algorithms",
+    "Data Structures",
+    "Teaching"
+  ],
+  "preferredSkills": [
+    "Java",
+    "Assessment"
+  ],
+  "deadline": "2026-08-17",
+  "quota": 4,
+  "workloadHours": 4,
+  "status": "OPEN"
+}

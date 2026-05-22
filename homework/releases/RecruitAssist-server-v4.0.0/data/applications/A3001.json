@@ -1,0 +1,14 @@
+{
+  "applicationId": "A3001",
+  "jobId": "J2001",
+  "applicantId": "U1001",
+  "applyTime": "2026-03-13T20:45:00Z",
+  "status": "SUBMITTED",
+  "recommendationScore": 0.82,
+  "explanation": [
+    "Matched required skills: Java, OOP",
+    "Preferred skill matches: Testing",
+    "No required skill gaps detected",
+    "Current workload: 0/12 hours"
+  ]
+}

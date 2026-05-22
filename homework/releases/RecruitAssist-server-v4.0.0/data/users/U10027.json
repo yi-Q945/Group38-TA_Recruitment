@@ -1,0 +1,19 @@
+{
+  "userId": "U10027",
+  "username": "recruiter.11",
+  "password": "demo123",
+  "role": "MO",
+  "name": "Dr Sofia Bennett",
+  "studentId": "",
+  "email": "recruiter_11@qmul.ac.uk",
+  "programme": "Module Organiser",
+  "skills": [
+    "Curriculum Design",
+    "Assessment",
+    "Candidate Review",
+    "Teaching Operations"
+  ],
+  "availability": "Weekdays; available for application review and interview panels",
+  "experience": "AI and data science module organiser with workload-aware TA recruitment and applicant feedback.",
+  "cvText": "Publishes module support roles, reviews candidate evidence and manages status decisions."
+}

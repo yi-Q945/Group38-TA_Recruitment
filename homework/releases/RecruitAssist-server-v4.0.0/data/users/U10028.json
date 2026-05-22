@@ -1,0 +1,19 @@
+{
+  "userId": "U10028",
+  "username": "recruiter.12",
+  "password": "demo123",
+  "role": "MO",
+  "name": "Dr Oliver Hughes",
+  "studentId": "",
+  "email": "recruiter_12@qmul.ac.uk",
+  "programme": "Module Organiser",
+  "skills": [
+    "Curriculum Design",
+    "Assessment",
+    "Candidate Review",
+    "Teaching Operations"
+  ],
+  "availability": "Weekdays; available for application review and interview panels",
+  "experience": "Networks and cloud lab coordinator with workload-aware TA recruitment and applicant feedback.",
+  "cvText": "Publishes module support roles, reviews candidate evidence and manages status decisions."
+}

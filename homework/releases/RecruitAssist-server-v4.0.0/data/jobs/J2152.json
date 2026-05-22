@@ -1,0 +1,20 @@
+{
+  "jobId": "J2152",
+  "ownerId": "U10028",
+  "title": "Database Systems Lab TA",
+  "moduleCode": "EBU6323",
+  "description": "Support SQL, transactions, indexing and data modelling practicals.",
+  "requiredSkills": [
+    "SQL",
+    "Databases",
+    "Java"
+  ],
+  "preferredSkills": [
+    "Debugging",
+    "Assessment"
+  ],
+  "deadline": "2026-08-07",
+  "quota": 4,
+  "workloadHours": 3,
+  "status": "OPEN"
+}

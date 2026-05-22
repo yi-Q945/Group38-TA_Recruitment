@@ -1,0 +1,14 @@
+{
+  "applicationId": "A4920",
+  "jobId": "J2146",
+  "applicantId": "U1165",
+  "applyTime": "2026-03-22T15:00:00Z",
+  "status": "WITHDRAWN",
+  "recommendationScore": 0.59,
+  "explanation": [
+    "Matched required skills: Linux",
+    "Preferred skill matches: none identified yet",
+    "Skills to strengthen: C",
+    "Projected workload after acceptance: 9/12 hours"
+  ]
+}

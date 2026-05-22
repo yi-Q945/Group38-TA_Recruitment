@@ -24,6 +24,7 @@ public class UserProfile {
     private String cvText;
     private String cvFileName;
     private String cvUploadedAt;
+    private String pdfShareToken;
 
     public String getUserId() {
         return userId == null ? "" : userId;
@@ -135,6 +136,14 @@ public class UserProfile {
 
     public void setCvUploadedAt(String cvUploadedAt) {
         this.cvUploadedAt = cvUploadedAt;
+    }
+
+    public String getPdfShareToken() {
+        return pdfShareToken == null ? "" : pdfShareToken;
+    }
+
+    public void setPdfShareToken(String pdfShareToken) {
+        this.pdfShareToken = pdfShareToken;
     }
 
     public String getRoleLabel() {

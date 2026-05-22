@@ -1,0 +1,20 @@
+{
+  "userId": "U10037",
+  "username": "ta.109",
+  "password": "demo123",
+  "role": "TA",
+  "name": "Yuki Tanaka",
+  "studentId": "20261309",
+  "email": "ta_109@qmul.ac.uk",
+  "programme": "Computer Science",
+  "skills": [
+    "Cloud Computing",
+    "Docker",
+    "DevOps",
+    "Python",
+    "Testing"
+  ],
+  "availability": "Flexible on weekdays; can support labs, coursework clinics and revision sessions",
+  "experience": "Supported peer learning sessions, practical labs and feedback clinics for undergraduate modules.",
+  "cvText": "Strong evidence in Cloud Computing, Docker, DevOps, Python, with experience explaining concepts and supporting students during labs."
+}

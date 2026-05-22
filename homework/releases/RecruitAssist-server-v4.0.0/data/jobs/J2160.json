@@ -1,0 +1,20 @@
+{
+  "jobId": "J2160",
+  "ownerId": "U9108",
+  "title": "Software Testing Clinic TA",
+  "moduleCode": "EBU6331",
+  "description": "Assist unit testing, CI feedback and debugging practical submissions.",
+  "requiredSkills": [
+    "Testing",
+    "Java",
+    "Git"
+  ],
+  "preferredSkills": [
+    "Agile",
+    "Mentoring"
+  ],
+  "deadline": "2026-08-23",
+  "quota": 4,
+  "workloadHours": 3,
+  "status": "OPEN"
+}
