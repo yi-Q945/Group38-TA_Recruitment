@@ -33,7 +33,10 @@
                 <span class="metric-pill refresh-pill" data-refresh-countdown>Refresh in ${autoRefreshSeconds}s</span>
             </div>
             <div class="action-row">
-                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/logout">Log out</a>
+                <form class="inline-form inline-form-tight" method="post" action="${pageContext.request.contextPath}/logout">
+                    <input type="hidden" name="csrfToken" value="${csrfToken}" />
+                    <button class="secondary-button small-button" type="submit">Log out</button>
+                </form>
             </div>
         </aside>
     </header>
@@ -71,7 +74,12 @@
                 <h2>Recruitment overview</h2>
                 <p class="muted-copy">This fills the backlog gap for an admin-level overview of positions, applicants and job status.</p>
             </div>
-            <span class="metric-pill">Current filter: ${jobStatusFilterLabel}</span>
+            <div class="top-actions">
+                <span class="metric-pill">Current filter: ${jobStatusFilterLabel}</span>
+                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/admin/export?type=jobs">Export jobs CSV</a>
+                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/admin/export?type=applications">Export applications CSV</a>
+                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/admin/export?type=workload">Export workload CSV</a>
+            </div>
         </div>
 
         <form class="filter-bar" method="get" action="${pageContext.request.contextPath}/dashboard">
@@ -189,6 +197,7 @@
                         <th>Job</th>
                         <th>Status</th>
                         <th>Score</th>
+                        <th>CV PDF</th>
                         <th>Submitted</th>
                     </tr>
                     </thead>
@@ -203,6 +212,14 @@
                             </td>
                             <td><span class="status-pill status-${application.status.cssClass}">${application.status.label}</span></td>
                             <td>${application.recommendationPercent}%</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${usersById[application.applicantId].cvAvailable}">
+                                        <a class="inline-link" href="${pageContext.request.contextPath}/pdf/share?token=${usersById[application.applicantId].pdfShareToken}&jobId=${application.jobId}" target="_blank" rel="noopener">Open PDF</a>
+                                    </c:when>
+                                    <c:otherwise><span class="muted-copy">No CV</span></c:otherwise>
+                                </c:choose>
+                            </td>
                             <td>${application.applyTimeLabel}</td>
                         </tr>
                     </c:forEach>
