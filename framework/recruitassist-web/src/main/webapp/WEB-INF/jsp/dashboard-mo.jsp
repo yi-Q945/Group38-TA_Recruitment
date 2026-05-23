@@ -33,7 +33,10 @@
                 <span class="metric-pill refresh-pill" data-refresh-countdown>Refresh in ${autoRefreshSeconds}s</span>
             </div>
             <div class="action-row">
-                <a class="secondary-button small-button" href="${pageContext.request.contextPath}/logout">Log out</a>
+                <form class="inline-form inline-form-tight" method="post" action="${pageContext.request.contextPath}/logout">
+                    <input type="hidden" name="csrfToken" value="${csrfToken}" />
+                    <button class="secondary-button small-button" type="submit">Log out</button>
+                </form>
             </div>
         </aside>
     </header>
@@ -120,6 +123,7 @@
             <span class="metric-pill">Lightweight text storage</span>
         </div>
         <form class="form-grid two-column-form" method="post" action="${pageContext.request.contextPath}/jobs/create">
+            <input type="hidden" name="csrfToken" value="${csrfToken}" />
             <label class="field-group">
                 <span>Job title</span>
                 <input class="input" type="text" name="title" placeholder="e.g. Software Engineering TA" required />
@@ -174,6 +178,7 @@
                 <div class="top-actions">
                     <span class="status-pill status-${job.status.cssClass}">${job.status.label}</span>
                     <form class="inline-form inline-form-tight" method="post" action="${pageContext.request.contextPath}/jobs/status">
+                        <input type="hidden" name="csrfToken" value="${csrfToken}" />
                         <input type="hidden" name="jobId" value="${job.jobId}" />
                         <c:choose>
                             <c:when test="${job.open}">
@@ -236,7 +241,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test="${candidate.cvAvailable}">
-                                        <a class="secondary-button small-button" href="${pageContext.request.contextPath}/cv/download?userId=${candidate.userId}&jobId=${job.jobId}">Download</a>
+                                        <a class="secondary-button small-button" href="${pageContext.request.contextPath}/pdf/share?token=${candidate.pdfShareToken}&jobId=${job.jobId}" target="_blank" rel="noopener">Open PDF</a>
                                     </c:when>
                                     <c:otherwise><span class="muted-copy">No CV</span></c:otherwise>
                                 </c:choose>
@@ -249,6 +254,7 @@
                                     </c:when>
                                     <c:otherwise>
                                         <form class="inline-form" method="post" action="${pageContext.request.contextPath}/applications/status">
+                                            <input type="hidden" name="csrfToken" value="${csrfToken}" />
                                             <input type="hidden" name="applicationId" value="${application.applicationId}" />
                                             <input type="hidden" name="jobId" value="${job.jobId}" />
                                             <select class="select" name="status">

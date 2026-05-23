@@ -93,9 +93,12 @@ public class JobDetailServlet extends AppServlet {
                     candidateStatusFilter,
                     workloadByUserId);
 
+            Map<String, UserProfile> usersById = services(req).userService().indexById();
+            services(req).pdfShareService().ensureTokensForCvOwners(usersById.values());
+
             req.setAttribute("applications", applications);
             req.setAttribute("visibleApplicationCount", applications.size());
-            req.setAttribute("usersById", services(req).userService().indexById());
+            req.setAttribute("usersById", usersById);
             req.setAttribute("workloadByUserId", workloadByUserId);
             req.setAttribute("candidateSort", candidateSort);
             req.setAttribute("candidateSortLabel", describeCandidateSort(candidateSort));
