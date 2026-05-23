@@ -52,6 +52,8 @@ class RegisterServiceTest {
         assertEquals("TA", user.getRole().name());
         assertEquals("Test TA User", user.getName());
         assertEquals("test@example.com", user.getEmail());
+        assertTrue(PasswordHasher.isHashed(user.getPassword()), "Registered passwords should be hashed");
+        assertTrue(PasswordHasher.verify("testpass123", user.getPassword()));
         assertFalse(user.getUserId().isBlank(), "Should have a generated userId");
 
         // Verify JSON file exists on disk
