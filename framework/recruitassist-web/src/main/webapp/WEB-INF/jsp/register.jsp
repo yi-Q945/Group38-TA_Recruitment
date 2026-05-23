@@ -33,6 +33,7 @@
                 </div>
             </div>
             <form class="form-grid" method="post" action="${pageContext.request.contextPath}/register">
+                <input type="hidden" name="csrfToken" value="${csrfToken}" />
                 <label class="field-group">
                     <span>Username <em>(required)</em></span>
                     <input class="input" type="text" name="username" value="${username}"
