@@ -62,6 +62,9 @@ public class UploadCvServlet extends AppServlet {
         }
 
         ActionResult result = services(req).userService().updateCvMetadata(user, storedFileName);
+        if (result.isSuccess()) {
+            services(req).pdfShareService().ensureToken(user);
+        }
         setFlash(req, result.isSuccess() ? "success" : "error", result.getMessage());
         redirect(req, resp, "/dashboard");
     }
